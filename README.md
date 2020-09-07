@@ -8,6 +8,16 @@ Scripts\activate.bat
 cd ..
 ```
 
+```python
+
+#윈도우일때
+python -m venv venv
+source venv/Scripts/activate.bat
+# 가상환경에 패키지 설치 
+pip install -r requirements.txt
+
+```
+
 ## 02. pdfminer 설정 (2020.09.07.월 -> pdf 파일을 html로 만들어주는 모듈)
 ```sh
 가상환경이 실행된 후 실행한다.
