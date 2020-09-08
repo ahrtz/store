@@ -46,7 +46,7 @@ To use `crawling_kci.py`, follow these steps:
 * 다운로드 경로: `download_path = C:\Users\multicampus\Downloads`
 * 다운로드 경로 안에 `논문검색리스트Excel.xls`  파일이 미리 있어야 오류가 나지 않습니다.
 * 300개씩 `논문검색리스트Excel (index).xls` 파일이 생성됩니다
-  * 이 때, `논문검색리스트Excel (index).xls`  파일이 생성되면 (index)페이지의 논문들을 하나씩 상세 조회를 합니다. 상세 조회에서 abstract을 크롤링한 다음 `논문검색리스트 정제 (index).xls` 파일을 새로 생성해 기존 엑셀에 abstract column을 추가해 해당 abstract를 추가해 저장합니다.
+  * 이 때, `논문검색리스트Excel (index).xls`  파일이 생성되면 (index)페이지의 논문들을 하나씩 상세 조회를 합니다. 상세 조회에서 abstract과 quotation을 크롤링한 다음 `논문검색리스트 정제 (index).xls` 파일을 새로 생성해 기존 엑셀에 abstract과 quotation column을 추가해 저장합니다.
   * 총 `int_last_page` 개 만큼 excel이 생성됩니다. 
 
 ```python
@@ -74,8 +74,19 @@ To use `crawling_kci.py`, follow these steps:
             detail = driver.find_element_by_xpath("//*[@id='poArtiSearList']/table/tbody/tr["+str(j)+"]/td[2]/p/label/a")
             detail.send_keys('\n')
             abstract = driver.find_element_by_xpath("//*[@id='printArea']/div[2]/div[1]/div/p")
-            print(abstract.text)
+            list_cita = driver.find_element_by_id("listCita")
+            list_cnt = list_cita.text.split("는")[1].split("건")[0]
+            print(list_cnt)
+            # try:
+            #     wos_cita = driver.find_element_by_id("wosCitaList")
+            #     wos_cnt = wos_cita.find_element('span')
+            #     print(wos_cnt.text)
+            # except Exception as e:
+            #     print(e)
+
+            # print(abstract.text)
             wb_sheet.write(j, ncols, abstract.text)
+            wb_sheet.write(j, ncols+1, list_cnt)
             driver.back()
             
         wb.save("논문검색리스트 정제 ("+str(i)+").xls")
