@@ -1,6 +1,7 @@
 import xlrd
 import xlwt
 from selenium import webdriver
+import time
 
 
 def crawler_thesis_chk_setting():
@@ -17,9 +18,9 @@ def crawler_thesis_chk_setting():
 
     # 로그인 => 추후에 id, pw 지우기
     login = driver.find_element_by_name("uid")
-    login.send_keys("myway1513")
+    login.send_keys("")
     login = driver.find_element_by_name("upw")
-    login.send_keys("54397456")
+    login.send_keys("")
     login.send_keys('\n')
 
     #
@@ -63,10 +64,11 @@ def crawler_thesis_chk_setting():
 
     # excel 다운 클릭
     download_path = "C:/Users/multicampus/Downloads/"
-    for i in range(1, 2):   # range(1, int_last_page) 추후에 모든 페이지 excel로 출력
+    for i in range(2, 4):   # range(1, int_last_page) 추후에 모든 페이지 excel로 출력
         driver.execute_script("javascript:goPage("+str(i)+")")
         driver.find_element_by_id("checkAll").click()
         driver.execute_script("lf_exceldown()")
+        time.sleep(15)
 
         # 엑셀 새로 생성
         rb = xlrd.open_workbook(download_path+"논문검색리스트Excel ("+str(i)+").xls")
