@@ -35,7 +35,6 @@
     <v-main>
       <v-container
         class="fill-height"
-        fluid
       >
         <v-row
           align="center"
@@ -109,6 +108,37 @@
             </v-col>
           </v-row>
         </v-row>
+        <v-row>
+          <v-col>
+            <div>
+              <v-row justify="space-around">
+                <v-icon @click="model--">mdi-minus</v-icon>
+                {{ model }}
+                <v-icon @click="model++">mdi-plus</v-icon>
+              </v-row>
+              <v-carousel v-model="model">
+                <v-carousel-item
+                  v-for="(color, i) in colors"
+                  :key="color"
+                >
+                  <v-sheet
+                    :color="color"
+                    height="100%"
+                    tile
+                  >
+                    <v-row
+                      class="fill-height"
+                      align="center"
+                      justify="center"
+                    >
+                      <div class="display-3">Slide {{ i + 1 }}</div>
+                    </v-row>
+                  </v-sheet>
+                </v-carousel-item>
+              </v-carousel>
+            </div>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
     <v-footer
@@ -136,6 +166,14 @@
     },
     data: () => ({
       drawer: null,
+      colors: [
+        'primary',
+        'secondary',
+        'yellow darken-2',
+        'red',
+        'orange',
+      ],
+      model: 0,
       defaultWords: [{
           "keyword": "Lux",
           "frequency": 26
