@@ -1,11 +1,34 @@
 # SSAFY Bigdata project
 
+## Commit Rule
+1. __branch 종류__
+  - __develop-_[이니셜]___ : 각 개발자들이 작업하는 개인 공간.
+2. __Commit 메세지 Format__  
+  ___"[type]commit message, [issue Key] "___  
+  _ex) git commit -m "[Add] <기능설명>, [jira Key]"_
+  - __Add :__ 새로운 기능 추가.
+  - __Fix :__ 버그 수정.
+  - __Modify :__ 기능에 버그는 없지만, 코드 수정.
+  - __Test :__ 테스트용 코드.
+  - __Style :__ 단순 코드 포멧팅.(세미콜론 누락, 들여쓰기 등).
+  - __Doc :__ 문서(.md 등) 수정.
+
 ## 01. 파이썬 가상환경 구성 (2020.09.07.월)
 ```sh
 python -m venv testing
 cd testing
 Scripts\activate.bat
 cd ..
+```
+
+```python
+
+#윈도우일때
+python -m venv venv
+source venv/Scripts/activate.bat
+# 가상환경에 패키지 설치 
+pip install -r requirements.txt
+
 ```
 
 ## 02. pdfminer 설정 (2020.09.07.월 -> pdf 파일을 html로 만들어주는 모듈)
@@ -17,3 +40,39 @@ python mode_pdfconvert.py
 요약하는 방법 중 하나를 사용한다.
 python mode_summarize.py
 ```
+
+## 09/08
+
+##### Vuetify 활용
+제공되는 layout 이용하면 간단하게 화면 구성 가능할 듯
+
+##### Excel -> 하나로 이어붙이기
+하나의 Excel파일로 하기로 했지만, for문으로 file들 읽어서 DB에 저장하면 어떨까 테스트
+
+## 09/09
+
+##### Vuetify 활용
+Vuetify에서 제공하는 file input, tab 기능 활용
+
+##### Wordcloud 적용
+vue-worldcloud 이용하여 간단하게 만들 수 있음
+
+##### SSAFY-SR 프로젝트 발대식
+이제 더 바빠질 듯
+
+## 09/10 ~ 09/11
+
+##### 텍스트 유사도 계산 알고리즘
+TF-IDF와 코사인 유사도 이용하여 Abstract의 유사도 검사
+대부분 10% 미만의 유사도지만 데이터가 300개뿐이라 아직 제대로 되는 건지 확인 못함
+
+##### 팀 미팅
+PDF 변환(텍스트, 이미지, 표 에서 중요도 순으로 먼저 하는 게 좋을 듯)
+요약 알고리즘
+추천 알고리즘 (텍스트 유사도가 어렵다면, like로 유사 논문 검색 + 협업 필터링)
+
+요약, 추천 중에서 현실적인 시간 따져서 중요도 생각해볼 것
+
+협업 필터링 - 스크랩 횟수, 접속 로그 + 접속 시간, 원문 보기
+
+이게 다 될까...?
