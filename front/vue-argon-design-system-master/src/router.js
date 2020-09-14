@@ -3,11 +3,11 @@ import Router from "vue-router";
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
 import Components from "./views/Components.vue";
-import main from "./views/main.vue";
 import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
+import main from "./views/main.vue";
 
 
 //커스터마이징
@@ -23,7 +23,8 @@ Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
-  routes: [{
+  routes: [
+    {
       path: "/",
       name: "main",
       components: {
@@ -75,12 +76,21 @@ export default new Router({
     {
       path: "/nmdetail",
       name: "nmdetail",
-      component: nmdetail
+      components: {
+        header: AppHeader,
+        default: nmdetail,
+        footer: AppFooter
+      }
     },
+    //가이드 페이지
     {
       path: "/guide",
       name: "guide",
-      component: guide
+      components: {
+        header: AppHeader,
+        default: guide,
+        footer: AppFooter
+      }
     },
 
 
