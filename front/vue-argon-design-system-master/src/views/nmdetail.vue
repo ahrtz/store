@@ -19,13 +19,34 @@
                     </close-button>
                 </div>
             </div>
-            <component :is="menu.menuComponent"></component>
+
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+              <li class="nav-item">
+                  <a class="nav-link nav-link-icon" href="#">
+                      논문 요약
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link nav-link-icon" href="#">
+                      논문 검색
+                  </a>
+              </li>
+            </ul>
+            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+                <base-dropdown tag="li" class="nav-item">
+                    <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-circle-08"></i>
+                    </a>
+                    <router-link to="/login" class="dropdown-item">Login</router-link>
+                    <router-link to="/register" class="dropdown-item">Register</router-link>
+                </base-dropdown>
+            </ul>
         </base-nav>
         <div class="container ct-example-row">
             <div class="row">
                 <div class="col">
                     <tabs fill class="flex-column flex-md-row">
-                        <card shadow slot-scope="{activeTabIndex}">
+                        <card shadow>
                             <tab-pane key="tab1">
                                 <template slot="title">
                                     <i class="ni ni-folder-17"></i>요약 전체
@@ -120,6 +141,7 @@ import TabPane from "@/components/Tabs/TabPane.vue";
 import TabsSection from "./components/JavascriptComponents/TabsSection";
 import Navigation from "./components/Navigation.vue";
 import BaseNav from "@/components/BaseNav";
+import BaseDropdown from "@/components/BaseDropdown";
 import CloseButton from "@/components/CloseButton";
 import Menu1 from "./components/Navigation/Menu1";
 import { BCarousel } from "bootstrap-vue/esm/components/carousel/carousel";
@@ -134,6 +156,7 @@ export default {
         TabsSection,
         Navigation,
         BaseNav,
+        BaseDropdown,
         CloseButton,
         Menu1,
         wordcloud,
