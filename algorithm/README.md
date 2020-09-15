@@ -8,7 +8,7 @@ Scripts\activate.bat
 cd ..
 ```
 
-## 02. pdfminer 설정 (2020.09.07.월 ~ 09.15.화 -> pdf 파일을 html로 만들어주는 모듈)
+## 02. pdfminer 설정 (2020.09.07.월 ~ 09.16.수 -> pdf 파일을 html로 만들어주는 모듈)
 ```sh
 가상환경이 실행된 후 실행한다.
 pip install pdfminer.six
