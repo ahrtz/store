@@ -58,12 +58,12 @@ def get_similarity(dataframes):
     similarity_list = []
     for i in range(0, 900):
         similarity = []
-        similarity.append(tf_idf_similarity(papers["title_en"][i], data.title_en))
+        # similarity.append(tf_idf_similarity(papers["title_en"][i], data.title_en))
         similarity.append(jaccard_similarity(papers["title_ko"][i], data.title_ko))
-        similarity.append(jaccard_similarity(papers["author"][i], data.author))
-        similarity.append(jaccard_similarity(papers["abstract"][i], data.abstract))
-        similarity.append(jaccard_similarity(papers["subject"][i], data.subject))
-        score = (0.3*similarity[0] + 0.3*similarity[1] + 0.1*similarity[2] + 0.2*similarity[3] + 0.1*similarity[4])
+        # similarity.append(jaccard_similarity(papers["author"][i], data.author))
+        # similarity.append(jaccard_similarity(papers["abstract"][i], data.abstract))
+        # similarity.append(jaccard_similarity(papers["subject"][i], data.subject))
+        # score = (0.3*similarity[0] + 0.3*similarity[1] + 0.1*similarity[2] + 0.2*similarity[3] + 0.1*similarity[4])
         similarity_list.append((i, score, similarity))
         # print(similarity)
 
@@ -84,6 +84,7 @@ def main():
     # parse_keyword(data)
     get_similarity(data)
     # hannanum_similarity("", "")
+
 
 if __name__ == "__main__":
     main()
