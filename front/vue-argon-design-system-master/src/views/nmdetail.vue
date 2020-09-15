@@ -31,12 +31,15 @@
                                     <i class="ni ni-folder-17"></i>요약 전체
                                 </template>
 
-                                <p class="description">Raw denim you probably haven't heard of them jean shorts
-                                    Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                    cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
-                                    keffiyeh dreamcatcher synth.</p>
-                                <p class="description">Raw denim you probably haven't heard of them jean shorts
-                                    Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.</p>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action active">
+                                        연구 주제 1
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">연구 방법 1</a>
+                                    <a href="#" class="list-group-item list-group-item-action">연구 방법 2</a>
+                                    <a href="#" class="list-group-item list-group-item-action">연구 결과 1</a>
+                                    <a href="#" class="list-group-item list-group-item-action">연구 결과 2</a>
+                                </div>
                             </tab-pane>
 
                             <tab-pane key="tab2">
@@ -44,9 +47,9 @@
                                     <i class="ni ni-bulb-61"></i>연구 주제
                                 </template>
 
-                                <p class="description">Cosby sweater eu banh mi, qui irure terry richardson ex
-                                    squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan
-                                    american apparel, butcher voluptate nisi qui.</p>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action active">연구 주제 1</a>
+                                </div>
                             </tab-pane>
 
                             <tab-pane key="tab3">
@@ -54,10 +57,10 @@
                                     <i class="ni ni-atom"></i>연구 방법
                                 </template>
 
-                                <p class="description">Raw denim you probably haven't heard of them jean shorts
-                                    Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                    cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
-                                    keffiyeh dreamcatcher synth.</p>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action active">연구 방법 1</a>
+                                    <a href="#" class="list-group-item list-group-item-action">연구 방법 2</a>
+                                </div>
                             </tab-pane>
 
                             <tab-pane key="tab4">
@@ -65,10 +68,10 @@
                                     <i class="ni ni-chart-bar-32"></i>연구 결과
                                 </template>
 
-                                <p class="description">Raw denim you probably haven't heard of them jean shorts
-                                    Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                    cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
-                                    keffiyeh dreamcatcher synth.</p>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action active">연구 결과 1</a>
+                                    <a href="#" class="list-group-item list-group-item-action">연구 결과 2</a>
+                                </div>
                             </tab-pane>
                         </card>
                     </tabs>
@@ -89,6 +92,7 @@
                         :data="defaultWords"
                         nameKey="keyword"
                         valueKey="frequency"
+                        :showTooltip="false"
                         :color="Accent"
                         :wordClick="wordClickHandler">
                     </wordcloud>
