@@ -9,6 +9,7 @@ Vue.use(Vuex);
 // 작성한 모듈을 가져옵니다.
 import boardstore from '@/store/modules/boardstore.js';
 import userstore from '@/store/modules/userstore.js';
+import filestore from '@/store/modules/filestore.js';
 
 const store = new Vuex.Store({
   modules: {
@@ -16,6 +17,7 @@ const store = new Vuex.Store({
     // 이런형태로 저장!
     boardstore,
     userstore,
+    filestore,
   },
   // plugins: [
   //   createPersistedState({

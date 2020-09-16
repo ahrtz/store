@@ -54,11 +54,18 @@
                     </a>
                     <router-link to="/landing" class="dropdown-item">Landing</router-link>
                     <router-link to="/profile" class="dropdown-item">Profile</router-link>
-                    <router-link to="/login" class="dropdown-item">Login</router-link>
-                    <router-link to="/register" class="dropdown-item">Register</router-link>
                 </base-dropdown>
+
+                <!-- 수정 파트 -->
+                <div tag="li" class="nav-item">
+                    <router-link slot="title" to="/login" class="nav-link" role="button">Sign in</router-link>
+                </div>
+
+                <div tag="li" class="nav-item">
+                    <router-link slot="title" to="/register" class="nav-link" role="button">Sign up</router-link>
+                </div>
             </ul>
-            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+            <!-- <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" rel="noopener"
                        data-toggle="tooltip" title="Like us on Facebook">
@@ -96,7 +103,7 @@
                         <span class="nav-link-inner--text">Download</span>
                     </a>
                 </li>
-            </ul>
+            </ul> -->
         </base-nav>
     </header>
 </template>
