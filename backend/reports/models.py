@@ -7,7 +7,7 @@ class Reports(models.Model):# 파일 업로드 용
 #     title_kor = models.CharField(max_length = 300)
 #     title_eng = models.CharField(max_length = 300)
 #     main_author = models.CharField(max_length = 100) 
-#     sub_author = models.TextField() #<- 이거 여러명 클릭 가능한 형식으로 할거면...... 연관 테이블...?
+#     sub_author = models.TextField() #<- 이거 여러명 클릭 가능한 형식으로 할거면...... 연관 테이블...? 이건 아니엇던듯? 
 #     # 저널 이름 
 #     journal_kor = models.CharField(max_length = 100)
 #     journal_eng = models.CharField(max_length = 100)
