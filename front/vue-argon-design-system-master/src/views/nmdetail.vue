@@ -37,12 +37,77 @@
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-circle-08"></i>
                     </a>
-                    <router-link to="/login" class="dropdown-item">Login</router-link>
-                    <router-link to="/register" class="dropdown-item">Register</router-link>
+                    <a class="dropdown-item" @click="modals.modal0 = true">로그인</a>
+                    <router-link to="/register" class="dropdown-item">회원가입</router-link>
                 </base-dropdown>
             </ul>
         </base-nav>
+        <modal :show.sync="modals.modal0">
+            <template slot="header">
+                <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+            </template>
+            <div>
+                <base-input type="text" name="uid" v-model="formData.uid" v-validate="'required'" label="아이디"/>
+                <base-input type="password" name="password" v-model="formData.password" v-validate="'required'" label="패스워드"/>
+            </div>
+            <template slot="footer">
+                <base-button type="primary">로그인</base-button>
+            </template>
+        </modal>
         <div class="container ct-example-row">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="h3 mb-0">논문 정보</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item px-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            제목
+                                        </div>
+                                        <div class="col-10">
+                                            <span>{{essay.title}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item px-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            저자
+                                        </div>
+                                        <div class="col-10">
+                                            <span>{{essay.author}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item px-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            분야
+                                        </div>
+                                        <div class="col-10">
+                                            <span>{{essay.topic}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item px-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            키워드 
+                                        </div>
+                                        <div class="col-10">
+                                            <span v-for="keyword in essay.keywords" :key="keyword" style="display: inline-block; margin-right: 20px">{{keyword}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <tabs fill class="flex-column flex-md-row">
@@ -146,7 +211,9 @@ import CloseButton from "@/components/CloseButton";
 import Menu1 from "./components/Navigation/Menu1";
 import { BCarousel } from "bootstrap-vue/esm/components/carousel/carousel";
 import { BCarouselSlide } from "bootstrap-vue/esm/components/carousel/carousel-slide";
-import wordcloud from 'vue-wordcloud'
+import Modal from "@/components/Modal";
+import Card from "@/components/Card";
+import wordcloud from 'vue-wordcloud';
 
 export default {
   name: "nmdetail",
@@ -161,7 +228,8 @@ export default {
         Menu1,
         wordcloud,
         BCarousel,
-        BCarouselSlide
+        BCarouselSlide,
+        Modal
   },
     methods: {
       wordClickHandler(keyword, frequency, vm) {
@@ -177,6 +245,10 @@ export default {
         'red',
         'orange',
       ],
+      formData: {
+          uid: '',
+          password: ''
+      },
       model: 0,
       defaultWords: [{
           "keyword": "Lux",
@@ -221,13 +293,25 @@ export default {
       ],
       menus: [
         { type: "default", menuComponent: Menu1 }
-      ]
+      ],
+      modals: {
+          modal0: false
+      },
+      essay: {
+          title: 'Application of Digital Forensics for Epidemiological Contact Tracing',
+          author: 'In Ha, Yoon',
+          keywords: [
+              'Digital Forensics',
+              'Contact Tracing',
+          ],
+          topic: 'Computer Science'
+      }
     }),
 };
 </script>
 
 <style>
     .row {
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
 </style>
