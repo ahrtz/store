@@ -1,6 +1,5 @@
 <template>
   <div>
-    <hero></hero>
     <h1>메인페이지입니다.</h1>
     <router-link to="/guide">컴포넌트 가이드</router-link><br>
     <router-link to="/nmdetail">논문상세페이지 임시 이동 링크</router-link><br>
@@ -20,7 +19,7 @@
   </div>
 </template>
 <script>
-import Hero from "./components/Hero";
+// import Hero from "./components/Hero";
 import BasicElements from "./components/BasicElements";
 import Inputs from "./components/Inputs";
 import CustomControls from "./components/CustomControls";
@@ -39,7 +38,7 @@ import search from "./search";
 export default {
   name: "components",
   components: {
-    Hero,
+    // Hero,
     BasicElements,
     Inputs,
     CustomControls,

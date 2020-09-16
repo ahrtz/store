@@ -57,5 +57,9 @@
 <script>
 export default {};
 </script>
-<style>
+<style scoped>
+    .section-hero {
+        width: 100%;
+        height: 20%;
+    }
 </style>
