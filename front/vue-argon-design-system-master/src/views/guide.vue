@@ -2,23 +2,23 @@
     <div>
         <hero></hero>
         <h1>argon 컴포넌트 페이지입니다.</h1>
-        여기인가요
+        여기인가요1
         <basic-elements></basic-elements>
-        여기인가요
+        여기인가요2
         <inputs></inputs>
-        여기인가요
+        여기인가요3
         <custom-controls></custom-controls>
-        여기인가요
+        여기인가요4
         <navigation></navigation>
-        여기인가요
+        여기인가요5
         <javascript-components></javascript-components>
-        여기인가요
+        여기인가요6
         <icons></icons>
-        여기인가요
+        여기인가요7
         <examples></examples>
-        여기인가요
+        여기인가요8
         <download-section></download-section>
-        여기인가요
+        여기인가요9
         <carousel></carousel>
     </div>
 </template>

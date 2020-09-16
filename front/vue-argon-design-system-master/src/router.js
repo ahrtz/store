@@ -14,6 +14,8 @@ import main from "./views/main.vue";
 
 //논문상세페이지
 import nmdetail from "./views/nmdetail.vue";
+//검색페이지
+import search from "./views/search.vue";
 
 //argon 컴포넌트페이지
 import guide from "./views/guide.vue";
@@ -23,8 +25,7 @@ Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
-  routes: [
-    {
+  routes: [{
       path: "/",
       name: "main",
       components: {
@@ -89,6 +90,16 @@ export default new Router({
       components: {
         header: AppHeader,
         default: guide,
+        footer: AppFooter
+      }
+    },
+    //검색 페이지
+    {
+      path: "/search",
+      name: "search",
+      components: {
+        header: AppHeader,
+        default: search,
         footer: AppFooter
       }
     },
