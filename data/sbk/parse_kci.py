@@ -6,9 +6,9 @@ import requests
 import json
 from googletrans import Translator
 
-DATA_DIR = "."
+DATA_DIR = "F:/SSAFY_doc_3"
 DATA_FILE = os.path.join(DATA_DIR, "논문검색리스트 정제 (1).xls")
-DUMP_FILE = os.path.join(DATA_DIR, "dump.pkl")
+DUMP_FILE = os.path.join(DATA_DIR, "dumps.pkl")
 
 paper_columns = (
     "id",    # pk
@@ -63,9 +63,8 @@ def import_data():
                     columns.append(rb_sheet.cell_value(row, col))
 
                 papers.append(columns)
-
     except FileNotFoundError as e:
-        print(f"`{data_path}` 가 존재하지 않습니다.")
+        # print(f"`{data_path}` 가 존재하지 않습니다.")
         exit(1)
 
     # print(papers)
@@ -161,22 +160,23 @@ if __name__ == '__main__':
     # data = xls_to_json()
 
     print("[*] Parsing data...")
-    data = import_data()
+    # data = import_data()
     print("[+] Done")
 
     print("[*] Parsing keyword...")
-    data = parse_keyword(data)
+    # data = parse_keyword(data)
     print("[+] Done")
 
-    # data = load_dataframes()
-    data_trans = translation_data(data)
+    data = load_dataframes()
+    # data_trans = translation_data(data)
 
     print("[*] Dumping data...")
-    dump_dataframes(data_trans)
+    # dump_dataframes(data_trans)
     print("[+] Done\n")
 
     print("[논문]")
     # print(data["papers"].loc[:, ("title_ko", "title_en")])
+    print(data)
     print("\n")
 
     print("[키워드]")
