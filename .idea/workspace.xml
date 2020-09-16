@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86df048f-624f-49e0-8518-d8e5515716d2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/data/sbk/analyze_kci.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/sbk/analyze_kci.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/sbk/parse_kci.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/sbk/parse_kci.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sbk/recommend.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/sbk/recommend.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,8 +66,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data/sbk/parse_kci.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+            <state relative-caret-position="339">
+              <caret line="73" column="70" selection-start-line="73" selection-start-column="70" selection-end-line="73" selection-end-column="70" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -160,7 +159,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
@@ -215,8 +214,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/sbk/parse_kci.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+        <state relative-caret-position="339">
+          <caret line="73" column="70" selection-start-line="73" selection-start-column="70" selection-end-line="73" selection-end-column="70" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
