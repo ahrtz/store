@@ -10,6 +10,7 @@ Vue.use(Vuex);
 import boardstore from '@/store/modules/boardstore.js';
 import userstore from '@/store/modules/userstore.js';
 import filestore from '@/store/modules/filestore.js';
+import nmstore from '@/store/modules/nmstore.js';
 
 const store = new Vuex.Store({
   modules: {
@@ -18,6 +19,7 @@ const store = new Vuex.Store({
     boardstore,
     userstore,
     filestore,
+    nmstore
   },
   // plugins: [
   //   createPersistedState({
