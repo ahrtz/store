@@ -4,7 +4,8 @@ from .models import Reports
 from .serializers import ReportsSerializers
 from django.http import HttpResponse
 from rest_framework.pagination import PageNumberPagination
-
+from reports.algo  import main
+from rest_framework.response import Response
 
 class FileUploadViewSet(ModelViewSet):
     permission_classes = []
@@ -14,8 +15,15 @@ class FileUploadViewSet(ModelViewSet):
     parser_classes = (MultiPartParser, FormParser,)
 
     def perform_create(self, serializer):
+
+        abstract_long,abstract_short,key=main.getpdf(str(self.request.data['datafile']))
         serializer.save(
-                       datafile=self.request.data.get('datafile'))
+                       datafile=self.request.data.get('datafile'),
+                       abstract_long=abstract_long,abstract_short=abstract_short,
+                       key=key
+                       )
+
+
         # print(self.request.data.get('datafile'))
         # self.request.data.get('datafile') <- 이게 파일 명입니다 위치는 media 폴더 아래에 존재 
 
