@@ -7,6 +7,10 @@ from mode_pdfconvert import pdfsort
 from mode_pdfconvert import pdfgrap
 from mode_pdfconvert import pdfcutter
 
+from mode_summarize import summarize_function
+from mode_summarize import keywords_function
+from mode_summarize import visualize_function
+
 from hanspell import spell_checker
 
 if __name__ == "__main__":
@@ -52,9 +56,23 @@ if __name__ == "__main__":
             except:
                 final_result += result[y] + "."
     print("맞춤법 교정 완료!")
+    print("")
 
-    fileOut = open('output.txt', 'w', encoding='utf-8')
+    # 요약서비스를 이용한다
+    summarize_data = summarize_function(final_result)
+
+    print("키워드 추출 시작!")
+    summarize_tags = keywords_function(final_result)
+    print(summarize_tags)
+    visualize_function(summarize_tags)
+    print("키워드 추출 완료!")
+
+    fileOut = open('output1.txt', 'w', encoding='utf-8')
     print(final_result, file=fileOut)
+    fileOut.close()
+
+    fileOut = open('output2.txt', 'w', encoding='utf-8')
+    print(summarize_data, file=fileOut)
     fileOut.close()
 
 

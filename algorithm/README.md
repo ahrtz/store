@@ -94,4 +94,8 @@ pip install itertools
 pip install collections
 pip install fitz
 pip install gensim newspaper3k
+
+pip install wordcloud
+pip install matplotlib
+pip install konlpy
 ```
