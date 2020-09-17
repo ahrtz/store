@@ -43,16 +43,8 @@
             </ul>
         </base-nav>
         <modal :show.sync="modals.modal0">
-            <template slot="header">
-                <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
-            </template>
-            <div>
-                <base-input type="text" name="uid" v-model="formData.uid" label="아이디"/>
-                <base-input type="password" name="password" v-model="formData.password" label="패스워드"/>
-            </div>
-            <template slot="footer">
-                <base-button type="primary">로그인</base-button>
-            </template>
+            <my-login>
+            </my-login>
         </modal>
         <div class="container ct-example-row">
             <div class="row">
@@ -214,6 +206,8 @@ import { BCarouselSlide } from "bootstrap-vue/esm/components/carousel/carousel-s
 import Modal from "@/components/Modal";
 import Card from "@/components/Card";
 import wordcloud from 'vue-wordcloud';
+import Login from './Login';
+import MyLogin from './MyLogin';
 
 export default {
   name: "nmdetail",
@@ -229,7 +223,9 @@ export default {
         wordcloud,
         BCarousel,
         BCarouselSlide,
-        Modal
+        Modal,
+        Login,
+        MyLogin
   },
     methods: {
       wordClickHandler(keyword, frequency, vm) {
@@ -245,10 +241,6 @@ export default {
         'red',
         'orange',
       ],
-      formData: {
-          uid: '',
-          password: ''
-      },
       model: 0,
       defaultWords: [{
           "keyword": "Lux",
