@@ -38,13 +38,17 @@
                         <i class="ni ni-circle-08"></i>
                     </a>
                     <a class="dropdown-item" @click="modals.modal0 = true">로그인</a>
-                    <router-link to="/register" class="dropdown-item">회원가입</router-link>
+                    <a class="dropdown-item" @click="modals.modal1 = true">회원가입</a>
                 </base-dropdown>
             </ul>
         </base-nav>
         <modal :show.sync="modals.modal0">
             <my-login>
             </my-login>
+        </modal>
+        <modal :show.sync="modals.modal1">
+            <my-sign-in>
+            </my-sign-in>
         </modal>
         <div class="container ct-example-row">
             <div class="row">
@@ -208,6 +212,7 @@ import Card from "@/components/Card";
 import wordcloud from 'vue-wordcloud';
 import Login from './Login';
 import MyLogin from './MyLogin';
+import MySignIn from './MySignIn';
 
 export default {
   name: "nmdetail",
@@ -225,7 +230,8 @@ export default {
         BCarouselSlide,
         Modal,
         Login,
-        MyLogin
+        MyLogin,
+        MySignIn
   },
     methods: {
       wordClickHandler(keyword, frequency, vm) {
@@ -287,7 +293,8 @@ export default {
         { type: "default", menuComponent: Menu1 }
       ],
       modals: {
-          modal0: false
+          modal0: false,
+          modal1: false
       },
       essay: {
           title: 'Application of Digital Forensics for Epidemiological Contact Tracing',
