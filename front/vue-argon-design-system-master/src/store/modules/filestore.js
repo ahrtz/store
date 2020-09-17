@@ -10,24 +10,29 @@ Vue.use(Vuex);
 const filestore = {
     state: {
         file: {},
-        result: {}
+        result: []
+    },
+
+    getters: {
+        getResult: state => state.result
     },
 
     actions: {
 
 
         //파일 전송
-        [Constant.SEND_FILE]: (store, payload) => {
+        [Constant.SEND_FILE]: async (store, payload) => {
             let formData = new FormData()
             formData.append('datafile', payload.file)
 
             // console.dir(payload.file.data + ' 왔습니다 여기까지')
-            axios.post('http://127.0.0.1:8080/reports/addreport/', formData, {
+            await axios.post('/api/reports/addreport/', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(() => {
+                .then((response) => {
+                    console.log(response.data)
                     store.commit(Constant.GET_RESULT, { result: response.data })
 
                     alert('파일 전송 성공!!');
@@ -36,9 +41,7 @@ const filestore = {
                     console.log(exp.data)
                     alert('파일 전송에 실패하였습니다.' + exp);
                 })
-        },
-
-
+        }
     },
 
     mutations: {

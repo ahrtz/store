@@ -238,6 +238,16 @@ export default {
         console.log('wordClickHandler', keyword, frequency, vm)
       }
     },
+    created: function() {
+        let result = this.$store.getters.getResult
+        let splitResult = result.key.split(/[, ()]+/)
+        console.log(splitResult)
+        for (var s in splitResult) {
+            if (splitResult[s] != "[" && splitResult[s] != "]" && isNaN(parseInt(splitResult[s]))) {
+                this.essay.keywords.push(splitResult[s])
+            }
+        }
+    },
     data: () => ({
       drawer: null,
       colors: [
@@ -247,6 +257,7 @@ export default {
         'red',
         'orange',
       ],
+      keywords: [],
       model: 0,
       defaultWords: [{
           "keyword": "Lux",
@@ -299,10 +310,7 @@ export default {
       essay: {
           title: 'Application of Digital Forensics for Epidemiological Contact Tracing',
           author: 'In Ha, Yoon',
-          keywords: [
-              'Digital Forensics',
-              'Contact Tracing',
-          ],
+          keywords: [],
           topic: 'Computer Science'
       }
     }),

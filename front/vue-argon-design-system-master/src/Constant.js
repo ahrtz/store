@@ -13,6 +13,6 @@ export default {
 
     //pdf 파일 전송
     SEND_FILE : 'sendFile',
-
+    GET_RESULT: 'getResult',
     
 }

@@ -15,7 +15,11 @@ class FileUploadViewSet(ModelViewSet):
     parser_classes = (MultiPartParser, FormParser,)
 
     def perform_create(self, serializer):
-
+        serializer.save(
+                       datafile=self.request.data.get('datafile'),
+                       abstract_long='',abstract_short='',
+                       key=''
+                       )
         abstract_long,abstract_short,key=main.getpdf(str(self.request.data['datafile']))
         serializer.save(
                        datafile=self.request.data.get('datafile'),
