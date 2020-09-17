@@ -38,21 +38,17 @@
                         <i class="ni ni-circle-08"></i>
                     </a>
                     <a class="dropdown-item" @click="modals.modal0 = true">로그인</a>
-                    <router-link to="/register" class="dropdown-item">회원가입</router-link>
+                    <a class="dropdown-item" @click="modals.modal1 = true">회원가입</a>
                 </base-dropdown>
             </ul>
         </base-nav>
         <modal :show.sync="modals.modal0">
-            <template slot="header">
-                <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
-            </template>
-            <div>
-                <base-input type="text" name="uid" v-model="formData.uid" label="아이디"/>
-                <base-input type="password" name="password" v-model="formData.password" label="패스워드"/>
-            </div>
-            <template slot="footer">
-                <base-button type="primary">로그인</base-button>
-            </template>
+            <my-login>
+            </my-login>
+        </modal>
+        <modal :show.sync="modals.modal1">
+            <my-sign-in>
+            </my-sign-in>
         </modal>
         <div class="container ct-example-row">
             <div class="row">
@@ -214,6 +210,9 @@ import { BCarouselSlide } from "bootstrap-vue/esm/components/carousel/carousel-s
 import Modal from "@/components/Modal";
 import Card from "@/components/Card";
 import wordcloud from 'vue-wordcloud';
+import Login from './Login';
+import MyLogin from './MyLogin';
+import MySignIn from './MySignIn';
 
 export default {
   name: "nmdetail",
@@ -229,7 +228,10 @@ export default {
         wordcloud,
         BCarousel,
         BCarouselSlide,
-        Modal
+        Modal,
+        Login,
+        MyLogin,
+        MySignIn
   },
     methods: {
       wordClickHandler(keyword, frequency, vm) {
@@ -245,10 +247,6 @@ export default {
         'red',
         'orange',
       ],
-      formData: {
-          uid: '',
-          password: ''
-      },
       model: 0,
       defaultWords: [{
           "keyword": "Lux",
@@ -295,7 +293,8 @@ export default {
         { type: "default", menuComponent: Menu1 }
       ],
       modals: {
-          modal0: false
+          modal0: false,
+          modal1: false
       },
       essay: {
           title: 'Application of Digital Forensics for Epidemiological Contact Tracing',
