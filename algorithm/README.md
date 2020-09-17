@@ -98,4 +98,7 @@ pip install gensim newspaper3k
 pip install wordcloud
 pip install matplotlib
 pip install konlpy
+
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud
+사이트에서 자신에 맞는 wordcloud 파일 다운로드
 ```
