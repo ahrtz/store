@@ -9,8 +9,8 @@ Vue.use(Vuex);
 
 const filestore = {
     state: {
-        boards: [],
-        board: {}
+        file: {},
+        result: {}
     },
 
     actions: {
@@ -28,12 +28,8 @@ const filestore = {
                     }
                 })
                 .then(() => {
-                    // store.dispatch(Constant.GET_BOARDLIST, {
-                    //     bstate: payload.bstate
-                    // });
-                    // store.dispatch('upFileForBoard', {
-                    //     bno: res.data
-                    // })
+                    store.commit(Constant.GET_RESULT, { result: response.data })
+
                     alert('파일 전송 성공!!');
                 })
                 .catch(exp => {
@@ -46,10 +42,9 @@ const filestore = {
     },
 
     mutations: {
-        // [Constant.GET_BOARDLIST]: (state, payload) => {
-        //     // console.log('mutation' + payload.boards);
-        //     state.boards = payload.boards;
-        // },
+        [Constant.GET_RESULT]: (state, payload) => {
+            state.result = payload.result;
+        },
         // [Constant.GET_BOARD]: (state, payload) => {
         //     state.board = payload.board;
         // },

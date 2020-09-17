@@ -98,9 +98,6 @@
     <!-- <div class="pt-5">
       Source code: <a href="https://github.com/lian-yue/vue-upload-component/blob/master/docs/views/examples/Drag.vue">/docs/views/examples/Drag.vue</a>
     </div>-->
-
-
-    
   </div>
 </template>
 
@@ -118,14 +115,17 @@ export default {
   data() {
     return {
       files: [],
+      check: false,
     };
   },
 
   methods: {
-    sendfile(file) {
-      console.log("정체: "+typeof(file));
-      this.$store.dispatch(Constant.SEND_FILE, { file : file.file });
-      
+    async sendfile(file) {
+      // console.log("정체: "+typeof(file));
+      await this.$store.dispatch(Constant.SEND_FILE, { file: file.file });
+      this.$router.push("/nmdetail"); 
+
+      // this.check = true;
     },
   },
 };
