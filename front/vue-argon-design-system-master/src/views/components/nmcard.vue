@@ -18,21 +18,40 @@
         <badge type="info" class="text-uppercase">Info</badge>
       </div>
       <div class="col-auto">
-        <button
-          type="button"
-          class="btn btn-default"
-          data-container="body"
-          data-toggle="popover"
-          data-placement="top"
-          data-content="abstract 내용이 들어갈 자리입니다."
-        >abstract 보기</button>
+        <base-button block type="primary" class="mb-3" @click="modals.modal1 = true">Default</base-button>
+        <modal :show.sync="modals.modal1">
+          <h6 slot="header" class="modal-title" id="modal-title-default">논문 초록 미리보기</h6>
+
+          <p>
+            abstract 잘라 넣기
+          </p>
+          
+
+          <template slot="footer">
+            <base-button type="link" class="ml-auto" @click="modals.modal1 = false">Close</base-button>
+          </template>
+        </modal>
       </div>
     </div>
   </card>
 </template>
 
 <script>
-export default {};
+import Modal from "@/components/Modal.vue";
+
+export default {
+  components: {
+    Modal
+  },
+  data() {
+    return {
+      modals: {
+        modal1: false,
+       
+      }
+    };
+  }
+};
 </script>
 
 <style>
