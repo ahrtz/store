@@ -2,6 +2,9 @@ from django.db import models
 
 class Reports(models.Model):# 파일 업로드 용
     datafile = models.FileField()
+    abstract_long= models.TextField(default=None)
+    abstract_short=models.TextField(default=None)
+    key=models.TextField(default=None)
 
 class Summary_report(models.Model): # 우리가 정제한 데이터 
     title_kor = models.CharField(max_length = 300)
