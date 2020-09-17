@@ -47,8 +47,8 @@
                 <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
             </template>
             <div>
-                <base-input type="text" name="uid" v-model="formData.uid" v-validate="'required'" label="아이디"/>
-                <base-input type="password" name="password" v-model="formData.password" v-validate="'required'" label="패스워드"/>
+                <base-input type="text" name="uid" v-model="formData.uid" label="아이디"/>
+                <base-input type="password" name="password" v-model="formData.password" label="패스워드"/>
             </div>
             <template slot="footer">
                 <base-button type="primary">로그인</base-button>
