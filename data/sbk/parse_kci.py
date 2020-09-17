@@ -6,9 +6,9 @@ import requests
 import json
 from googletrans import Translator
 
-DATA_DIR = "."
+DATA_DIR = "F:/SSAFY_doc_3"
 DATA_FILE = os.path.join(DATA_DIR, "논문검색리스트 정제 (1).xls")
-DUMP_FILE = os.path.join(DATA_DIR, "dump.pkl")
+DUMP_FILE = os.path.join(DATA_DIR, "dumps.pkl")
 
 paper_columns = (
     "id",    # pk
@@ -63,9 +63,8 @@ def import_data():
                     columns.append(rb_sheet.cell_value(row, col))
 
                 papers.append(columns)
-
     except FileNotFoundError as e:
-        print(f"`{data_path}` 가 존재하지 않습니다.")
+        # print(f"`{data_path}` 가 존재하지 않습니다.")
         exit(1)
 
     # print(papers)
@@ -124,30 +123,35 @@ def translation_data(dataframes):
     title_en = papers["title_en"]
     translator = Translator()
 
-    for i in range(0, 900):   # len(title_ko)
+    for i in range(0, 300):   # len(title_ko)
         # 어떤 언어인지 확인
         str_title_ko = title_ko[i]
         str_title_en = title_en[i]
         title_ko_lang = ""
         title_en_lang = ""
-        if str_title_ko != "":  title_ko_lang = translator.detect(str_title_ko).lang
-        if str_title_en != "":  title_en_lang = translator.detect(str_title_en).lang
+        if str_title_ko != "":
+            title_ko_lang = translator.detect(str_title_ko).lang
+        if str_title_en != "":
+            title_en_lang = translator.detect(str_title_en).lang
 
-        if title_ko_lang == 'ko' and title_en_lang == 'en':     # 두개 다 있는 경우
-            continue
-        elif title_ko_lang == 'en' and title_en_lang == 'ko':   # 두개 위치가 바뀐 경우
-            papers.loc[i, 'title_ko'] = str_title_en
-            papers.loc[i, 'title_en'] = str_title_ko
-        elif title_ko_lang == 'en':                             # 영어인 경우
-            title_trans = translator.translate(str_title_ko, dest="ko")
-            papers.loc[i, 'title_ko'] = title_trans.text
-            papers.loc[i, 'title_en'] = str_title_ko
-        else:                                                   # 한글인 경우
-            title_trans = translator.translate(str_title_ko, dest="en")
-            papers.loc[i, 'title_en'] = title_trans.text
+        if title_ko_lang == 'ko':
+            if title_en_lang == 'en':     # 두개 다 있는 경우
+                papers.loc[i, 'title_ko'] = str_title_en
+                papers.loc[i, 'title_en'] = str_title_ko
+            else:
+                title_trans = translator.translate(str_title_ko, dest="en")
+                papers.loc[i, 'title_en'] = title_trans.text
 
-    # print(papers["title_ko"])
-    # print(papers["title_en"])
+        author = papers["author"][i]
+        if translator.detect(author) == 'ko':
+            papers.loc[i, 'author'] = translator.translate(author, dest="en").text
+            papers.loc[i, 'coauthor'] = translator.translate(papers["coauthor"][i], dest="en").text
+
+        keyword = papers["keyword"][i]
+        if translator.detect(keyword) == 'ko':
+            papers.loc[i, 'keyword'] = translator.translate(keyword, dest="en").text
+
+    print(papers.loc[:, ["title_ko", "keyword", "author", "coauthor"]])
 
     return {"papers": dataframes["papers"], "keywords": keywords}
 
@@ -171,7 +175,8 @@ if __name__ == '__main__':
     print("[+] Done\n")
 
     print("[논문]")
-    print(data["papers"].loc[:, ("title_ko", "title_en")])
+    # print(data["papers"].loc[:, ("title_ko", "title_en")])
+    print(data)
     print("\n")
 
     print("[키워드]")
