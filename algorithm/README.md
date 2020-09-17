@@ -70,4 +70,28 @@ cd ..
 - PDFPlumber
 - 옵션도 많고, 지원하는 기능도 많습니다.
 - 현재 논문 PDF에서 table 인식이 불가능 합니다.
+
+- OCR_SPACE
+- OCR 기반의 table 추출 API
+- 25,000회 제한, API 표 인식 불가
+
+- PDF_Tables
+- 25회 제한, API
+- 기존 텍스트까지 표로 인식하는 문제 발생
+```
+
+## 03. PDF Install
+```sh
+pip install pdfminer.six
+
+git clone https://github.com/ssut/py-hanspell
+cd hanspell
+python setup.py install
+cd ..
+
+pip install re
+pip install itertools
+pip install collections
+pip install fitz
+pip install gensim newspaper3k
 ```
