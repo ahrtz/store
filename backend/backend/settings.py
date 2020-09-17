@@ -155,5 +155,7 @@ REST_FRAMEWORK = {
 }
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/reports/algo/documents/'
+MEDIA_ROOT = BASE_DIR / 'reports/algo/documents'
