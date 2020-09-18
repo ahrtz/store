@@ -1,4 +1,4 @@
-from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 from rest_framework.viewsets import ModelViewSet
 from .models import Reports
 from .serializers import ReportsSerializers
@@ -12,7 +12,7 @@ class FileUploadViewSet(ModelViewSet):
     
     queryset = Reports.objects.all()
     serializer_class = ReportsSerializers
-    parser_classes = (MultiPartParser, FormParser,)
+    parser_classes = (MultiPartParser, FormParser,JSONParser)
 
     def perform_create(self, serializer):
         serializer.save(
