@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 ]
 SITE_ID = 1 
 CORS_ORIGIN_ALLOW_ALL = True   
-
+# CORS_ALLOW_ALL_ORIGINS = True
 # 아래 코드가 없으면 이메일 인증 코드를 보내려고 시도 해서 에러남 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
@@ -149,7 +149,7 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
 
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
         
     ]
 }
@@ -158,4 +158,4 @@ REST_FRAMEWORK = {
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/reports/algo/documents/'
-MEDIA_ROOT = BASE_DIR / 'reports/algo/documents'
+MEDIA_ROOT = BASE_DIR / 'reports/algo/documents/' 

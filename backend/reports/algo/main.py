@@ -87,7 +87,7 @@ def getpdf(filename):
     fileOut = open('output2.txt', 'w', encoding='utf-8')
     print(summarize_data, file=fileOut)
     fileOut.close()
-    return final_result,summarize_data,summarize_tags
+    return final_result,title_data+';^'+summarize_data,summarize_tags
 
 
 
