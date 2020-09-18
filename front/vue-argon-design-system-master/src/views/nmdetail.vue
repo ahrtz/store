@@ -89,15 +89,14 @@
                                         </div>
                                     </div>
                                 </li>
+                                <base-button type="success" @click="essay.whichDescription = !essay.whichDescription">
+                                    <span v-if="!essay.whichDescription">긴 요약</span>
+                                    <span v-else>짧은 요약</span>
+                                </base-button>
                                 <li class="list-group-item px-0">
                                     <div class="row align-items-center">
                                         <div class="col">
                                             요약
-                                            <br>
-                                            <base-button type="success" @click="essay.whichDescription = !essay.whichDescription">
-                                                <span v-if="!essay.whichDescription">긴 요약</span>
-                                                <span v-else>짧은 요약</span>
-                                            </base-button>
                                         </div>
                                         <div class="col-10">
                                             <span v-if="!essay.whichDescription">{{essay.shortDescription}}</span>
