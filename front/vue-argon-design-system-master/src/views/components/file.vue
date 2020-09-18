@@ -121,12 +121,14 @@ export default {
 
   methods: {
     async sendfile(file) {
-      // console.log("정체: "+typeof(file));
-      await this.$store.dispatch(Constant.SEND_FILE, { file: file.file }).then(() => {
-        this.$router.push("/nmdetail"); 
-      });
+      this.$emit("update");
 
-      // this.check = true;
+      await this.$store
+        .dispatch(Constant.SEND_FILE, { file: file.file })
+        .then(() => {
+          this.$router.push("/nmdetail");
+        });
+
     },
   },
 };
