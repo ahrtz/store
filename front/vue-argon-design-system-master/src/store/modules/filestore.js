@@ -32,7 +32,6 @@ const filestore = {
                     }
                 })
                 .then((response) => {
-                    console.log(response.data)
                     store.commit(Constant.GET_RESULT, { result: response.data })
 
                     alert('파일 전송 성공!!');

@@ -72,16 +72,6 @@
                                 <li class="list-group-item px-0">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            저자
-                                        </div>
-                                        <div class="col-10">
-                                            <span>{{essay.author}}</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item px-0">
-                                    <div class="row align-items-center">
-                                        <div class="col">
                                             분야
                                         </div>
                                         <div class="col-10">
@@ -99,64 +89,25 @@
                                         </div>
                                     </div>
                                 </li>
+                                <li class="list-group-item px-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            요약
+                                            <br>
+                                            <base-button type="success" @click="essay.whichDescription = !essay.whichDescription">
+                                                <span v-if="!essay.whichDescription">긴 요약</span>
+                                                <span v-else>짧은 요약</span>
+                                            </base-button>
+                                        </div>
+                                        <div class="col-10">
+                                            <span v-if="!essay.whichDescription">{{essay.shortDescription}}</span>
+                                            <span v-else>{{essay.longDescription}}</span>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <tabs fill class="flex-column flex-md-row">
-                        <card shadow>
-                            <tab-pane key="tab1">
-                                <template slot="title">
-                                    <i class="ni ni-folder-17"></i>요약 전체
-                                </template>
-
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action active">
-                                        연구 주제 1
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">연구 방법 1</a>
-                                    <a href="#" class="list-group-item list-group-item-action">연구 방법 2</a>
-                                    <a href="#" class="list-group-item list-group-item-action">연구 결과 1</a>
-                                    <a href="#" class="list-group-item list-group-item-action">연구 결과 2</a>
-                                </div>
-                            </tab-pane>
-
-                            <tab-pane key="tab2">
-                                <template slot="title">
-                                    <i class="ni ni-bulb-61"></i>연구 주제
-                                </template>
-
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action active">연구 주제 1</a>
-                                </div>
-                            </tab-pane>
-
-                            <tab-pane key="tab3">
-                                <template slot="title">
-                                    <i class="ni ni-atom"></i>연구 방법
-                                </template>
-
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action active">연구 방법 1</a>
-                                    <a href="#" class="list-group-item list-group-item-action">연구 방법 2</a>
-                                </div>
-                            </tab-pane>
-
-                            <tab-pane key="tab4">
-                                <template slot="title">
-                                    <i class="ni ni-chart-bar-32"></i>연구 결과
-                                </template>
-
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action active">연구 결과 1</a>
-                                    <a href="#" class="list-group-item list-group-item-action">연구 결과 2</a>
-                                </div>
-                            </tab-pane>
-                        </card>
-                    </tabs>
                 </div>
             </div>
             <div class="row">
@@ -241,12 +192,15 @@ export default {
     created: function() {
         let result = this.$store.getters.getResult
         let splitResult = result.key.split(/[, ()]+/)
-        console.log(splitResult)
         for (var s in splitResult) {
             if (splitResult[s] != "[" && splitResult[s] != "]" && isNaN(parseInt(splitResult[s]))) {
                 this.essay.keywords.push(splitResult[s])
             }
         }
+        splitResult = result.abstract_short.split(";^")
+        this.essay.title = splitResult[0]
+        this.essay.shortDescription = splitResult[1]
+        this.essay.longDescription = result.abstract_long
     },
     data: () => ({
       drawer: null,
@@ -311,7 +265,10 @@ export default {
           title: 'Application of Digital Forensics for Epidemiological Contact Tracing',
           author: 'In Ha, Yoon',
           keywords: [],
-          topic: 'Computer Science'
+          topic: 'Computer Science',
+          shortDescription: '',
+          longDescription: '',
+          whichDescription: false
       }
     }),
 };
