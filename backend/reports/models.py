@@ -18,7 +18,7 @@ class Summary_report(models.Model): # 우리가 정제한 데이터
     issuer_kor = models.CharField(max_length=100)
     issuer_eng = models.CharField(max_length=100)
     issue_year = models.IntegerField(default=0)
-    book_num = models.IntegerField(default=0)
+    book_num = models.CharField(max_length = 100)
     keyword_kor = models.TextField()
     keyword_eng =  models.TextField()
     subject = models.CharField(max_length = 50)
@@ -26,4 +26,4 @@ class Summary_report(models.Model): # 우리가 정제한 데이터
     direct_urls = models.URLField(max_length=200) # 200이면 되려나
     doi = models.CharField(max_length = 50)
     abstract  = models.TextField() # 이건 요약 정보
-    page_num=models.IntegerField(default=0)
+    page_num=models.CharField(max_length = 100)
