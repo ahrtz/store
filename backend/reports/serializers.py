@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Reports
+from .models import Reports,Scraps
 
 
 # 논문 목록
@@ -14,3 +14,7 @@ class ReportsSerializers(serializers.ModelSerializer):
         model = Reports
         fields = '__all__'
 
+class ScrapsSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Scraps
+        fields='__all__'

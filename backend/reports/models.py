@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Reports(models.Model):# 파일 업로드 용
     datafile = models.FileField()
@@ -27,3 +28,8 @@ class Summary_report(models.Model): # 우리가 정제한 데이터
     doi = models.CharField(max_length = 50)
     abstract  = models.TextField() # 이건 요약 정보
     page_num=models.CharField(max_length = 100)
+
+
+class Scraps(models.Model):
+    summary = models.ForeignKey(Summary_report,on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

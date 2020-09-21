@@ -1,11 +1,15 @@
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 from rest_framework.viewsets import ModelViewSet
-from .models import Reports
-from .serializers import ReportsSerializers
-from django.http import HttpResponse
-from rest_framework.pagination import PageNumberPagination
+from .models import Reports,Scraps,Summary_report
+from .serializers import ReportsSerializers,ScrapsSerializers
 from reports.algo  import main
+from django.http import HttpResponse
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.decorators import api_view
+
+
 
 class FileUploadViewSet(ModelViewSet):
     permission_classes = []
@@ -31,6 +35,8 @@ class FileUploadViewSet(ModelViewSet):
         # print(self.request.data.get('datafile'))
         # self.request.data.get('datafile') <- 이게 파일 명입니다 위치는 media 폴더 아래에 존재 
 
+
+
 # @api_view(['GET'])
 # def reports_list(request):
 #     paginator = PageNumberPagination()
@@ -38,3 +44,21 @@ class FileUploadViewSet(ModelViewSet):
 #     page = paginator.paginate_queryset(reports, request)
 #     serializer = ReportsListSerializers(page, many=True)
 #     return paginator.get_paginated_response(serializer.data)
+
+
+
+@api_view(['GET'])  # SCrap 리스트 받아오는 곳
+def scrap_list(request):
+    scraps = get_object_or_404(Scraps, user=request.user)
+    serializer = ScrapsSerializers(scraps)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def make_scrap(request,report_id):
+    report = get_object_or_404(Summary_report,id=report_id)
+    serializer = ScrapsSerializers(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user,summary=report)
+        return Response(serializer.data)
+    return HttpResponse(status = 404)
+

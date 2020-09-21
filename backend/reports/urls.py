@@ -8,8 +8,8 @@ router.register(r'addreport',views.FileUploadViewSet,basename='testing')
 
 app_name = 'reports'
 
-
-
 urlpatterns = [
-    path("",include(router.urls))
+    path("",include(router.urls)),
+    path('scrap/list/',views.scrap_list),
+    path('scrap/make/',views.make_scrap)
 ]  
