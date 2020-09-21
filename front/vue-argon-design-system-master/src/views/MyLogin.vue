@@ -27,6 +27,7 @@
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, min, max, regex } from 'vee-validate/dist/rules';
 import Navigation from "./components/Navigation.vue";
+import store from "../store/modules/user/store"
 
 extend('required', {
   ...required,
@@ -68,7 +69,11 @@ export default {
     }),
     methods: {
         onSubmit() {
-
+            let successful = store.dispatch('login', {formData: this.formData})
+            if (successful) {
+                this.formData.uid = ''
+                this.formData.password = ''
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
     <div>
         <validation-observer v-slot="{ invalid }">
             <header>
-                <h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
+                <h3 class="modal-title" id="exampleModalLabel">회원가입</h3>
             </header>
             <validation-provider name="uid" rules="required|minmax:6,12" v-slot="{ errors }">
                 <base-input type="text" v-model="formData.uid" label="아이디"/>
@@ -23,18 +23,38 @@
                 </base-alert>
             </validation-provider>
             <validation-provider name="priority" rules="required" v-slot="{ errors }">
-                <span>자연과학</span>
+                <h4>선호 주제 (최대 3개)</h4>
+                <h5>자연과학</h5>
                 <div
-                    v-for="(topic, index) in priorityList.nature"
-                    :key="index"
+                    v-for="topic in priorityList.nature"
+                    :key="topic"
+                    style="display: inline-block; width: 150px"
                 >
-                    <base-checkbox
+                    <input
+                        type="checkbox"
                         v-model="formData.selectedList"
-                        :name="topic"
-                        :value="index"
+                        :value="topic"
+                        :disabled="formData.selectedList.length >= 3 && formData.selectedList.indexOf(topic) == -1"
                     >
+                    <label style="margin-left: 10px">
                         {{ topic }}
-                    </base-checkbox>
+                    </label>
+                </div>
+                <h5>공학</h5>
+                <div
+                    v-for="topic in priorityList.engineering"
+                    :key="topic"
+                    style="display: inline-block; width: 150px"
+                >
+                    <input
+                        type="checkbox"
+                        v-model="formData.selectedList"
+                        :value="topic"
+                        :disabled="formData.selectedList.length >= 3 && formData.selectedList.indexOf(topic) == -1"
+                    >
+                    <label style="margin-left: 10px">
+                        {{ topic }}
+                    </label>
                 </div>
                 <base-alert type="danger" v-if="errors[0]">
                     {{ errors[0] }}
@@ -52,6 +72,7 @@ import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, min, max, regex } from 'vee-validate/dist/rules';
 import Navigation from "./components/Navigation.vue";
 import CustomControls from "./components/CustomControls"
+import store from "../store/modules/user/store"
 
 extend('required', {
   ...required,
@@ -112,7 +133,17 @@ export default {
     }),
     methods: {
         onSubmit() {
-
+            let successful = store.dispatch('signUp', {formData: this.formData})
+            if (successful) {
+                this.formData.uid = ''
+                this.formData.password = ''
+                this.formData.passwordVerify = ''
+                this.formData.selectedList = ''
+                store.dispatch('login', this.formData)
+            }
+            else {
+                alert("회원가입에 실패하였습니다")
+            }
         }
     }
 }
