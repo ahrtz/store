@@ -47,8 +47,8 @@
             </my-login>
         </modal>
         <modal :show.sync="modals.modal1">
-            <my-sign-in>
-            </my-sign-in>
+            <my-sign-up>
+            </my-sign-up>
         </modal>
         <div class="container ct-example-row">
             <div class="row">
@@ -90,8 +90,8 @@
                                     </div>
                                 </li>
                                 <base-button type="success" @click="essay.whichDescription = !essay.whichDescription">
-                                    <span v-if="!essay.whichDescription">긴 요약</span>
-                                    <span v-else>짧은 요약</span>
+                                    <span v-if="!essay.whichDescription">요약</span>
+                                    <span v-else>본문</span>
                                 </base-button>
                                 <li class="list-group-item px-0">
                                     <div class="row align-items-center">
@@ -162,7 +162,7 @@ import Card from "@/components/Card";
 import wordcloud from 'vue-wordcloud';
 import Login from './Login';
 import MyLogin from './MyLogin';
-import MySignIn from './MySignIn';
+import MySignUp from './MySignUp';
 
 export default {
   name: "nmdetail",
@@ -181,7 +181,7 @@ export default {
         Modal,
         Login,
         MyLogin,
-        MySignIn
+        MySignUp
   },
     methods: {
       wordClickHandler(keyword, frequency, vm) {
@@ -191,9 +191,16 @@ export default {
     created: function() {
         let result = this.$store.getters.getResult
         let splitResult = result.key.split(/[, ()]+/)
+        var a = new Object()
         for (var s in splitResult) {
-            if (splitResult[s] != "[" && splitResult[s] != "]" && isNaN(parseInt(splitResult[s]))) {
-                this.essay.keywords.push(splitResult[s])
+            if (splitResult[s] != "[" && splitResult[s] != "]") {
+                if (isNaN(parseInt(splitResult[s]))) {
+                    a.keyword = splitResult[s]
+                }
+                else {
+                    a.frequency = parseInt(splitResult[s])
+                    defaultWords.push(a)
+                }
             }
         }
         splitResult = result.abstract_short.split(";^")
@@ -212,46 +219,7 @@ export default {
       ],
       keywords: [],
       model: 0,
-      defaultWords: [{
-          "keyword": "Lux",
-          "frequency": 26
-        },
-        {
-          "keyword": "Syndra",
-          "frequency": 17
-        },
-        {
-          "keyword": "Orianna",
-          "frequency": 14
-        },
-        {
-          "keyword": "Lulu",
-          "frequency": 8
-        },
-        {
-          "keyword": "Xerath",
-          "frequency": 8
-        },
-        {
-          "keyword": "Viktor",
-          "frequency": 7
-        },
-        {
-          "keyword": "Ezreal",
-          "frequency": 7
-        },
-        {
-          "keyword": "Poppi",
-          "frequency": 4
-        },
-        {
-          "keyword": "Ryze",
-          "frequency": 4
-        },
-        {
-          "keyword": "Jayce",
-          "frequency": 3
-        },
+      defaultWords: [
       ],
       menus: [
         { type: "default", menuComponent: Menu1 }

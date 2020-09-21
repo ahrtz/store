@@ -4,26 +4,26 @@
             <header>
                 <h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
             </header>
-            <validation-provider rules="required|minmax:6,12" v-slot="{ errors }">
-                <base-input type="text" name="uid" v-model="formData.uid" label="아이디"/>
+            <validation-provider name="uid" rules="required|minmax:6,12" v-slot="{ errors }">
+                <base-input type="text" v-model="formData.uid" label="아이디"/>
                 <base-alert type="danger" v-if="errors[0]">
                     {{ errors[0] }}
                 </base-alert>
             </validation-provider>
-            <validation-provider rules="required|minmax:8,16|verify_password" v-slot="{ errors }">
-                <base-input type="password" name="password" v-model="formData.password" label="패스워드"/>
+            <validation-provider name="password" rules="required|minmax:8,16|verify_password" v-slot="{ errors }">
+                <base-input type="password" v-model="formData.password" label="패스워드"/>
                 <base-alert type="danger" v-if="errors[0]">
                     {{ errors[0] }}
                 </base-alert>
             </validation-provider>
-            <validation-provider rules="required|minmax:8,16|verify_password" v-slot="{ errors }">
-                <base-input type="password" name="password-verify" v-model="formData.passwordVerify" label="패스워드 확인"/>
+            <validation-provider name="password-verify" rules="required|minmax:8,16|verify_password|password_confirm:@password" v-slot="{ errors }">
+                <base-input type="password" v-model="formData.passwordVerify" label="패스워드 확인"/>
                 <base-alert type="danger" v-if="errors[0]">
                     {{ errors[0] }}
                 </base-alert>
             </validation-provider>
             <footer>
-                <base-button type="primary" :disabled="invalid" @click="onSubmit">로그인</base-button>
+                <base-button type="primary" :disabled="invalid" @click="onSubmit">가입</base-button>
             </footer>
         </validation-observer>
     </div>
@@ -57,6 +57,14 @@ extend('verify_password', {
         return strongRegex.test(value);
     },
     message: '대문자, 소문자, 숫자를 각각 1개 이상 입력해 주세요'
+});
+
+extend('password_confirm', {
+    params: ['target'],
+    validate(value, {target}) {
+        return value === target
+    },
+    message: '패스워드가 일치하지 않습니다'
 });
 
 export default {
