@@ -16,33 +16,51 @@ def favorites_list(request):
     serializer = FavoritesSerializers(favorites, many=True)
     return Response(serializer.data)
 
+# @api_view(['POST'])
+# def insert_favorites(request):
+#     user = request.user
+#     user_obj = get_object_or_404(User, username=request.user)
+#     print(user_obj['id'])
+
+#     first_favorites = get_object_or_404(Favorites, id=request.data.get('first_favorites_id'))
+#     second_favorites = get_object_or_404(Favorites, id=request.data.get('second_favorites_id'))
+#     third_favorites = get_object_or_404(Favorites, id=request.data.get('third_favorites_id'))
+#     print(request.data)
+
+#     serializer = UserFavoritesSerializers(first_favorites=first_favorites,
+#                 second_favorites=second_favorites, third_favorites=third_favorites)
+#     # print(serializer)
+    
+#     if serializer.is_valid():
+#         print('hi')
+#         serializer.save(user_id=user_obj.id, first_favorites=first_favorites,
+#                 second_favorites=second_favorites, third_favorites=third_favorites)
+
+#     return Response(serializer.data)
+
 @api_view(['POST'])
 def insert_favorites(request):
-    user = request.user
-    user_obj = get_object_or_404(User, username=request.user)
-    print(user_obj['id'])
-
-    first_favorites = get_object_or_404(Favorites, id=request.data.get('first_favorites_id'))
-    second_favorites = get_object_or_404(Favorites, id=request.data.get('second_favorites_id'))
-    third_favorites = get_object_or_404(Favorites, id=request.data.get('third_favorites_id'))
     print(request.data)
-
-    serializer = UserFavoritesSerializers(first_favorites=first_favorites,
-                second_favorites=second_favorites, third_favorites=third_favorites)
+    # user_favorites = get_object_or_404(User_Favorites, user_id=request.user.id)
+    # serializer = UserFavoritesSerializers(user_favorites)
+    # print(serializer.data)
+    serializer = UserFavoritesSerializers(first_favorites=request.data.get('first_favorites_id'),
+    second_favorites_id=request.data.get('second_favorites_id'), third_favorites_id=request.data.get('third_favorites_id'))
+    # print(serializer.data)
+    # serializer = UserFavoritesSerializers(data=request.data)
+    # serializer = UserFavoritesSerializers(data=request.data, user=request.user.id)
     # print(serializer)
     
     if serializer.is_valid():
         print('hi')
-        serializer.save(user_id=user_obj.id, first_favorites=first_favorites,
-                second_favorites=second_favorites, third_favorites=third_favorites)
-
+        # serializer.save(user_id=user_obj.id, first_favorites=first_favorites,
+        #         second_favorites=second_favorites, third_favorites=third_favorites)
+        serializer.save(user=request.user)
     return Response(serializer.data)
-    
+
 @api_view(['GET'])
 def search_favorites(request):
-    user = request.user.id
-    print(user)
-    favorites = User_Favorites.objects.filter(user_id=request.user.id)
-    print(favorites)
-    serializer = FavoritesSerializers(favorites, many=True)
+    print(request.data)
+    user_favorites = get_object_or_404(User_Favorites, user_id=request.user.id)
+    serializer = UserFavoritesSerializers(user_favorites)
     return Response(serializer.data)
