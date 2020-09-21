@@ -85,7 +85,7 @@
                                             키워드 
                                         </div>
                                         <div class="col-10">
-                                            <span v-for="keyword in essay.keywords" :key="keyword" style="display: inline-block; margin-right: 20px">{{keyword}}</span>
+                                            <span v-for="keyword in essay.keywords" :key="keyword" style="display: inline-block; width: 160px; text-align: center">{{keyword}}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -195,11 +195,13 @@ export default {
         for (var s in splitResult) {
             if (splitResult[s] != "[" && splitResult[s] != "]") {
                 if (isNaN(parseInt(splitResult[s]))) {
-                    a.keyword = splitResult[s]
+                    this.essay.keywords.push(splitResult[s].slice(1, -1))
+                    a.keyword = splitResult[s].slice(1, -1)
                 }
                 else {
                     a.frequency = parseInt(splitResult[s])
-                    defaultWords.push(a)
+                    this.defaultWords.push(a)
+                    a = new Object()
                 }
             }
         }
@@ -217,10 +219,8 @@ export default {
         'red',
         'orange',
       ],
-      keywords: [],
       model: 0,
-      defaultWords: [
-      ],
+      defaultWords: [],
       menus: [
         { type: "default", menuComponent: Menu1 }
       ],

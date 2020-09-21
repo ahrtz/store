@@ -22,6 +22,24 @@
                     {{ errors[0] }}
                 </base-alert>
             </validation-provider>
+            <validation-provider name="priority" rules="required" v-slot="{ errors }">
+                <span>자연과학</span>
+                <div
+                    v-for="(topic, index) in priorityList.nature"
+                    :key="index"
+                >
+                    <base-checkbox
+                        v-model="formData.selectedList"
+                        :name="topic"
+                        :value="index"
+                    >
+                        {{ topic }}
+                    </base-checkbox>
+                </div>
+                <base-alert type="danger" v-if="errors[0]">
+                    {{ errors[0] }}
+                </base-alert>
+            </validation-provider>
             <footer>
                 <base-button type="primary" :disabled="invalid" @click="onSubmit">가입</base-button>
             </footer>
@@ -33,6 +51,7 @@
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, min, max, regex } from 'vee-validate/dist/rules';
 import Navigation from "./components/Navigation.vue";
+import CustomControls from "./components/CustomControls"
 
 extend('required', {
   ...required,
@@ -71,15 +90,25 @@ export default {
     components: {
         ValidationProvider,
         ValidationObserver,
-        Navigation
+        Navigation,
+        CustomControls
     },
     data: () => ({
         value: '',
         formData: {
             uid: '',
             password: '',
-            passwordVerify: ''
+            passwordVerify: '',
+            selectedList: []
         },
+        priorityList: {
+            nature: [
+                '기타자연과학', '대기과학', '물리학', '생물학', '생활과학', '수학', '자연과학', '자연과학일반', '지구과학', '지질학', '천문학', '통계학', '해양학', '화학'
+            ],
+            engineering: [
+                '건축공학', '고분자공학', '공학', '공학일반', '교통공학', '금속공학', '기계공학', '기타공학', '농공학', '산림공학', '산업공학', '생물공학', '섬유공학', '안전공학', '원자력공학', '의공학', '자동차공학', '자원공학', '재료공학', '전기공학', '전자/정보통신공학', '제어계측공학', '조선공학', '컴퓨터학', '토목공학', '항공우주공학', '해양공학', '화학공학', '환경공학'
+            ]
+        }
     }),
     methods: {
         onSubmit() {
