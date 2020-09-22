@@ -20,6 +20,9 @@ import search from "./views/search.vue";
 //argon 컴포넌트페이지
 import guide from "./views/guide.vue";
 
+// 스크랩 페이지
+import scrap from "./views/scrap.vue";
+
 
 Vue.use(Router);
 
@@ -100,6 +103,16 @@ export default new Router({
       components: {
         header: AppHeader,
         default: search,
+        footer: AppFooter
+      }
+    },
+    //스크랩
+    {
+      path: "/scrap",
+      name: "scrap",
+      components: {
+        header: AppHeader,
+        default: scrap,
         footer: AppFooter
       }
     },

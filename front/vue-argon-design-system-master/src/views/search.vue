@@ -1,21 +1,6 @@
 <template>
   <div class="container2">
-    <h1>검색페이지입니다</h1>
     <div class="col-12" style="display : flex;">
-      <div class="col-2">
-        <select
-          class="form-control"
-          data-toggle="select"
-          data-minimum-results-for-search="Infinity"
-        >
-          <option>대분류</option>
-          <option>Badges</option>
-          <option>Buttons</option>
-          <option>Cards</option>
-          <option>Forms</option>
-          <option>Modals</option>
-        </select>
-      </div>
 
       <div class="col-2">
         <select
@@ -23,17 +8,16 @@
           data-toggle="select"
           data-minimum-results-for-search="Infinity"
         >
-          <option>소분류</option>
-          <option>Badges</option>
-          <option>Buttons</option>
-          <option>Cards</option>
-          <option>Forms</option>
-          <option>Modals</option>
+          <option>5개씩 보기</option>
+          <option>10개씩 보기</option>
+          <option>20개씩 보기</option>
         </select>
       </div>
 
-      <div class="col-2">
-        <select
+      <!-- <div class="col-2">
+      </div> -->
+      <div class="col-3">
+        <!-- <select
           class="form-control"
           data-toggle="select"
           data-minimum-results-for-search="Infinity"
@@ -50,18 +34,25 @@
           <option>2012</option>
           <option>2011</option>
           <option>2010</option>
-          
+        </select> -->
+      </div>
+
+      <div class="col-2">
+        <select
+          class="form-control"
+          data-toggle="select"
+          data-minimum-results-for-search="Infinity"
+        >
+          <option>제목으로 검색</option>
+          <option>키워드로 검색</option>
+        
         </select>
       </div>
-
-      <div class="col-2">
-        <input type="text" placeholder="키워드" class="form-control" />
-      </div>
-      <div class="col-2">
-        <input type="text" placeholder="저자" class="form-control" />
+      <div class="col-4">
+        <input type="text" placeholder="검색어를 입력하세요" class="form-control" />
       </div>
 
-      <div class="col-2">
+      <div class="col-1">
         <button class="btn btn-primary col-12">검색</button>
       </div>
     </div>
@@ -72,12 +63,11 @@
         <table class="table align-items-center" style="margin : 10px;">
           <thead class="thead-light">
             <tr>
-              <th scope="col" class="sort" data-sort="name">논문명</th>
-              <th scope="col" class="sort" data-sort="budget">1</th>
-              <th scope="col" class="sort" data-sort="status">2</th>
-              <th scope="col">3</th>
-              <th scope="col">3</th>
-              <th scope="col" class="sort" data-sort="completion">4</th>
+              <th >논문명</th>
+              <th >분류</th>
+              <th >저자 발행기관</th>
+              <th >초록</th>
+              <th >상세보기</th>
             </tr>
           </thead>
           <tbody class="list">
@@ -102,7 +92,7 @@
               <td>
                 <span class="completion mr-2">60%</span>
               </td>
-              <td class="text-right"></td> -->
+              <td class="text-right"></td>-->
             </tr>
           </tbody>
         </table>
@@ -113,8 +103,6 @@
       <base-pagination :page-count="10" v-model="pagination.default"></base-pagination>
       <div></div>
     </div>
-
-    
   </div>
 </template>
 
