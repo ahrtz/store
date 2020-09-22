@@ -9,6 +9,8 @@ class Favorites(models.Model):
 
 class User_Favorites(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    first_favorites = models.ForeignKey(Favorites, related_name='related_first_favorites', on_delete=models.CASCADE)
-    second_favorites = models.ForeignKey(Favorites, related_name='related_second_favorites', null=True, on_delete=models.CASCADE)
-    third_favorites = models.ForeignKey(Favorites, related_name='related_third_favorites', null=True, on_delete=models.CASCADE)
+    favorites =  models.ForeignKey(Favorites, on_delete=models.CASCADE, null=True)
+    ranking = models.IntegerField(default=1)
+    # first_favorites = models.ForeignKey(Favorites, related_name='related_first_favorites', on_delete=models.CASCADE)
+    # second_favorites = models.ForeignKey(Favorites, related_name='related_second_favorites', null=True, on_delete=models.CASCADE)
+    # third_favorites = models.ForeignKey(Favorites, related_name='related_third_favorites', null=True, on_delete=models.CASCADE)

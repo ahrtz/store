@@ -11,6 +11,8 @@ class FavoritesSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserFavoritesSerializers(serializers.ModelSerializer):
+    user = UserSerializer(required=False)
+    favorites = FavoritesSerializers(required=False)
     class Meta:
         model = User_Favorites
         fields = '__all__'
