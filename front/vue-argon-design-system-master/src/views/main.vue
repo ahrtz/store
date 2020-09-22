@@ -6,6 +6,8 @@
     <router-link to="/nmdetail">논문상세페이지 임시 이동 링크</router-link>
     <br />
     <router-link to="/search">검색페이지 임시 이동 링크</router-link>
+    <br />
+    <router-link to="/scrap">스크랩 페이지 임시 이동 링크</router-link>
 
     <div style="text-align : center;">
       <h1>
