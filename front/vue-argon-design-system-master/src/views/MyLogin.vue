@@ -5,13 +5,13 @@
                 <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
             </header>
             <validation-provider rules="required|minmax:6,12" v-slot="{ errors }">
-                <base-input type="text" name="uid" v-model="formData.uid" label="아이디"/>
+                <base-input type="text" name="uid" v-model="uid" label="아이디"/>
                 <base-alert type="danger" v-if="errors[0]">
                     {{ errors[0] }}
                 </base-alert>
             </validation-provider>
             <validation-provider rules="required|minmax:8,16|verify_password" v-slot="{ errors }">
-                <base-input type="password" name="password" v-model="formData.password" label="패스워드"/>
+                <base-input type="password" name="password" v-model="password" label="패스워드"/>
                 <base-alert type="danger" v-if="errors[0]">
                     {{ errors[0] }}
                 </base-alert>
@@ -27,7 +27,6 @@
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, min, max, regex } from 'vee-validate/dist/rules';
 import Navigation from "./components/Navigation.vue";
-import store from "../store/modules/user/store"
 
 extend('required', {
   ...required,
@@ -62,17 +61,15 @@ export default {
     },
     data: () => ({
         value: '',
-        formData: {
-            uid: '',
-            password: ''
-        },
+        uid: '',
+        password: ''
     }),
     methods: {
         onSubmit() {
-            let successful = store.dispatch('login', {formData: this.formData})
+            let successful = this.$store.dispatch('login', {username: this.uid, password: this.password})
             if (successful) {
-                this.formData.uid = ''
-                this.formData.password = ''
+                this.uid = ''
+                this.password = ''
             }
         }
     }

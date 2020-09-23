@@ -14,5 +14,7 @@ export default {
     //pdf 파일 전송
     SEND_FILE : 'sendFile',
     GET_RESULT: 'getResult',
-    
+    TOKEN: 'TOKEN',
+    ERROR_STATE: 'ERROR_STATE',
+    IS_AUTH: 'IS_AUTH',
 }
