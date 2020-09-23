@@ -42,19 +42,22 @@ if __name__ == "__main__":
     result = ""
     for y in range(len(text_list)):
         result += text_list[y] + " "
-    
+
     # 맞춤법을 교정한다.
     print("맞춤법 교정 시작!")
     result = result.strip().split(".")
     final_result = ""
+    print_result = ""
     for y in range(len(result)):
         print("맞춤법 교정 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
         if len(result[y]) > 0:
             try:
                 temp = spell_checker.check(result[y] + '.')
                 final_result += temp.as_dict()['checked']
+                print_result += temp.as_dict()['checked'] + "\n\n"
             except:
                 final_result += result[y] + "."
+                print_result += result[y] + "\n\n"
     print("맞춤법 교정 완료!")
     print("")
 
@@ -68,12 +71,9 @@ if __name__ == "__main__":
     print("키워드 추출 완료!")
 
     fileOut = open('output1.txt', 'w', encoding='utf-8')
-    print(final_result, file=fileOut)
+    print(print_result, file=fileOut)
     fileOut.close()
 
     fileOut = open('output2.txt', 'w', encoding='utf-8')
     print(summarize_data, file=fileOut)
     fileOut.close()
-
-
-
