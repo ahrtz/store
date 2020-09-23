@@ -29,6 +29,17 @@ export default {
   data() {
     return {
       selectedCard: -1,
+      images : [
+        "@/assets/images/category/bhh.jpeg",
+        "@/assets/images/category/eyh.jpg",
+        "@/assets/images/category/gh.jpg",
+        "@/assets/images/category/imh.jpg",
+        "@/assets/images/category/jygh.jpg",
+        "@/assets/images/category/nshyh.jpg",
+        "@/assets/images/category/shgh.jpg",
+        "@/assets/images/category/yscyh.jpg",
+      ],
+      
       cards: [
         {
           title: "Gooey PBJ Brownies",
@@ -47,6 +58,13 @@ export default {
         },
       ],
     };
+  },
+  props: {
+    scraps : {
+      type: Array,
+      required: true,
+    },
+    
   },
   methods: {
     hoverCard(selectedIndex) {

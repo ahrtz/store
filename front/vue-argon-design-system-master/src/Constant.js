@@ -15,4 +15,14 @@ export default {
     SEND_FILE : 'sendFile',
     GET_RESULT: 'getResult',
     
+    //논문 
+    GET_NMLIST : 'getNmlist',
+    GET_NM : 'getNm',
+    SEARCH_TITLE_NMLIST : 'searchTitleNmlist',
+    SEARCH_KEYWORD_NMLIST : 'searchKeywordNmlist',
+
+    //스크랩
+    GET_SCRAPLIST : 'getScraplist',
+    ADD_SCRAP : 'addScrap',
+
 }
