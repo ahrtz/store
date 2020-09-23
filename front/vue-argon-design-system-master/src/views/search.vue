@@ -1,7 +1,6 @@
 <template>
   <div class="container2">
     <div class="col-12" style="display : flex;">
-
       <div class="col-2">
         <select
           class="form-control"
@@ -15,7 +14,7 @@
       </div>
 
       <!-- <div class="col-2">
-      </div> -->
+      </div>-->
       <div class="col-3">
         <!-- <select
           class="form-control"
@@ -34,7 +33,7 @@
           <option>2012</option>
           <option>2011</option>
           <option>2010</option>
-        </select> -->
+        </select>-->
       </div>
 
       <div class="col-2">
@@ -42,18 +41,18 @@
           class="form-control"
           data-toggle="select"
           data-minimum-results-for-search="Infinity"
+          v-model="selectval"
         >
-          <option>제목으로 검색</option>
-          <option>키워드로 검색</option>
-        
+          <option value="title">제목으로 검색</option>
+          <option value="keyword">키워드로 검색</option>
         </select>
       </div>
       <div class="col-4">
-        <input type="text" placeholder="검색어를 입력하세요" class="form-control" />
+        <input type="text" placeholder="검색어를 입력하세요" class="form-control" v-model="inputval"/>
       </div>
 
       <div class="col-1">
-        <button class="btn btn-primary col-12">검색</button>
+        <button class="btn btn-primary col-12" @click="searchnms">검색</button>
       </div>
     </div>
 
@@ -63,17 +62,23 @@
         <table class="table align-items-center" style="margin : 10px;">
           <thead class="thead-light">
             <tr>
-              <th >논문명</th>
-              <th >분류</th>
-              <th >저자 발행기관</th>
-              <th >초록</th>
-              <th >상세보기</th>
+              <th>논문명</th>
+              <th>분류</th>
+              <th>저자 발행기관</th>
+              <th>초록</th>
+              <th>상세보기</th>
             </tr>
           </thead>
           <tbody class="list">
             <tr>
               <td colspan="6">
-                <nmcard />
+                                  <!-- v-for="(nm,index) in nms.slice(this.perPage*(currentPage-1),perPage*(currentPage))" -->
+
+                <nmcard
+                  v-for="(nm,index) in nms.results"
+                  :key="index"
+                  :nm="nm"
+                />
               </td>
               <!-- <th scope="row">
                 <div class="media align-items-center">
@@ -120,6 +125,8 @@ export default {
       pagination: {
         default: 1,
       },
+      selectval: "",
+      inputval: "",
     };
   },
   created() {
@@ -127,7 +134,20 @@ export default {
   },
   computed: {
     nms() {
+      console.log('확인'+this.$store.state.nmstore.nms.next);
       return this.$store.state.nmstore.nms;
+    },
+  },
+  methods: {
+    searchnms() {
+      //타이틀 검색
+      if (this.selectval == "title") {
+        this.$store.dispatch(Constant.SEARCH_TITLE_NMLIST,{title : this.inputval});
+      }
+      //키워드 검색
+      else {
+        this.$store.dispatch(Constant.SEARCH_KEYWORD_NMLIST,{keyword : this.inputval});
+      }
     },
   },
 };

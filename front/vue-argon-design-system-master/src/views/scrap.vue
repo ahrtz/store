@@ -20,9 +20,10 @@
           class="form-control"
           data-toggle="select"
           data-minimum-results-for-search="Infinity"
+          v-model="selectval"
         >
-          <option>제목으로 검색</option>
-          <option>키워드로 검색</option>
+          <option value="title">제목으로 검색</option>
+          <option value="keyword">키워드로 검색</option>
         </select>
       </div>
       <div class="col-4">
@@ -30,13 +31,13 @@
       </div>
 
       <div class="col-1">
-        <button class="btn btn-primary col-12">검색</button>
+        <button class="btn btn-primary col-12" @click="searchscrap">검색</button>
       </div>
     </div>
     <hr />
 
     <!-- cardvue list -->
-        <scrapcard />
+    <scrapcard :scraps="scraps" />
     <!-- end cardvue -->
     <hr />
 
@@ -49,6 +50,8 @@
 </template>
 
 <script>
+import Constant from "../Constant.js";
+import http from "@/http-common.js";
 import scrapcard from "./components/scrapcard";
 export default {
   components: {
@@ -59,7 +62,28 @@ export default {
       pagination: {
         default: 1,
       },
+      selectval: "",
     };
+  },
+  created() {
+    this.$store.dispatch(Constant.GET_SCRAPLIST);
+  },
+  computed: {
+    scraps() {
+      return this.$store.state.scrapstore.scraps;
+    },
+  },
+  methods: {
+    searchscrap() {
+      //타이틀 검색
+      if (this.selectval == "title") {
+        // this.$store.dispatch(Constant.GET_SCRAPLIST);
+      }
+      //키워드 검색
+      else {
+        // this.$store.dispatch(Constant.GET_SCRAPLIST);
+      }
+    },
   },
 };
 </script>
