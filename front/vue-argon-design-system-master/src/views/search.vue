@@ -1,8 +1,8 @@
 <template>
   <div class="container2">
-    <div class="col-12" style="display : flex;">
+    <div class="col-12" style="display: flex">
       <div class="col-2">
-        <select
+        <!-- <select
           class="form-control"
           data-toggle="select"
           data-minimum-results-for-search="Infinity"
@@ -10,7 +10,7 @@
           <option>5개씩 보기</option>
           <option>10개씩 보기</option>
           <option>20개씩 보기</option>
-        </select>
+        </select> -->
       </div>
 
       <!-- <div class="col-2">
@@ -38,9 +38,7 @@
 
       <div class="col-2">
         <select
-          class="form-control"
-          data-toggle="select"
-          data-minimum-results-for-search="Infinity"
+          class="form-control" 
           v-model="selectval"
         >
           <option value="title">제목으로 검색</option>
@@ -48,7 +46,12 @@
         </select>
       </div>
       <div class="col-4">
-        <input type="text" placeholder="검색어를 입력하세요" class="form-control" v-model="inputval"/>
+        <input
+          type="text"
+          placeholder="검색어를 입력하세요"
+          class="form-control"
+          v-model="inputval"
+        />
       </div>
 
       <div class="col-1">
@@ -59,7 +62,7 @@
     <!--  -->
     <div class="table tb">
       <div>
-        <table class="table align-items-center" style="margin : 10px;">
+        <table class="table align-items-center" style="margin: 10px">
           <thead class="thead-light">
             <tr>
               <th>논문명</th>
@@ -72,13 +75,8 @@
           <tbody class="list">
             <tr>
               <td colspan="6">
-                                  <!-- v-for="(nm,index) in nms.slice(this.perPage*(currentPage-1),perPage*(currentPage))" -->
-
-                <nmcard
-                  v-for="(nm,index) in nms.results"
-                  :key="index"
-                  :nm="nm"
-                />
+                <!-- v-for="(nm,index) in nms.slice(this.perPage*(currentPage-1),perPage*(currentPage))" -->
+                <nmcard v-for="(nm, index) in nms" :key="index" :nm="nm" />
               </td>
               <!-- <th scope="row">
                 <div class="media align-items-center">
@@ -103,9 +101,18 @@
         </table>
       </div>
     </div>
-    <div class="row row-grid justify-content-between align-items-center mt-lg pg">
+    <div
+      class="row row-grid justify-content-between align-items-center mt-lg pg"
+    >
       <div></div>
-      <base-pagination :page-count="10" v-model="pagination.default"></base-pagination>
+      <!-- :page-count="10" -->
+      <base-pagination v-model="page" 
+      :pageCount = count/10+1
+      :perPage = 10
+      :total = count
+      :value = page
+      >
+      </base-pagination>
       <div></div>
     </div>
   </div>
@@ -122,31 +129,45 @@ export default {
   },
   data() {
     return {
-      pagination: {
-        default: 1,
-      },
+      page: 1,
+      
       selectval: "",
       inputval: "",
     };
   },
   created() {
-    this.$store.dispatch(Constant.GET_NMLIST);
+    this.$store.dispatch(Constant.GET_NMLIST, { pg: 1 });
   },
   computed: {
     nms() {
-      console.log('확인'+this.$store.state.nmstore.nms.next);
+      // console.log('도착');
+      // console.dir(this.$store.state.nmstore.nms);
       return this.$store.state.nmstore.nms;
+    },
+    count() {
+      return this.$store.state.nmstore.count;
+    },
+  },
+  watch: {
+    page() {
+      // console.log(this.page);
+      this.$store.dispatch(Constant.GET_NMLIST, { pg: this.page });
     },
   },
   methods: {
     searchnms() {
+      // alert(this.selectval);
       //타이틀 검색
       if (this.selectval == "title") {
-        this.$store.dispatch(Constant.SEARCH_TITLE_NMLIST,{title : this.inputval});
+        this.$store.dispatch(Constant.SEARCH_TITLE_NMLIST, {
+          title: this.inputval,
+        });
       }
       //키워드 검색
       else {
-        this.$store.dispatch(Constant.SEARCH_KEYWORD_NMLIST,{keyword : this.inputval});
+        this.$store.dispatch(Constant.SEARCH_KEYWORD_NMLIST, {
+          keyword: this.inputval,
+        });
       }
     },
   },
