@@ -3,6 +3,7 @@ import Vue from 'vue';
 
 import Constant from '../../Constant.js';
 import http from '../../http-common.js';
+import axios from 'axios'
 Vue.use(Vuex);
 
 const scrapstore = {
@@ -24,7 +25,16 @@ const scrapstore = {
           .catch(exp => alert('getScrapList처리에 실패하였습니다!!' + exp));
     },
 
-
+    async [Constant.ADD_SCRAP] (store, payload) {
+        await axios.post(`/api/reports/scrap/make/${payload.essayId}`, {
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => {
+            alert('스크랩 목록에 추가되었습니다')
+        }).catch(e => {
+            console.log(e.message)
+            alert('스크랩 중 문제가 발생했습니다')
+        })
+    }
 
     // //bno으로 게시글 하나 가져오기
     // [Constant.GET_BOARD]: (store, payload) => {
