@@ -1,33 +1,38 @@
 <template>
   <div id="app">
     <div class="card-row">
-      <div
-        v-for="(card, index) in cards"
+        <!-- v-for="(card, index) in cards"
         :key="index"
         :ref="`card_${index}`"
         @mouseover="hoverCard(index)"
-        @mouseout="hoverCard(-1)"
+        @mouseout="hoverCard(-1)" -->
+      <div
         class="card"
       >
-        <img class="card-image" :class="{'selected': isSelected(index)}" :src="card.image" />
+        <!-- <img class="card-image" :class="{'selected': isSelected(index)}" :src="card.image" /> -->
 
         <div class="card-footer">
-          <p class="card-text">RECIPE</p>
-          <h3 class="card-title">{{card.title}}</h3>
+          <p class="card-text">{{scp.subject}}</p>
+          <h3 class="card-title">{{scp.title_kor}}</h3>
           <p class="card-text">
             by
-            <span class="card-author" :class="{'selected': isSelected(index)}">{{card.author}}</span>
+            <span class="card-author" :class="{'selected': isSelected(index)}">{{scp.main_author}}</span>
           </p>
         </div>
       </div>
     </div>
+
+
   </div>
 </template>
 
 <script>
+import Constant from "@/Constant.js";
+import http from "@/http-common.js";
 export default {
   data() {
     return {
+      scs : [],
       selectedCard: -1,
       images : [
         "@/assets/images/category/bhh.jpeg",
@@ -60,11 +65,22 @@ export default {
     };
   },
   props: {
-    scraps : {
-      type: Array,
+    sid : {
+      type: Number,
       required: true,
     },
     
+  },
+  created() {
+    comsol
+       this.$store.dispatch(Constant.GET_NM,{sid:this.sid});
+
+  },
+  computed: {
+    scp(){
+            return this.$store.state.nmstore.nm;
+ 
+    }
   },
   methods: {
     hoverCard(selectedIndex) {
@@ -74,7 +90,7 @@ export default {
     animateCards() {
       this.cards.forEach((card, index) => {
         const direction = this.calculateCardDirection(index, this.selectedCard);
-        TweenMax.to(this.$refs[`card_${index}`], 0.3, { x: direction * 50 });
+        // TweenMax.to(this.$refs[`card_${index}`], 0.3, { x: direction * 50 });
       });
     },
     calculateCardDirection(cardIndex, selectedIndex) {

@@ -35,7 +35,7 @@ const nmstore = {
     //???으로 논문 하나 가져오기
     [Constant.GET_NM]: (store, payload) => {
 
-      http.get('/reports/detail/' + payload.bno + '/')
+      http.get('/reports/detail/' + payload.sid + '/')
         .then(response => {
           // console.log(response.data);
           store.commit(Constant.GET_NM, {
