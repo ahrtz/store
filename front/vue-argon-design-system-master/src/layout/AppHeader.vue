@@ -35,6 +35,15 @@
                     <router-link class="dropdown-item" to="/profile">프로필</router-link>
                     <a class="dropdown-item" @click="modals.modal2 = true">선호주제</a>
                 </base-dropdown>
+
+                
+                <div tag="li" class="nav-item">
+                    <router-link slot="title" to="/mypage" class="nav-link" role="button">내 정보</router-link>
+                </div>
+
+                <div tag="li" class="nav-item">
+                    <router-link slot="title" to="/scrap" class="nav-link" role="button">마이스크랩</router-link>
+                </div>
             </ul>
         </base-nav>
         <modal :show.sync="modals.modal0">

@@ -25,6 +25,9 @@ import guide from "./views/guide.vue";
 // 스크랩 페이지
 import scrap from "./views/scrap.vue";
 
+//마이페이지
+import mypage from "./views/mypage.vue";
+
 
 Vue.use(Router);
 
@@ -125,6 +128,16 @@ export default new Router({
       components: {
         header: AppHeader,
         default: scrap,
+        footer: AppFooter
+      }
+    },
+    //마이페이지
+    {
+      path: "/mypage",
+      name: "mypage",
+      components: {
+        header: AppHeader,
+        default: mypage,
         footer: AppFooter
       }
     },
