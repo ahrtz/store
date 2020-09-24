@@ -64,6 +64,10 @@
                 <div tag="li" class="nav-item">
                     <router-link slot="title" to="/register" class="nav-link" role="button">Sign up</router-link>
                 </div>
+
+                <div tag="li" class="nav-item">
+                    <router-link slot="title" to="/mypage" class="nav-link" role="button">마이페이지</router-link>
+                </div>
             </ul>
             <!-- <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <li class="nav-item">
