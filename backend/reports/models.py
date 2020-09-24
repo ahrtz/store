@@ -27,7 +27,7 @@ class Summary_report(models.Model): # 우리가 정제한 데이터
     direct_urls = models.URLField(max_length=200) # 200이면 되려나
     doi = models.CharField(max_length = 50)
     abstract  = models.TextField() # 이건 요약 정보
-    page_num=models.CharField(max_length = 100)
+    page_num=models.CharField(max_length = 100,blank=True,null=True)
 
 
 class Scraps(models.Model):
