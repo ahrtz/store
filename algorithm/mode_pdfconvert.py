@@ -108,6 +108,9 @@ def pdfread(device, interpreter, pages):
     text_list = []
     textfont_list = []
     textmiddle_list = []
+    textmiddle_average = 0.0
+    textfont_average = 0.0
+    textfont_cnt = 0
 
     obj_cnt = 0
     title_cnt = 0
@@ -138,6 +141,11 @@ def pdfread(device, interpreter, pages):
                         temp.append(lobj.get_text())
                         tempfont.append(round(lobj.bbox[3] - lobj.bbox[1], 2))
                         tempmiddle.append(round(lobj.bbox[0], 2))
+
+                        textfont_average += lobj.bbox[0]
+                        textfont_cnt += 1
+                        if textmiddle_average < (lobj.bbox[2] - lobj.bbox[0]):
+                            textmiddle_average = (lobj.bbox[2] - lobj.bbox[0])
                 obj_cnt += 1
 
             if isinstance(obj,LTFigure):
@@ -164,10 +172,11 @@ def pdfread(device, interpreter, pages):
     image_name = image_temp1
     image_list = image_temp2
 
+    textfont_average = int(textfont_average / textfont_cnt)
     print("PDF 파일 로드 완료!")
     print("")
 
-    return text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list
+    return text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list, textmiddle_average/2, textfont_average
 
 # 논문 Title을 찾고, 특수 문자를 제거해준다.
 def title_return(title_data):
@@ -228,7 +237,7 @@ def maxsize_return(text_list, textfont_list):
     return collect_loc
 
 # PDF 파일 다단 구분해주기 (pdfminer 이용)
-def pdfsort(text_list, textfont_list, textmiddle_list):
+def pdfsort(text_list, textfont_list, textmiddle_list, textmiddle_average, textfont_average):
     text_list2 = []
     textfont_list2 = []
     figure_data = []
@@ -253,9 +262,9 @@ def pdfsort(text_list, textfont_list, textmiddle_list):
                 elif text_list[y][x].count('Fig') and text_list[y][x].find('Fig') < 3:
                     figure_data.append(text_list[y][x])
                     figure_list.append(y+1)
-                
+    
             for x in range(len(text_list[y])):
-                if textmiddle_list[y][x] <= 280:
+                if textmiddle_list[y][x] <= 272:
                     # 참고문헌 뒤 삭제
                     temp = text_list[y][x].replace(' ', '')
                     temp = re.sub("[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]", '', temp)
@@ -274,7 +283,7 @@ def pdfsort(text_list, textfont_list, textmiddle_list):
                     temp_list.append(refer_text)
                     tempfont_list.append(refer_font)
 
-                if textmiddle_list[y][x] > 280:
+                if textmiddle_list[y][x] > 272:
                     temp_list.append(text_list[y][x])
                     tempfont_list.append(textfont_list[y][x])
             
@@ -313,7 +322,7 @@ def pdfsort(text_list, textfont_list, textmiddle_list):
     figure_name = figure_temp1
     figure_list = figure_temp2
 
-    return text_list, textfont_list, figure_name, figure_list
+    return text_list2, textfont_list2, figure_name, figure_list
 
 # PDF 파일을 텍스트 사이즈로 묶어주는 함수 (pdfminer 이용)
 def pdfgrap(text_list, textfont_list):
@@ -326,9 +335,9 @@ def pdfgrap(text_list, textfont_list):
 
             for x in range(1, len(text_list[y])):
                 if textfont_list[y][x-1] == textfont_list[y][x]:
-                    text_list2[len(text_list2)-1] += text_list[y][x]
+                    text_list2[len(text_list2)-1] += text_list[y][x].strip()
                 else:
-                    text_list2.append(text_list[y][x])
+                    text_list2.append(text_list[y][x].strip())
                     textfont_list2.append(textfont_list[y][x])
 
     return text_list2, textfont_list2
@@ -387,11 +396,11 @@ def pdfcutter(text_list, textfont_list, title_num, collect_loc):
             cnt = 0
 
         elif abs(textfont_list[y] - collect_loc) < 0.1 and isEnglishOrKorean(text_list[y]) != 'none' and cnt == 0:
-            text_list2.append(text_list[y])
+            text_list2.append(text_list[y].strip())
             textfont_list2.append(textfont_list[y])
             cnt = 1
         
         elif abs(textfont_list[y] - collect_loc) < 0.1 and isEnglishOrKorean(text_list[y]) != 'none' and cnt == 1:
-            text_list2[len(text_list2) - 1] += text_list[y]
+            text_list2[len(text_list2) - 1] += text_list[y].strip()
 
     return text_list2, textfont_list2
