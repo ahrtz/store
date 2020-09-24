@@ -54,7 +54,10 @@ def reports_detail(request,report_id):
 
 @api_view(['GET'])  # SCrap 리스트 받아오는 곳
 def scrap_list(request):
-    scraps = get_object_or_404(Scraps, user=request.user)
+    # print(request.user.id)
+    scraps = Scraps.objects.filter(user_id=request.user.id)
+    # get_object_or_404(Scraps, user_id=request.user.id)
+    
     serializer = ScrapsSerializers(scraps,many=True)
     return Response(serializer.data)
 
