@@ -32,7 +32,6 @@
                         <i class="ni ni-circle-08"></i>
                     </a>
                     <a class="dropdown-item" @click="userLogout()">로그아웃</a>
-                    <router-link class="dropdown-item" to="/profile">프로필</router-link>
                     <a class="dropdown-item" @click="modals.modal2 = true">선호주제</a>
                 </base-dropdown>
 
