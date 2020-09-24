@@ -12,6 +12,7 @@ from mode_summarize import keywords_function
 from mode_summarize import visualize_function
 
 from mode_crawling import crawling_setting
+from mode_imageconvert import printAllFile
 
 from hanspell import spell_checker
 
@@ -28,29 +29,38 @@ if __name__ == "__main__":
     # PDF를 읽고, test_list를 가져오고, title을 가져오고, 띄어쓰기를 교정하며, 가장 많이 사용한 텍스트 크기를 반환한다.
     text_list, textfont_list, textmiddle_list, title_num, title_data = pdfread(device, interpreter, pages)
     title_data = title_return(title_data).strip()
+    # print(title_data)
 
-    # KCI 사이트에서 관련 정보를 가져온다.
-    print("PDF 논문 분석 중...")
-    link_data, title_data_ko, title_data_en, title_data_plus1, title_data_plus2, journalInfo1, journalInfo2, journalInfo3, name1, name2, content1, content2, content3, content4, reference = crawling_setting(title_data)
-    print("PDF 논문 분석 완료!")
+    try:
+        # KCI 사이트에서 관련 정보를 가져온다.
+        print("PDF 논문 분석 중...")
+        link_data, title_data_ko, title_data_en, title_data_plus1, title_data_plus2, journalInfo1, journalInfo2, journalInfo3, name1, name2, content1, content2, content3, content4, reference = crawling_setting(title_data)
+        print("PDF 논문 분석 완료!")
+        print("")
+    except:
+        link_data = -1
+
+    print("PDF 이미지 추출 중...")
+    printAllFile(PDFfileName)
+    print("PDF 이미지 추출 완료!")
     print("")
-
     text_list = list_return(text_list)
     collect_loc = maxsize_return(text_list, textfont_list)
     # print(collect_loc)
 
     # 다단 나누고, 같은 글자 크기끼리 리스트를 합친다.
-    text_list, textfont_list = pdfsort(text_list, textfont_list, textmiddle_list)
+    text_list, textfont_list, figure_list = pdfsort(text_list, textfont_list, textmiddle_list)
     text_list, textfont_list = pdfgrap(text_list, textfont_list)
     text_list, textfont_list = pdfcutter(text_list, textfont_list, title_num, collect_loc)
 
     # 관련 텍스트를 전부 합친다.
     result = ""
+    print_result = ""
     for y in range(len(text_list)):
         result += text_list[y] + " "
 
     if link_data == -1:
-        print("KCI에 등록되어 있지 않은 논문입니다.")
+        print("KCI에 등록되어 있지 않은 논문이거나 사이트 액세스 오류입니다.")
     else:
         # 관련 정보를 추가한다.
         print_result = "링크 : " + link_data + "\n\n"
@@ -72,13 +82,23 @@ if __name__ == "__main__":
         print_result += content2 + "\n\n"
 
         print_result += "키워드\n"
-        for x in range(len(content3)):
-            print_result += str(x) + " : " + content3[x] + " (" + content4[x] + ")\n"
+        if len(content3) == len(content4):
+            for x in range(len(content3)):
+                print_result += str(x) + " : " + content3[x] + " (" + content4[x] + ")\n"
+        else:
+            for x in range(len(content3)):
+                print_result += str(x) + " : " + content3[x] + "\n"
         print_result += "\n"
 
         print_result += "참고 문헌\n"
         for x in range(len(reference)):
             print_result += reference[x] + "\n"
+        print_result += "\n"
+
+    if len(figure_list) > 0:
+        print_result += "그림\n"
+        for x in range(len(figure_list)):
+            print_result += figure_list[x] + "\n"
         print_result += "\n"
 
     print_result += "논문 내용\n"
@@ -92,10 +112,10 @@ if __name__ == "__main__":
             try:
                 temp = spell_checker.check(result[y] + '.')
                 final_result += temp.as_dict()['checked']
-                print_result += temp.as_dict()['checked'] + "\n\n"
+                print_result += temp.as_dict()['checked'] + "\n"
             except:
                 final_result += result[y] + "."
-                print_result += result[y] + "\n\n"
+                print_result += result[y] + ".\n"
     print("맞춤법 교정 완료!")
     print("")
 
