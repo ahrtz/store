@@ -152,12 +152,30 @@ def pdfsort(text_list, textfont_list, textmiddle_list):
         if len(text_list[y]) > 0:
             temp_list = []
             tempfont_list = []
+
+            refer_location = -1
+            refer_text = ""
+            refer_font = 0.0
+
             for x in range(len(text_list[y])):
                 if textmiddle_list[y][x] <= 280:
+                    # 참고문헌 뒤 삭제
+                    temp = text_list[y][x].replace(' ', '')
+                    temp = re.sub("[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]", '', temp)
+                    if temp == '참고문헌' or temp == 'Reference' or temp == 'reference':
+                        refer_location = x
+                        refer_text = text_list[y][x]
+                        refer_font = textfont_list[y][x]
+                        break
+
                     temp_list.append(text_list[y][x])
                     tempfont_list.append(textfont_list[y][x])
 
             for x in range(len(text_list[y])):
+                if refer_location == x:
+                    temp_list.append(refer_text)
+                    tempfont_list.append(refer_font)
+
                 if textmiddle_list[y][x] > 280:
                     temp_list.append(text_list[y][x])
                     tempfont_list.append(textfont_list[y][x])
