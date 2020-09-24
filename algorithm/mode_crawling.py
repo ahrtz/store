@@ -83,8 +83,6 @@ def crawling_setting(title_data):
 
             temp = temp.replace('  ', ' ')
         reference.append(temp)
-    
-    print(reference)
 
     return link_data, title_data_ko, title_data_en, title_data_plus1, title_data_plus2, journalInfo1, journalInfo2, journalInfo3, name1, name2, content1, content2, content3, content4, reference
     '''
