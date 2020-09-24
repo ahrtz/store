@@ -12,8 +12,10 @@ import main from "./views/main.vue";
 
 //커스터마이징
 
-//논문상세페이지
+//논문요약결과페이지
 import nmdetail from "./views/nmdetail.vue";
+//논문검색상세페이지
+import showdetail from "./views/showdetail.vue";
 //검색페이지
 import search from "./views/search.vue";
 
@@ -77,6 +79,16 @@ export default new Router({
     ///////////////////// 여기서부터 커스터마이징
 
     //논문상세페이지
+    {
+      path: "/showdetail/:id",
+      name: "showdetail",
+      components: {
+        header: AppHeader,
+        default: showdetail,
+        footer: AppFooter
+      }
+    },
+    //논문요약결과
     {
       path: "/nmdetail",
       name: "nmdetail",

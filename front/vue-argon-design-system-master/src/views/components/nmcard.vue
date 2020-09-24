@@ -38,7 +38,7 @@
         </button>
       </div>
       <div class="col-1">
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" @click="movedetail()">
           상세보기
         </button>
       </div>
@@ -77,6 +77,10 @@ export default {
     onClickRedirect() {
       window.open(this.nm.direct_urls);
     },
+    movedetail(){
+      var url = '/showdetail/' + this.nm.id;
+      this.$router.push(url);
+    }
   },
 };
 </script>
