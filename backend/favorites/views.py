@@ -31,3 +31,20 @@ def search_favorites(request):
     user_favorites = User_Favorites.objects.filter(user_id=request.user.id)
     serializer = UserFavoritesSerializers(user_favorites, many=True)
     return Response(serializer.data)
+
+@api_view(['PATCH'])
+def update_favorites(request):
+    update_favorites = request.data.get('favorites')
+
+    user_favorites = User_Favorites.objects.filter(user_id=request.user.id).order_by('ranking')
+    print(user_favorites)
+    for idx in range(0, 3):
+        print(update_favorites[idx]['favorites_id'])
+        print(user_favorites[idx].favorites_id)
+        temp = user_favorites[idx]
+        temp.favorites_id = update_favorites[idx]['favorites_id']
+        temp.save()
+
+    user_favorites = User_Favorites.objects.filter(user_id=request.user.id)
+    serializer = UserFavoritesSerializers(user_favorites, many=True)
+    return Response(serializer.data)
