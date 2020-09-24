@@ -132,7 +132,7 @@ export default {
         console.log('wordClickHandler', keyword, frequency, vm)
       },
       scrapEssay() {
-          console.log("scrap")
+          this.$store.dispatch('addScrap', {essayId: this.$route.params.id})
       }
     },
     /*
