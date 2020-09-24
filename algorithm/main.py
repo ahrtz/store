@@ -12,7 +12,6 @@ from mode_summarize import keywords_function
 from mode_summarize import visualize_function
 
 from mode_crawling import crawling_setting
-from mode_imageconvert import printAllFile
 
 from hanspell import spell_checker
 
@@ -27,7 +26,7 @@ if __name__ == "__main__":
         exit()
 
     # PDF를 읽고, test_list를 가져오고, title을 가져오고, 띄어쓰기를 교정하며, 가장 많이 사용한 텍스트 크기를 반환한다.
-    text_list, textfont_list, textmiddle_list, title_num, title_data = pdfread(device, interpreter, pages)
+    text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list = pdfread(device, interpreter, pages)
     title_data = title_return(title_data).strip()
     # print(title_data)
 
@@ -39,17 +38,13 @@ if __name__ == "__main__":
         print("")
     except:
         link_data = -1
-
-    print("PDF 이미지 추출 중...")
-    printAllFile(PDFfileName)
-    print("PDF 이미지 추출 완료!")
-    print("")
+    
     text_list = list_return(text_list)
     collect_loc = maxsize_return(text_list, textfont_list)
     # print(collect_loc)
 
     # 다단 나누고, 같은 글자 크기끼리 리스트를 합친다.
-    text_list, textfont_list, figure_list = pdfsort(text_list, textfont_list, textmiddle_list)
+    text_list, textfont_list, figure_name, figure_list = pdfsort(text_list, textfont_list, textmiddle_list)
     text_list, textfont_list = pdfgrap(text_list, textfont_list)
     text_list, textfont_list = pdfcutter(text_list, textfont_list, title_num, collect_loc)
 
@@ -95,11 +90,35 @@ if __name__ == "__main__":
             print_result += reference[x] + "\n"
         print_result += "\n"
 
-    if len(figure_list) > 0:
-        print_result += "그림\n"
-        for x in range(len(figure_list)):
-            print_result += figure_list[x] + "\n"
-        print_result += "\n"
+    # 그림 데이터를 정제한다.
+    figure_image_name = []
+    figure_image_src = []
+    if len(figure_name) > 0:
+        max_cnt = max(image_list)
+        max_list = []
+        count_list = []
+        for x in range(max_cnt+1):
+            max_list.append(image_list.count(x))
+            count_list.append(0)
+
+            if x >= 1:
+                max_list[x] += max_list[x-1]
+        # print(max_list)
+        # print(count_list)
+
+        for x in range(len(figure_name)):
+            if (count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1]) < max_list[figure_list[x]]:
+                if image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])].count('No Image') == 0:
+                    figure_image_name.append(figure_name[x])
+                    figure_image_src.append("images/" + image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])])
+                count_list[figure_list[x] - 1] += 1
+
+        if len(figure_image_name) > 0:
+            print_result += "그림\n"
+            for x in range(len(figure_image_name)):
+                print_result += figure_image_name[x] + " " + figure_image_src[x] + "\n"
+            print_result += "\n"
+
 
     print_result += "논문 내용\n"
     # 맞춤법을 교정한다.
