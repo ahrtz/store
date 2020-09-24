@@ -74,8 +74,9 @@ def searchtitle(request,keyword): # 제목
     paginator = PageNumberPagination()
     report = Summary_report.objects.filter(title_eng__contains=key)
     page = paginator.paginate_queryset(report, request)
+    # print(page)
     serializer = ReportsListSerializers(page,many=True)
-    return Response(serializer.data)
+    return paginator.get_paginated_response(serializer.data)
 
 @api_view(['GET'])
 def searchkeyword(request,keyword):
@@ -85,4 +86,4 @@ def searchkeyword(request,keyword):
     report = Summary_report.objects.filter(keyword_kor__contains=key) ## 이거 ... 데이터 정제가..
     page = paginator.paginate_queryset(report, request)
     serializer = ReportsListSerializers(page,many=True)
-    return Response(serializer.data)
+    return paginator.get_paginated_response(serializer.data)
