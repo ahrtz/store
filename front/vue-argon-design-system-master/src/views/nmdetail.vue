@@ -1,55 +1,5 @@
 <template>
     <div>
-        <base-nav v-for="menu in menus"
-                  :key="menu.type"
-                  :type="menu.type"
-                  effect="dark"
-                  expand
-                  title="논문 요약 시스템"
-                  :content-id="`navbar-${menu.type}`">
-            <div class="row" slot="content-header" slot-scope="{closeMenu}">
-                <div class="col-6 collapse-brand">
-                    <a href="./index.html">
-                        <img src="img/brand/blue.png">
-                    </a>
-                </div>
-                <div class="col-6 collapse-close">
-                    <close-button @click="closeMenu" :target="`navbar-${menu.type}`">
-
-                    </close-button>
-                </div>
-            </div>
-
-            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-              <li class="nav-item">
-                  <a class="nav-link nav-link-icon" href="#">
-                      논문 요약
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link nav-link-icon" href="#">
-                      논문 검색
-                  </a>
-              </li>
-            </ul>
-            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-                <base-dropdown tag="li" class="nav-item">
-                    <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-circle-08"></i>
-                    </a>
-                    <a class="dropdown-item" @click="modals.modal0 = true">로그인</a>
-                    <a class="dropdown-item" @click="modals.modal1 = true">회원가입</a>
-                </base-dropdown>
-            </ul>
-        </base-nav>
-        <modal :show.sync="modals.modal0">
-            <my-login>
-            </my-login>
-        </modal>
-        <modal :show.sync="modals.modal1">
-            <my-sign-up>
-            </my-sign-up>
-        </modal>
         <div class="container ct-example-row">
             <div class="row">
                 <div class="col">
@@ -85,7 +35,7 @@
                                             키워드 
                                         </div>
                                         <div class="col-10">
-                                            <span v-for="keyword in essay.keywords" :key="keyword" style="display: inline-block; margin-right: 20px">{{keyword}}</span>
+                                            <span v-for="keyword in essay.keywords" :key="keyword" style="display: inline-block; width: 160px; text-align: center">{{keyword}}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -154,15 +104,10 @@ import Navigation from "./components/Navigation.vue";
 import BaseNav from "@/components/BaseNav";
 import BaseDropdown from "@/components/BaseDropdown";
 import CloseButton from "@/components/CloseButton";
-import Menu1 from "./components/Navigation/Menu1";
 import { BCarousel } from "bootstrap-vue/esm/components/carousel/carousel";
 import { BCarouselSlide } from "bootstrap-vue/esm/components/carousel/carousel-slide";
-import Modal from "@/components/Modal";
 import Card from "@/components/Card";
 import wordcloud from 'vue-wordcloud';
-import Login from './Login';
-import MyLogin from './MyLogin';
-import MySignUp from './MySignUp';
 
 export default {
   name: "nmdetail",
@@ -174,14 +119,9 @@ export default {
         BaseNav,
         BaseDropdown,
         CloseButton,
-        Menu1,
         wordcloud,
         BCarousel,
-        BCarouselSlide,
-        Modal,
-        Login,
-        MyLogin,
-        MySignUp
+        BCarouselSlide
   },
     methods: {
       wordClickHandler(keyword, frequency, vm) {
@@ -195,11 +135,13 @@ export default {
         for (var s in splitResult) {
             if (splitResult[s] != "[" && splitResult[s] != "]") {
                 if (isNaN(parseInt(splitResult[s]))) {
-                    a.keyword = splitResult[s]
+                    this.essay.keywords.push(splitResult[s].slice(1, -1))
+                    a.keyword = splitResult[s].slice(1, -1)
                 }
                 else {
                     a.frequency = parseInt(splitResult[s])
-                    defaultWords.push(a)
+                    this.defaultWords.push(a)
+                    a = new Object()
                 }
             }
         }
@@ -217,17 +159,8 @@ export default {
         'red',
         'orange',
       ],
-      keywords: [],
       model: 0,
-      defaultWords: [
-      ],
-      menus: [
-        { type: "default", menuComponent: Menu1 }
-      ],
-      modals: {
-          modal0: false,
-          modal1: false
-      },
+      defaultWords: [],
       essay: {
           title: 'Application of Digital Forensics for Epidemiological Contact Tracing',
           author: 'In Ha, Yoon',

@@ -2,22 +2,22 @@
     <div>
         <validation-observer v-slot="{ invalid }">
             <header>
-                <h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
+                <h3 class="modal-title" id="exampleModalLabel">회원가입</h3>
             </header>
             <validation-provider name="uid" rules="required|minmax:6,12" v-slot="{ errors }">
-                <base-input type="text" v-model="formData.uid" label="아이디"/>
+                <base-input type="text" v-model="uid" label="아이디"/>
                 <base-alert type="danger" v-if="errors[0]">
                     {{ errors[0] }}
                 </base-alert>
             </validation-provider>
             <validation-provider name="password" rules="required|minmax:8,16|verify_password" v-slot="{ errors }">
-                <base-input type="password" v-model="formData.password" label="패스워드"/>
+                <base-input type="password" v-model="password" label="패스워드"/>
                 <base-alert type="danger" v-if="errors[0]">
                     {{ errors[0] }}
                 </base-alert>
             </validation-provider>
             <validation-provider name="password-verify" rules="required|minmax:8,16|verify_password|password_confirm:@password" v-slot="{ errors }">
-                <base-input type="password" v-model="formData.passwordVerify" label="패스워드 확인"/>
+                <base-input type="password" v-model="passwordVerify" label="패스워드 확인"/>
                 <base-alert type="danger" v-if="errors[0]">
                     {{ errors[0] }}
                 </base-alert>
@@ -33,6 +33,7 @@
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, min, max, regex } from 'vee-validate/dist/rules';
 import Navigation from "./components/Navigation.vue";
+import CustomControls from "./components/CustomControls"
 
 extend('required', {
   ...required,
@@ -71,19 +72,28 @@ export default {
     components: {
         ValidationProvider,
         ValidationObserver,
-        Navigation
+        Navigation,
+        CustomControls
     },
     data: () => ({
         value: '',
-        formData: {
-            uid: '',
-            password: '',
-            passwordVerify: ''
-        },
+        uid: '',
+        password: '',
+        passwordVerify: ''
     }),
     methods: {
         onSubmit() {
-
+            let successful = this.$store.dispatch('signUp', {username: this.uid, password1: this.password, password2: this.passwordVerify})
+            if (successful) {
+                this.uid = ''
+                this.password = ''
+                this.passwordVerify = ''
+                this.selectedList = ''
+                this.$emit("closemodal");
+            }
+            else {
+                alert("회원가입에 실패하였습니다")
+            }
         }
     }
 }

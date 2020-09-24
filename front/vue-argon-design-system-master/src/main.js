@@ -21,9 +21,14 @@ import router from "./router";
 import Argon from "./plugins/argon-kit";
 import './registerServiceWorker'
 import store from '@/store/index.js'
+import axios from 'axios'
 
 Vue.config.productionTip = false;
+Vue.prototype.$axios = axios
 Vue.use(Argon);
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN'
 
 new Vue({
   router,
