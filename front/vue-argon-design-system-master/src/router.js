@@ -12,13 +12,18 @@ import main from "./views/main.vue";
 
 //커스터마이징
 
-//논문상세페이지
+//논문요약결과페이지
 import nmdetail from "./views/nmdetail.vue";
+//논문검색상세페이지
+import showdetail from "./views/showdetail.vue";
 //검색페이지
 import search from "./views/search.vue";
 
 //argon 컴포넌트페이지
 import guide from "./views/guide.vue";
+
+// 스크랩 페이지
+import scrap from "./views/scrap.vue";
 
 
 Vue.use(Router);
@@ -75,6 +80,16 @@ export default new Router({
 
     //논문상세페이지
     {
+      path: "/showdetail/:id",
+      name: "showdetail",
+      components: {
+        header: AppHeader,
+        default: showdetail,
+        footer: AppFooter
+      }
+    },
+    //논문요약결과
+    {
       path: "/nmdetail",
       name: "nmdetail",
       components: {
@@ -100,6 +115,16 @@ export default new Router({
       components: {
         header: AppHeader,
         default: search,
+        footer: AppFooter
+      }
+    },
+    //스크랩
+    {
+      path: "/scrap",
+      name: "scrap",
+      components: {
+        header: AppHeader,
+        default: scrap,
         footer: AppFooter
       }
     },

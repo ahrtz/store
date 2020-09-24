@@ -1,39 +1,22 @@
 <template>
   <div class="container2">
-    <h1>검색페이지입니다</h1>
-    <div class="col-12" style="display : flex;">
+    <div class="col-12" style="display: flex">
       <div class="col-2">
-        <select
+        <!-- <select
           class="form-control"
           data-toggle="select"
           data-minimum-results-for-search="Infinity"
         >
-          <option>대분류</option>
-          <option>Badges</option>
-          <option>Buttons</option>
-          <option>Cards</option>
-          <option>Forms</option>
-          <option>Modals</option>
-        </select>
+          <option>5개씩 보기</option>
+          <option>10개씩 보기</option>
+          <option>20개씩 보기</option>
+        </select> -->
       </div>
 
-      <div class="col-2">
-        <select
-          class="form-control"
-          data-toggle="select"
-          data-minimum-results-for-search="Infinity"
-        >
-          <option>소분류</option>
-          <option>Badges</option>
-          <option>Buttons</option>
-          <option>Cards</option>
-          <option>Forms</option>
-          <option>Modals</option>
-        </select>
-      </div>
-
-      <div class="col-2">
-        <select
+      <!-- <div class="col-2">
+      </div>-->
+      <div class="col-3">
+        <!-- <select
           class="form-control"
           data-toggle="select"
           data-minimum-results-for-search="Infinity"
@@ -50,40 +33,50 @@
           <option>2012</option>
           <option>2011</option>
           <option>2010</option>
-          
+        </select>-->
+      </div>
+
+      <div class="col-2">
+        <select
+          class="form-control" 
+          v-model="selectval"
+        >
+          <option value="title">제목으로 검색</option>
+          <option value="keyword">키워드로 검색</option>
         </select>
       </div>
-
-      <div class="col-2">
-        <input type="text" placeholder="키워드" class="form-control" />
+      <div class="col-4">
+        <input
+          type="text"
+          placeholder="검색어를 입력하세요"
+          class="form-control"
+          v-model="inputval"
+        />
       </div>
-      <div class="col-2">
-        <input type="text" placeholder="저자" class="form-control" />
-      </div>
 
-      <div class="col-2">
-        <button class="btn btn-primary col-12">검색</button>
+      <div class="col-1">
+        <button class="btn btn-primary col-12" @click="searchnms">검색</button>
       </div>
     </div>
 
     <!--  -->
     <div class="table tb">
       <div>
-        <table class="table align-items-center" style="margin : 10px;">
+        <table class="table align-items-center" style="margin: 10px">
           <thead class="thead-light">
             <tr>
-              <th scope="col" class="sort" data-sort="name">논문명</th>
-              <th scope="col" class="sort" data-sort="budget">1</th>
-              <th scope="col" class="sort" data-sort="status">2</th>
-              <th scope="col">3</th>
-              <th scope="col">3</th>
-              <th scope="col" class="sort" data-sort="completion">4</th>
+              <th>논문명</th>
+              <th>분류</th>
+              <th>저자 발행기관</th>
+              <th>초록</th>
+              <th>상세보기</th>
             </tr>
           </thead>
           <tbody class="list">
             <tr>
               <td colspan="6">
-                <nmcard />
+                <!-- v-for="(nm,index) in nms.slice(this.perPage*(currentPage-1),perPage*(currentPage))" -->
+                <nmcard v-for="(nm, index) in nms" :key="index" :nm="nm" />
               </td>
               <!-- <th scope="row">
                 <div class="media align-items-center">
@@ -102,19 +95,26 @@
               <td>
                 <span class="completion mr-2">60%</span>
               </td>
-              <td class="text-right"></td> -->
+              <td class="text-right"></td>-->
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="row row-grid justify-content-between align-items-center mt-lg pg">
+    <div
+      class="row row-grid justify-content-between align-items-center mt-lg pg"
+    >
       <div></div>
-      <base-pagination :page-count="10" v-model="pagination.default"></base-pagination>
+      <!-- :page-count="10" -->
+      <base-pagination v-model="page" 
+      :pageCount = count/10+1
+      :perPage = 10
+      :total = count
+      :value = page
+      >
+      </base-pagination>
       <div></div>
     </div>
-
-    
   </div>
 </template>
 
@@ -129,17 +129,46 @@ export default {
   },
   data() {
     return {
-      pagination: {
-        default: 1,
-      },
+      page: 1,
+      
+      selectval: "",
+      inputval: "",
     };
   },
   created() {
-    this.$store.dispatch(Constant.GET_NMLIST);
+    this.$store.dispatch(Constant.GET_NMLIST, { pg: 1 });
   },
   computed: {
     nms() {
+      // console.log('도착');
+      // console.dir(this.$store.state.nmstore.nms);
       return this.$store.state.nmstore.nms;
+    },
+    count() {
+      return this.$store.state.nmstore.count;
+    },
+  },
+  watch: {
+    page() {
+      // console.log(this.page);
+      this.$store.dispatch(Constant.GET_NMLIST, { pg: this.page });
+    },
+  },
+  methods: {
+    searchnms() {
+      // alert(this.selectval);
+      //타이틀 검색
+      if (this.selectval == "title") {
+        this.$store.dispatch(Constant.SEARCH_TITLE_NMLIST, {
+          title: this.inputval,
+        });
+      }
+      //키워드 검색
+      else {
+        this.$store.dispatch(Constant.SEARCH_KEYWORD_NMLIST, {
+          keyword: this.inputval,
+        });
+      }
     },
   },
 };
