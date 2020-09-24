@@ -1,40 +1,35 @@
 <template>
-  <div id="app">
-    <div class="card-row">
-      <!-- v-for="(card, index) in cards"
+  <!-- v-for="(card, index) in cards"
         :key="index"
         :ref="`card_${index}`"
         @mouseover="hoverCard(index)"
         @mouseout="hoverCard(-1)" -->
-      <div class="card">
-        <!-- <img class="card-image" :class="{'selected': isSelected(index)}" :src="card.image" /> -->
+  <router-link :to="'/showdetail/' + sid.id">
+    <div class="card">
+      <img class="card-image" :src="cards[0].image" />
 
-        <div class="card-footer">
-          <p class="card-text">{{ scp.subject }}</p>
-          <h3 class="card-title">{{ scp.title_kor }}</h3>
-          <p class="card-text">
-            by
-            <span
-              class="card-author"
-              :class="{ selected: isSelected(index) }"
-              >{{ scp.main_author }}</span
-            >
-          </p>
-        </div>
+      <div class="card-footer">
+        <p class="card-text">{{ sid.subject }}</p>
+        <p class="card-title">{{ sid.title_kor }}</p>
+        <p class="card-text">
+          by
+          <!-- :class="{ selected: isSelected(index) }" -->
+          <span class="card-author">{{ sid.main_author }}</span>
+        </p>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
-import Constant from "@/Constant.js";
+import Constant from "../../Constant.js";
 import http from "@/http-common.js";
 export default {
   data() {
     return {
       selectedCard: -1,
       images: [
-        "@/assets/images/category/bhh.jpeg",
+        "../../assets/images/category/bhh.jpeg",
         "@/assets/images/category/eyh.jpg",
         "@/assets/images/category/gh.jpg",
         "@/assets/images/category/imh.jpg",
@@ -65,20 +60,19 @@ export default {
   },
   props: {
     sid: {
-      type: Number,
+      type: Object,
       required: true,
     },
   },
   created() {
-    console.log("개별 디스패치");
-    this.$store.dispatch(Constant.GET_NM, { sid: this.sid });
+    // console.log("개별 디스패치");
+    // this.$store.dispatch(Constant.GET_NM, { sid: this.sid });
   },
   computed: {
-    scp() {
-          console.log('개별 컴퓨티드');
-
-      return this.$store.state.nmstore.nm;
-    },
+    // scp() {
+    //       console.log('개별 컴퓨티드');
+    //   return this.$store.state.nmstore.nm;
+    // },
   },
   methods: {
     hoverCard(selectedIndex) {
@@ -143,7 +137,7 @@ body {
   right: -9999px;
   margin: auto;
 
-  height: 220px;
+  height: 300px;
   min-width: 100%;
   transition: height 0.3s, opacity 0.3s;
 }

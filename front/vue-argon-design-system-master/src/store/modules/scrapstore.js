@@ -32,8 +32,8 @@ const scrapstore = {
       
     await axios.get('/api/reports/scrap/list/')
         .then(response => {
-          console.log('덴');
-          console.dir(response.data);
+          // console.log('덴');
+          // console.dir(response.data);
             store.commit(Constant.GET_SCRAPLIST, { scraps: response.data })
       })
         .catch(exp => alert('getScrapList처리에 실패하였습니다!!' + exp));
@@ -76,7 +76,7 @@ const scrapstore = {
 
   mutations: {
     [Constant.GET_SCRAPLIST]: (state, payload) => {
-        console.log('mutation' + payload.scraps);
+        // console.log('mutation' + payload.scraps);
         state.scraps = payload.scraps;
     },
     // [Constant.GET_BOARD]: (state, payload) => {

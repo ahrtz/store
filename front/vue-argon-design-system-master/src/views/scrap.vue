@@ -43,7 +43,13 @@
     <hr />
 
     <!-- cardvue list -->
-    <!-- <scrapcard v-for="(scrap, index) in scraps" :key="index" :sid="scrap.summary_id" /> -->
+    <div style="display : flex;">
+    <scrapcard
+      v-for="(scrap, index) in scraps"
+      :key="index"
+      :sid="scrap.summary"
+    />
+    </div>
     <!-- end cardvue -->
     <hr />
 
@@ -77,13 +83,13 @@ export default {
     };
   },
   created() {
-    console.log('스크랩디스패치');
-    this.$store.dispatch('getScraplist');
+    // console.log('스크랩디스패치');
+    this.$store.dispatch("getScraplist");
   },
   computed: {
     scraps() {
-          console.log('스크랩 컴퓨티드');
-          console.dir(this.$store.state.scrapstore.scraps);
+      // console.log('스크랩 컴퓨티드');
+      // console.dir(this.$store.state.scrapstore.scraps);
 
       return this.$store.state.scrapstore.scraps;
     },
