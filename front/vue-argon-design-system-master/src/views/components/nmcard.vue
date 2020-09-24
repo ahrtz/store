@@ -15,10 +15,10 @@
         >
       </div>
       <div class="col-2">{{ nm.subject }}</div>
-      <div class="col-1">{{ nm.main_author }} 외 {{ subcnt }}명</div>
+      <div class="col-2">{{ nm.main_author }} 외 {{ subcnt }}명</div>
       <div class="col-1">{{ nm.issuer_kor }}</div>
 
-      <div class="col-2">
+      <div class="col-1">
         <base-button @click="modals.modal1 = true">초록 보기</base-button>
         <modal :show.sync="modals.modal1">
           <h6 slot="header" class="modal-title" id="modal-title-default">
@@ -32,8 +32,13 @@
           </template>-->
         </modal>
       </div>
-      <div class="col-2">
+      <div class="col-1">
         <button type="button" class="btn" @click="onClickRedirect()">
+          참고사이트
+        </button>
+      </div>
+      <div class="col-1">
+        <button type="button" class="btn btn-primary">
           상세보기
         </button>
       </div>
