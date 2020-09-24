@@ -51,7 +51,6 @@ import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, min, max, regex } from 'vee-validate/dist/rules';
 import Navigation from "./components/Navigation.vue";
 import CustomControls from "./components/CustomControls"
-import axios from 'axios'
 
 extend('required', {
   ...required,
@@ -77,58 +76,34 @@ export default {
         selectedList: [],
         priorityList: {
             nature: [
-                {
-                    "id": 1,
-                    "main_category": "자연과학",
-                    "sub_category": "기타자연과학"
-                }, 
-                {
-                    "id": 2,
-                    "main_category": "자연과학",
-                    "sub_category": "대기과학"
-                },
-                {
-                    "id": 3,
-                    "main_category": "자연과학",
-                    "sub_category": "물리학"
-                },
             ],
             engineering: [
-                {
-                    "id": 15,
-                    "main_category": "공학",
-                    "sub_category": "건축공학"
-                }, 
-                {
-                    "id": 16,
-                    "main_category": "공학",
-                    "sub_category": "고분자공학"
-                },
-                {
-                    "id": 17,
-                    "main_category": "공학",
-                    "sub_category": "공학"
-                },
             ]
         }
     }),
     methods: {
         onSubmit() {
-            let successful = store.dispatch('favoriteInsert', {favorites: this.selectedList})
-            if (successful) {
-                this.formData.uid = ''
-                this.formData.password = ''
-                this.formData.passwordVerify = ''
-                store.dispatch('login', this.formData)
+            var favoritesList = []
+            for (var i in this.selectedList) {
+                var s = {}
+                s.favorites_id = this.selectedList[i]
+                s.ranking = i
+                favoritesList.push(s)
             }
-            else {
-                alert("회원가입에 실패하였습니다")
-            }
+            this.$store.dispatch('setFavorites', {favorites: favoritesList})
+            this.$emit('closemodal')
         }
     },
     created() {
-        axios.get('/api/favorites/').then(response => {
-            console.log(response.data)
+        this.$axios.get('/api/favorites/').then(response => {
+            for (var i in response.data) {
+                if (i < 14) {
+                    this.priorityList.nature.push(response.data[i])
+                }
+                else {
+                    this.priorityList.engineering.push(response.data[i])
+                }
+            }
         })
     }
 }
