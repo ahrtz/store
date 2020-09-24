@@ -89,7 +89,8 @@ export default {
                 this.password = ''
                 this.passwordVerify = ''
                 this.selectedList = ''
-                this.$emit('close')
+                this.$emit("update:visible", false);
+                this.$emit("close");
             }
             else {
                 alert("회원가입에 실패하였습니다")

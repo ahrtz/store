@@ -23,23 +23,15 @@ const userstore = {
             password: password
         }, {headers: {'Content-Type': 'application/json'}}
         ).then((response) => {
-            console.log(response)
-            if (response.data.status) {
-                this.showAlert = true;
-                this.errMsg = response.data.data.email + "로그인 되었습니다"
-                store.commit('TOKEN', response.headers["jwt-auth-token"])
-                store.commit('IS_AUTH', true)
-            }
-            else {
-                store.commit('TOKEN', '')
-                store.commit('IS_AUTH', false)
-            }
+            store.commit('TOKEN', response.data.key)
+            store.commit('IS_AUTH', true)
+            return true
         }).catch(e => {
             store.commit('TOKEN', '')
             store.commit('IS_AUTH', false)
-            alert('로그인 정보가 올바르지 않습니다')
+            alert('로그인에 실패하였습니다')
+            return false
         })
-        return store.getters.getIsAuth
     },
 
     async signUp (store, {username, password1, password2}) {
@@ -50,23 +42,14 @@ const userstore = {
             password2: password2,
         }, {headers: {'Content-Type': 'application/json'}}
         ).then((response) => {
-            console.log(response)
-            if (response.data.status) {
-                sessionStorage.setItem('jwt-auth-token', response.data.key)
-                store.commit('TOKEN', response.data.key)
-                store.commit('IS_AUTH', true)
-                return true
-            }
-            else {
-                store.commit('TOKEN', '')
-                store.commit('IS_AUTH', false)
-                return false
-            }
+            store.commit('TOKEN', response.data.key)
+            store.commit('IS_AUTH', true)
+            return true
         }).catch(e => {
           store.commit('TOKEN', '')
           store.commit('IS_AUTH', false)
+          alert('회원가입에 실패하였습니다')
           return false
-          console.log(e.message)
         })
     },
 

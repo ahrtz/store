@@ -70,6 +70,8 @@ export default {
             if (successful) {
                 this.uid = ''
                 this.password = ''
+                this.$emit("update:visible", false);
+                this.$emit("close");
             }
         }
     }

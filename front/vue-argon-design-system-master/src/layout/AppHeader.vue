@@ -24,9 +24,8 @@
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-circle-08"></i>
                     </a>
-                    <a class="dropdown-item" @click="modals.modal0 = true" @close="modals.modal0 = false">로그인</a>
-                    <a class="dropdown-item" @click="modals.modal1 = true">회원가입</a>
-                    <a class="dropdown-item" @click="userLogout()">로그아웃</a>
+                    <a class="dropdown-item" @click="modals.modal0 = true" v-on:closemodal="modals.modal0 = false">로그인</a>
+                    <a class="dropdown-item" @click="modals.modal1 = true" v-on:closemodal="modals.modal1 = false">회원가입</a>
                 </base-dropdown>
                 <base-dropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl"  v-else> 
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
@@ -81,7 +80,7 @@ export default {
   methods: {
       userLogout() {
           this.$axios.post('/api/rest-auth/logout/').then(response => {
-              console.log(response.data)
+              this.$store.commit('IS_AUTH', false)
           }).catch(e => {
               console.log(e.message)
           })
