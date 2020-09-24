@@ -15,7 +15,7 @@ from reports.models import Summary_report
 
 DOWNLAD_PATH = "C:/Users/multicampus/Downloads/"
 
-def crawler_thesis_chk_setting():
+def crawler_thesis_chk_setting(start, end):
     """
     kci checkbox setting
     :return:
@@ -76,11 +76,12 @@ def crawler_thesis_chk_setting():
     # print(int_last_page)
 
     # 다운로드할 페이지 설정해서 excel 다운 클릭
-    for i in range(6, 7):   # range(1, int_last_page) 추후에 모든 페이지 excel로 출력
+    for i in range(start, end):   # range(1, int_last_page) 추후에 모든 페이지 excel로 출력
         driver.execute_script("javascript:goPage("+str(i)+")")
         driver.find_element_by_id("checkAll").click()
         driver.execute_script("lf_exceldown()")
         time.sleep(10)
+        print(i)
 
 
 def extract_abstract_using_selenium():
@@ -151,9 +152,9 @@ def extract_abstract_using_selenium():
             ).save()
 
 
-def extract_abstract_using_openAPI():
+def extract_abstract_using_openAPI(start, end):
     # i: excel 번호
-    for i in range(6, 7):
+    for i in range(start, end):
         rb = xlrd.open_workbook(DOWNLAD_PATH + "논문검색리스트Excel (" + str(i) + ").xls")
         rb_sheet = rb.sheet_by_index(0)
         nrows = rb_sheet.nrows
@@ -162,8 +163,7 @@ def extract_abstract_using_openAPI():
         result = []
         words = ["title_kor", "title_eng", "main_author", "sub_author", "journal_kor", "journal_eng",
                  "issuer_kor", "issuer_eng", "issue_year", "book_num", "page_num", "keyword_kor", "keyword_eng",
-                 "subject",
-                 "quote", "direct_urls", "doi", "abstract"]
+                 "subject", "quote", "direct_urls", "doi", "abstract"]
 
         # 엑셀에 있는 모든 row
         for j in range(1, nrows):
@@ -172,20 +172,20 @@ def extract_abstract_using_openAPI():
             papers_kci_id = ""
 
             for col in range(ncols):
+                # 논문 ID
                 if col == 1:
                     papers_kci_id = rb_sheet.cell_value(j, col)
                     continue
                 if col == 0 or col == 10:
                     continue
-
-                # 논문 ID
+                
+                papers[words[idx]] = "NaN"
                 papers[words[idx]] = rb_sheet.cell_value(j, col)
                 idx += 1
 
             # print(papers_kci_id)
             url = "https://open.kci.go.kr/po/openapi/openApiSearch.kci?key=19192000&apiCode=articleDetail&id=" + papers_kci_id
             response = requests.get(url=url)
-
             if(response.status_code == 200):
                 xml = response.text
             else:
@@ -195,11 +195,15 @@ def extract_abstract_using_openAPI():
             tree = ET.ElementTree(ET.fromstring(xml))
             root = tree.getroot()
             abstract = root.find('outputData').find('record').find('articleInfo').find('abstract')
-            papers["abstract"] = abstract.text
+            if abstract is None:
+                papers["abstract"] = "NaN"
+            else:
+                papers["abstract"] = abstract.text
             # print(abstract.text)
 
             result.append(papers)
 
+        print(str(i)+"번 엑셀까지 완료")
         # print(result)
         for item in result:
             Summary_report(
@@ -225,7 +229,42 @@ def extract_abstract_using_openAPI():
                 page_num=item['page_num']
             ).save()
 
+import sqlite3
+import pandas as pd
+DATA_DIR = 'F:/SSAFY/BigDataPJT/LAST/s03p23a406/data/sbk'
+DUMP_FILE_EN = os.path.join(DATA_DIR, "abstract_en.pkl")
+DUMP_FILE_KO = os.path.join(DATA_DIR, "abstract_ko.pkl")
+def sqlite_to_pandas():
+    con = sqlite3.connect("./db.sqlite3")
+    cur = con.cursor()
+    query = cur.execute("SELECT * FROM reports_summary_report")
+    cols = [column[0] for column in query.description]
+    result = pd.DataFrame.from_records(data=query.fetchall(), columns=cols)
+    result_ko = []
+    result_en = []
+
+    for index, row in result.iterrows():
+        if isEnglishOrKorean(row.abstract):
+            result_en.append(row)
+        else:
+            result_ko.append(row)
+    
+    endf = pd.DataFrame.from_records(data=result_en, columns=cols)
+    kodf = pd.DataFrame.from_records(data=result_ko, columns=cols)
+    pd.to_pickle(endf, DUMP_FILE_EN)
+    pd.to_pickle(kodf, DUMP_FILE_KO)
+    print(len(result_en))
+    print(len(result_ko))
+
+
+def isEnglishOrKorean(input):
+    for c in input:
+        if ord('가') <= ord(c) <= ord('힣'):
+            return False
+
+    return True
 
 if __name__ == '__main__':
-    #crawler_thesis_chk_setting()
-    extract_abstract_using_openAPI()
+    # crawler_thesis_chk_setting(26, 31)    # 시작 페이지, 끝페이지
+    # extract_abstract_using_openAPI(29, 31)    # 시작 엑셀번호, 끝 엑셀번호
+    sqlite_to_pandas()
