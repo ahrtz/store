@@ -1,28 +1,28 @@
 <template>
   <div id="app">
     <div class="card-row">
-        <!-- v-for="(card, index) in cards"
+      <!-- v-for="(card, index) in cards"
         :key="index"
         :ref="`card_${index}`"
         @mouseover="hoverCard(index)"
         @mouseout="hoverCard(-1)" -->
-      <div
-        class="card"
-      >
+      <div class="card">
         <!-- <img class="card-image" :class="{'selected': isSelected(index)}" :src="card.image" /> -->
 
         <div class="card-footer">
-          <p class="card-text">{{scp.subject}}</p>
-          <h3 class="card-title">{{scp.title_kor}}</h3>
+          <p class="card-text">{{ scp.subject }}</p>
+          <h3 class="card-title">{{ scp.title_kor }}</h3>
           <p class="card-text">
             by
-            <span class="card-author" :class="{'selected': isSelected(index)}">{{scp.main_author}}</span>
+            <span
+              class="card-author"
+              :class="{ selected: isSelected(index) }"
+              >{{ scp.main_author }}</span
+            >
           </p>
         </div>
       </div>
     </div>
-
-
   </div>
 </template>
 
@@ -32,9 +32,8 @@ import http from "@/http-common.js";
 export default {
   data() {
     return {
-      scs : [],
       selectedCard: -1,
-      images : [
+      images: [
         "@/assets/images/category/bhh.jpeg",
         "@/assets/images/category/eyh.jpg",
         "@/assets/images/category/gh.jpg",
@@ -44,7 +43,7 @@ export default {
         "@/assets/images/category/shgh.jpg",
         "@/assets/images/category/yscyh.jpg",
       ],
-      
+
       cards: [
         {
           title: "Gooey PBJ Brownies",
@@ -65,22 +64,21 @@ export default {
     };
   },
   props: {
-    sid : {
+    sid: {
       type: Number,
       required: true,
     },
-    
   },
   created() {
-    comsol
-       this.$store.dispatch(Constant.GET_NM,{sid:this.sid});
-
+    console.log("개별 디스패치");
+    this.$store.dispatch(Constant.GET_NM, { sid: this.sid });
   },
   computed: {
-    scp(){
-            return this.$store.state.nmstore.nm;
- 
-    }
+    scp() {
+          console.log('개별 컴퓨티드');
+
+      return this.$store.state.nmstore.nm;
+    },
   },
   methods: {
     hoverCard(selectedIndex) {
