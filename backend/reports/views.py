@@ -62,6 +62,7 @@ def scrap_list(request):
 def make_scrap(request,report_id):
     report = get_object_or_404(Summary_report,id=report_id)
     serializer = ScrapsSerializers(data=request.data)
+    print(report.title_kor)
     if serializer.is_valid():
         serializer.save(user=request.user,summary=report)
         return Response(serializer.data)
