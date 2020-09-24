@@ -2,7 +2,7 @@
   <div class="container2">
     <div class="col-12" style="display : flex;">
       <div class="col-2">
-        <select
+        <!-- <select
           class="form-control"
           data-toggle="select"
           data-minimum-results-for-search="Infinity"
@@ -10,7 +10,7 @@
           <option>5개씩 보기</option>
           <option>10개씩 보기</option>
           <option>20개씩 보기</option>
-        </select>
+        </select> -->
       </div>
 
       <div class="col-3"></div>
