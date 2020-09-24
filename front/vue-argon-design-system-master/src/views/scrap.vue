@@ -78,7 +78,7 @@ export default {
   },
   created() {
     console.log('스크랩디스패치');
-    this.$store.dispatch(Constant.GET_SCRAPLIST);
+    this.$store.dispatch('getScraplist');
   },
   computed: {
     scraps() {

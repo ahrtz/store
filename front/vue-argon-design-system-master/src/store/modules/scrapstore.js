@@ -16,9 +16,10 @@ const scrapstore = {
     //스크랩
 
     //아이디로 스크랩 리스트 가져오기
-    [Constant.GET_SCRAPLIST]: (store,payload) => {
+    /* 
+    [Constant.GET_SCRAPLIST]: async (store,payload) => {
       
-      http.get('/reports/scrap/list')
+      await http.get('/reports/scrap/list/')
           .then(response => {
             console.log('덴');
             console.dir(response.data);
@@ -26,6 +27,17 @@ const scrapstore = {
         })
           .catch(exp => alert('getScrapList처리에 실패하였습니다!!' + exp));
     },
+    */
+   async [Constant.GET_SCRAPLIST] (store,payload) {
+      
+    await axios.get('/api/reports/scrap/list/')
+        .then(response => {
+          console.log('덴');
+          console.dir(response.data);
+            store.commit(Constant.GET_SCRAPLIST, { scraps: response.data })
+      })
+        .catch(exp => alert('getScrapList처리에 실패하였습니다!!' + exp));
+  },
 
     async [Constant.ADD_SCRAP] (store, payload) {
         await axios.post(`/api/reports/scrap/make/${payload.essayId}`, {
