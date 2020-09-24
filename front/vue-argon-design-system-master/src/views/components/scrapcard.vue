@@ -1,36 +1,35 @@
 <template>
-  <div id="app">
-    <div class="card-row">
-      <div
-        v-for="(card, index) in cards"
+  <!-- v-for="(card, index) in cards"
         :key="index"
         :ref="`card_${index}`"
         @mouseover="hoverCard(index)"
-        @mouseout="hoverCard(-1)"
-        class="card"
-      >
-        <img class="card-image" :class="{'selected': isSelected(index)}" :src="card.image" />
+        @mouseout="hoverCard(-1)" -->
+  <router-link :to="'/showdetail/' + sid.id">
+    <div class="card">
+      <img class="card-image" :src="cards[0].image" />
 
-        <div class="card-footer">
-          <p class="card-text">RECIPE</p>
-          <h3 class="card-title">{{card.title}}</h3>
-          <p class="card-text">
-            by
-            <span class="card-author" :class="{'selected': isSelected(index)}">{{card.author}}</span>
-          </p>
-        </div>
+      <div class="card-footer">
+        <p class="card-text">{{ sid.subject }}</p>
+        <p class="card-title">{{ sid.title_kor }}</p>
+        <p class="card-text">
+          by
+          <!-- :class="{ selected: isSelected(index) }" -->
+          <span class="card-author">{{ sid.main_author }}</span>
+        </p>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
+import Constant from "../../Constant.js";
+import http from "@/http-common.js";
 export default {
   data() {
     return {
       selectedCard: -1,
-      images : [
-        "@/assets/images/category/bhh.jpeg",
+      images: [
+        "../../assets/images/category/bhh.jpeg",
         "@/assets/images/category/eyh.jpg",
         "@/assets/images/category/gh.jpg",
         "@/assets/images/category/imh.jpg",
@@ -39,7 +38,7 @@ export default {
         "@/assets/images/category/shgh.jpg",
         "@/assets/images/category/yscyh.jpg",
       ],
-      
+
       cards: [
         {
           title: "Gooey PBJ Brownies",
@@ -60,11 +59,20 @@ export default {
     };
   },
   props: {
-    scraps : {
-      type: Array,
+    sid: {
+      type: Object,
       required: true,
     },
-    
+  },
+  created() {
+    // console.log("개별 디스패치");
+    // this.$store.dispatch(Constant.GET_NM, { sid: this.sid });
+  },
+  computed: {
+    // scp() {
+    //       console.log('개별 컴퓨티드');
+    //   return this.$store.state.nmstore.nm;
+    // },
   },
   methods: {
     hoverCard(selectedIndex) {
@@ -74,7 +82,7 @@ export default {
     animateCards() {
       this.cards.forEach((card, index) => {
         const direction = this.calculateCardDirection(index, this.selectedCard);
-        TweenMax.to(this.$refs[`card_${index}`], 0.3, { x: direction * 50 });
+        // TweenMax.to(this.$refs[`card_${index}`], 0.3, { x: direction * 50 });
       });
     },
     calculateCardDirection(cardIndex, selectedIndex) {
@@ -129,7 +137,7 @@ body {
   right: -9999px;
   margin: auto;
 
-  height: 220px;
+  height: 300px;
   min-width: 100%;
   transition: height 0.3s, opacity 0.3s;
 }

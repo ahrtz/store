@@ -1,6 +1,6 @@
 <template>
   <div class="container2">
-    <div class="col-12" style="display : flex;">
+    <div class="col-12" style="display: flex">
       <div class="col-2">
         <!-- <select
           class="form-control"
@@ -27,23 +27,40 @@
         </select>
       </div>
       <div class="col-4">
-        <input type="text" placeholder="검색어를 입력하세요" class="form-control" />
+        <input
+          type="text"
+          placeholder="검색어를 입력하세요"
+          class="form-control"
+        />
       </div>
 
       <div class="col-1">
-        <button class="btn btn-primary col-12" @click="searchscrap">검색</button>
+        <button class="btn btn-primary col-12" @click="searchscrap">
+          검색
+        </button>
       </div>
     </div>
     <hr />
 
     <!-- cardvue list -->
-    <scrapcard :scraps="scraps" />
+    <div style="display : flex;">
+    <scrapcard
+      v-for="(scrap, index) in scraps"
+      :key="index"
+      :sid="scrap.summary"
+    />
+    </div>
     <!-- end cardvue -->
     <hr />
 
-    <div class="row row-grid justify-content-between align-items-center mt-lg pg">
+    <div
+      class="row row-grid justify-content-between align-items-center mt-lg pg"
+    >
       <div></div>
-      <base-pagination :page-count="10" v-model="pagination.default"></base-pagination>
+      <base-pagination
+        :page-count="10"
+        v-model="pagination.default"
+      ></base-pagination>
       <div></div>
     </div>
   </div>
@@ -66,10 +83,14 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch(Constant.GET_SCRAPLIST);
+    // console.log('스크랩디스패치');
+    this.$store.dispatch("getScraplist");
   },
   computed: {
     scraps() {
+      // console.log('스크랩 컴퓨티드');
+      // console.dir(this.$store.state.scrapstore.scraps);
+
       return this.$store.state.scrapstore.scraps;
     },
   },

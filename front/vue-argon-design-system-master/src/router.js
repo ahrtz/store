@@ -7,6 +7,7 @@ import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
+import store from '@/store/index.js'
 import main from "./views/main.vue";
 
 
@@ -30,6 +31,13 @@ import mypage from "./views/mypage.vue";
 
 
 Vue.use(Router);
+
+const requireAuth = () => (to, from, next) => {
+  if (store.getters.getIsAuth == true) {
+    return next();
+  }
+  alert('로그인 후 이용 가능합니다')
+}
 
 export default new Router({
   linkExactActiveClass: "active",
@@ -139,7 +147,8 @@ export default new Router({
         header: AppHeader,
         default: mypage,
         footer: AppFooter
-      }
+      },
+      beforeEnter: requireAuth()
     },
 
 
