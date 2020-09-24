@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Reports,Scraps,Summary_report
-
+from accounts.serializers import UserSerializer
 
 # 논문 목록
 class ReportsListSerializers(serializers.ModelSerializer):
@@ -16,6 +16,8 @@ class ReportsSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 class ScrapsSerializers(serializers.ModelSerializer):
+    user = UserSerializer(required=False)
+    summary = ReportsListSerializers(required=False)
     class Meta:
         model = Scraps
         fields='__all__'
