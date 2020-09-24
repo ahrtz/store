@@ -71,6 +71,18 @@ const userstore = {
             })
             return result;
         }
+    },
+
+    async setFavorites (store, {favorites}) {
+        
+        await axios.post('/api/favorites/users/insert/', {
+            favorites: favorites
+        }, {headers: {'Content-Type': 'application/json'}}).then(response => {
+            alert('선호 주제가 등록되었습니다')
+        }).catch(e => {
+            console.log(e.message)
+            alert('등록 중 문제가 발생했습니다')
+        })
     }
   },
 
