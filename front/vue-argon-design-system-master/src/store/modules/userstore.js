@@ -23,11 +23,11 @@ const userstore = {
             password: password
         }, {headers: {'Content-Type': 'application/json'}}
         ).then((response) => {
-            store.commit('TOKEN', response.data.key)
+            sessionStorage.setItem('jwt-auth-token', response.data.key)
             store.commit('IS_AUTH', true)
             return true
         }).catch(e => {
-            store.commit('TOKEN', '')
+            sessionStorage.setItem('jwt-auth-token', '')
             store.commit('IS_AUTH', false)
             alert('로그인에 실패하였습니다')
             return false
@@ -42,11 +42,11 @@ const userstore = {
             password2: password2,
         }, {headers: {'Content-Type': 'application/json'}}
         ).then((response) => {
-            store.commit('TOKEN', response.data.key)
+            sessionStorage.setItem('jwt-auth-token', response.data.key)
             store.commit('IS_AUTH', true)
             return true
         }).catch(e => {
-          store.commit('TOKEN', '')
+            sessionStorage.setItem('jwt-auth-token', '')
           store.commit('IS_AUTH', false)
           alert('회원가입에 실패하였습니다')
           return false
@@ -54,35 +54,38 @@ const userstore = {
     },
 
     async checkLogin (store) {
-        var result;
         if (sessionStorage.getItem('jwt-auth-token')) {
-            store.commit('TOKEN', sessionStorage.getItem('jwt-auth-token'))
             store.commit('IS_AUTH', true)
-            await axios.get(`/api/user/${store.getters.getToken}`, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                result = res.data
-            }).catch(e => {
-                store.commit('logout')
-                alert('토큰이 만료되었습니다. 다시 로그인해주세요')
-                router.push('/');
-            })
-            return result;
         }
     },
 
-    async setFavorites (store, {favorites}) {
-        
-        await axios.post('/api/favorites/users/insert/', {
-            favorites: favorites
-        }, {headers: {'Content-Type': 'application/json'}}).then(response => {
-            alert('선호 주제가 등록되었습니다')
-        }).catch(e => {
-            console.log(e.message)
-            alert('등록 중 문제가 발생했습니다')
-        })
+    async setFavorites (store, {favorites, insmod}) {
+        var res = false;
+        if (insmod) {
+            await axios.patch('/api/favorites/users/update/', {
+                favorites: favorites
+            }, {headers: {'Content-Type': 'application/json'}}).then(response => {
+                alert('선호 주제가 변경되었습니다')
+                res = true
+            }).catch(e => {
+                console.log(e.message)
+                alert('변경 중 문제가 발생했습니다')
+                res = false
+            })
+        }
+        else {
+            await axios.post('/api/favorites/users/insert/', {
+                favorites: favorites
+            }, {headers: {'Content-Type': 'application/json'}}).then(response => {
+                alert('선호 주제가 등록되었습니다')
+                res = true
+            }).catch(e => {
+                console.log(e.message)
+                alert('등록 중 문제가 발생했습니다')
+                res = false
+            })
+        }
+        return res
     }
   },
 
