@@ -92,9 +92,11 @@ cd ..
 pip install re
 pip install itertools
 pip install collections
-pip install fitz
-pip install gensim newspaper3k
+pip install os
+pip install binascii
 
+pip install gensim newspaper3k
+pip install lexrankr
 pip install wordcloud
 pip install matplotlib
 pip install konlpy
@@ -102,4 +104,103 @@ pip install konlpy
 https://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud
 사이트에서 자신에 맞는 wordcloud 파일 다운로드
 pip install wordcloud-1.8.0-cp36-cp36m-win_amd64.whl
+```
+
+## 04. 사용 설명서
+```sh
+(1) 폴더, 파일 이름
+documents Folder : PDF 파일을 저장하는 장소입니다. 파일 입력시 반영 됩니다.
+images Folder : PDF에서 추출된 Image, WordCloud 파일이 저장됩니다.
+testing Folder : Testing 했던 폴더입니다.
+
+main.py : python main.py를 실행 시키면 메인 기능이 동작합니다.
+mode_crawling.py : selenium을 이용한 KCI 페이지 크롤링이며, PDF를 통해 자세한 정보 검색이 가능합니다.
+mode_imageconvert.py : image 관련 처리 함수이며, 현재는 images Path 안에 있는 파일을 Remove 해주는 함수 하나가 담겨 있습니다.
+mode_pdfconvert.py : PDF를 처리하는 모든 함수 패키지가 담겨 있습니다.
+mode_summarize.py : PDF를 요약해주는 모든 함수 패키지가 담겨 있습니다.
+
+output1.txt : 논문 개요, 논문 전문을 간단히 볼수 있는 텍스트 파일입니다.
+output2.txt : 논문 요약 (10줄)을 볼 수 있는 텍스트 파일 입니다.
+```
+
+```sh
+(2) 변수 이름
+link_data : KCI를 통해 검색한 논문의 URL입니다.
+title_data_ko : 논문 제목 (한글) 입니다.
+title_data_en : 논문 제목 (영어) 입니다.
+
+title_data_plus1 : 논문이 피인용 된 횟수 입니다.
+title_data_plus2 : 논문이 열람 된 횟수 입니다.
+
+journalInfo1 : 학술지 이름입니다.
+journalInfo2 : 논문 정보입니다.
+journalInfo3 : 발행 기관입니다.
+
+name1 : 저자 정보 (이름)가 담겨 있습니다.
+name2 : 저자 정보 (학교)가 담겨 있습니다.
+
+content1 : 논문 초록 (요약, 한글)이 담겨 있습니다.
+content2 : 논문 초록 (요약, 영어)이 담겨 있습니다.
+
+content3 : 키워드 (한글)가 담겨 있습니다.
+content4 : 키워드 (영어)가 담겨 있습니다.
+
+reference : 참고문헌이 담겨 있습니다.
+
+figure_image_name : PDF에서 추출한 그림 데이터 (이름) 입니다.
+figure_image_src : PDF에서 추출한 그림 데이터 (경로) 입니다.
+
+final_result : PDF에서 추출한 논문 내용입니다. (초록, 참고문헌 제외한 모든 텍스트)
+print_result : PDF에서 추출한 개요, 논문 내용을 output1.txt에 출력할 수 있도록 도와주는 변수입니다.
+
+summarize_data : lexlank 프로그램을 이용한 본문 요약 리스트 입니다. (10줄)
+summarize_result : 본문 요약 리스트를 output2.txt에 출력할 수 있도록 도와주는 변수입니다.
+
+summarize_tags : 키워드 추출 변수입니다.
+```
+
+```sh
+(3) 함수 이름
+mode_pdfconvert.py
+- save_image, determine_image_type, write_file : PDF에서 추출한 Image 데이터를 바이너리 데이터로 변경 후, 이미지 저장하는 함수 입니다.
+
+- isEnglishOrKorean : 영어인지, 한글인지 반환해주는 함수입니다.
+
+- pdfopen : pdfminer를 이용, pdf를 열어주는 함수입니다.
+
+- pdfread : pdfminer를 이용, pdf에서 텍스트를 추출해줍니다.
+- [텍스트 내용, 위치를 저장하고, 이미지를 텍스트 처리 즉시 저장해주는 함수입니다.]
+- [text_list : 텍스트 변수 리스트, textfont_list : 텍스트 크기 리스트 (예 : 10px)]
+- [textmiddle_list : 텍스트 시작 위치 리스트, textmiddle_average : 전체 텍스트 평균 위치 변수]
+- [textfont_average : 전체 텍스트 중간 위치 변수, textfont_cnt : 텍스트 처리 카운트]
+- [title_num : 타이틀 위치, title_data : 타이틀 이름]
+- [image_name : 이미지 이름, image_list : 이미지 위치 리스트]
+
+- title_return : pdf에서 가장 큰 텍스트를 찾고, 그걸 기반으로 타이틀을 반환하는 함수입니다.
+
+- list_return : 기본적으로 pdfminer는 띄어쓰기를 두번한 상태로 처리되는데, 그 부분을 교정해주는 함수입니다.
+
+- maxsize_return : 가장 많이 쓰인 텍스트 사이즈를 반환해주며, 이를 토대로 본문 텍스트 크기를 찾아주는 함수입니다.
+
+- pdfsort : PDF 파일에 다단이 있는지 확인하고, 이를 처리해줍니다. 추가로 그림이나, 참고문헌 예외처리도 해줍니다.
+
+- pdfgrap : PDF 텍스트 크기별로 묶어주는 함수입니다. 이를 통해서 쓸데없는 텍스트를 걸러줍니다.
+
+- pdfcutter : 참고문헌을 삭제해주고, 서론 앞을 삭제해줍니다. 이후 maxsize_return을 통해 받은 본문 크기를 받고, 중간에 들어간 머리말, 표 글씨 등을 전부 삭제합니다.
+
+
+mode_summarize.py
+- summarize_function : 문장을 요약해주나, 부정확한 부분이 있어서 현재는 사용하지 않는 TextRank 방식의 요약 문장 반환 함수 입니다.
+
+- lexlank_function : 문장을 lexlank (TextRank와 유사하나, 한글 처리 특화)를 통해 10문장으로 요약해주는 함수입니다.
+
+- keywords_function, visualize_function : 키워드를 추출하고, 그걸 기반으로 워드클라우드를 만들어주는 함수입니다.
+
+
+mode_crawling.py
+- crawling_setting : selenium을 이용한 KCI 논문 검색 함수 입니다.
+
+
+mode_imageconvert.py
+- removeAllFile : images 안에 있는 파일을 삭제하고, 초기화 하는 함수입니다.
 ```

@@ -7,21 +7,37 @@ import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
+import store from '@/store/index.js'
 import main from "./views/main.vue";
 
 
 //커스터마이징
 
-//논문상세페이지
+//논문요약결과페이지
 import nmdetail from "./views/nmdetail.vue";
+//논문검색상세페이지
+import showdetail from "./views/showdetail.vue";
 //검색페이지
 import search from "./views/search.vue";
 
 //argon 컴포넌트페이지
 import guide from "./views/guide.vue";
 
+// 스크랩 페이지
+import scrap from "./views/scrap.vue";
+
+//마이페이지
+import mypage from "./views/mypage.vue";
+
 
 Vue.use(Router);
+
+const requireAuth = () => (to, from, next) => {
+  if (store.getters.getIsAuth == true) {
+    return next();
+  }
+  alert('로그인 후 이용 가능합니다')
+}
 
 export default new Router({
   linkExactActiveClass: "active",
@@ -75,6 +91,16 @@ export default new Router({
 
     //논문상세페이지
     {
+      path: "/showdetail/:id",
+      name: "showdetail",
+      components: {
+        header: AppHeader,
+        default: showdetail,
+        footer: AppFooter
+      }
+    },
+    //논문요약결과
+    {
       path: "/nmdetail",
       name: "nmdetail",
       components: {
@@ -102,6 +128,27 @@ export default new Router({
         default: search,
         footer: AppFooter
       }
+    },
+    //스크랩
+    {
+      path: "/scrap",
+      name: "scrap",
+      components: {
+        header: AppHeader,
+        default: scrap,
+        footer: AppFooter
+      }
+    },
+    //마이페이지
+    {
+      path: "/mypage",
+      name: "mypage",
+      components: {
+        header: AppHeader,
+        default: mypage,
+        footer: AppFooter
+      },
+      beforeEnter: requireAuth()
     },
 
 

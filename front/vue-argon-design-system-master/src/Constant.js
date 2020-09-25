@@ -14,5 +14,18 @@ export default {
     //pdf 파일 전송
     SEND_FILE : 'sendFile',
     GET_RESULT: 'getResult',
+    TOKEN: 'TOKEN',
+    ERROR_STATE: 'ERROR_STATE',
+    IS_AUTH: 'IS_AUTH',
     
+    //논문 
+    GET_NMLIST : 'getNmlist',
+    GET_NM : 'getNm',
+    SEARCH_TITLE_NMLIST : 'searchTitleNmlist',
+    SEARCH_KEYWORD_NMLIST : 'searchKeywordNmlist',
+
+    //스크랩
+    GET_SCRAPLIST : 'getScraplist',
+    ADD_SCRAP : 'addScrap',
+
 }

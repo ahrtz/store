@@ -103,3 +103,5 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud
 사이트에서 자신에 맞는 wordcloud 파일 다운로드
 pip install wordcloud-1.8.0-cp36-cp36m-win_amd64.whl
 ```
+
+## 04. PDF 정제 (09.21.월 시작)
