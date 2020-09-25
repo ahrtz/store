@@ -194,6 +194,16 @@ def extract_abstract_using_openAPI(start, end):
             # xml parsing
             tree = ET.ElementTree(ET.fromstring(xml))
             root = tree.getroot()
+            
+            # subject 중분류까지만 바꾸기
+            categories = root.find('outputData').find('record').find('articleInfo').find('article-categories').text
+            if categories is None:
+                papers["subject"] = "NaN"
+            else:
+                categories_list = categories.split('>')
+                if len(categories_list) > 1:
+                    papers["subject"] = categories_list[1].strip()
+
             abstract = root.find('outputData').find('record').find('articleInfo').find('abstract')
             if abstract is None:
                 papers["abstract"] = "NaN"
@@ -265,6 +275,6 @@ def isEnglishOrKorean(input):
     return True
 
 if __name__ == '__main__':
-    # crawler_thesis_chk_setting(26, 31)    # 시작 페이지, 끝페이지
-    # extract_abstract_using_openAPI(29, 31)    # 시작 엑셀번호, 끝 엑셀번호
-    sqlite_to_pandas()
+    # crawler_thesis_chk_setting(26, 27)    # 시작 페이지, 끝페이지
+    extract_abstract_using_openAPI(26, 31)    # 시작 엑셀번호, 끝 엑셀번호
+    # sqlite_to_pandas()
