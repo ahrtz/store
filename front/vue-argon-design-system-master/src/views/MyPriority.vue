@@ -40,7 +40,7 @@
                 </base-alert>
             </validation-provider>
             <footer>
-                <base-button type="primary" :disabled="invalid" @click="onSubmit">가입</base-button>
+                <base-button type="primary" :disabled="invalid" @click="onSubmit">등록</base-button>
             </footer>
         </validation-observer>
     </div>
@@ -74,6 +74,7 @@ export default {
     data: () => ({
         value: '',
         selectedList: [],
+        insmod: false,
         priorityList: {
             nature: [
             ],
@@ -81,8 +82,16 @@ export default {
             ]
         }
     }),
+    computed: {
+        check_login() { return this.$store.getters.getIsAuth }
+    },
+    watch: {
+        check_login(val) {
+            this.changeSelection(val)
+        }
+    },
     methods: {
-        onSubmit() {
+        async onSubmit() {
             var favoritesList = []
             for (var i in this.selectedList) {
                 var s = {}
@@ -90,8 +99,31 @@ export default {
                 s.ranking = i
                 favoritesList.push(s)
             }
-            this.$store.dispatch('setFavorites', {favorites: favoritesList})
+            let success = await this.$store.dispatch('setFavorites', {favorites: favoritesList, insmod: this.insmod})
+            if (this.insmod == false && success == true) {
+                this.insmod = true
+            }
             this.$emit('closemodal')
+        },
+        changeSelection(val) {
+            if (this.$store.getters.getIsAuth == true) {
+                this.$axios.get('/api/favorites/users/').then(response => {
+                    if (response.data.length < 3) {
+                        this.insmod = false
+                        this.selectedList = []
+                    }
+                    else {
+                        for (var i in response.data) {
+                            this.selectedList.push(response.data[i].favorites.id)
+                        }
+                        this.insmod = true
+                    }
+                })
+            }
+            else {
+                this.insmod = false
+                this.selectedList = []
+            }
         }
     },
     created() {
@@ -105,6 +137,7 @@ export default {
                 }
             }
         })
+        this.changeSelection(this.$store.getters.getIsAuth)
     }
 }
 </script>
