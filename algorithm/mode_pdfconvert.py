@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*- 
 
-from pdfminer.layout import LAParams, LTTextBox, LTTextLine, LTTextBoxHorizontal
+from pdfminer.layout import LAParams, LTTextBox, LTTextLine, LTTextBoxHorizontal, LTFigure
 from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.converter import PDFPageAggregator
@@ -9,6 +9,64 @@ from pdfminer.pdfinterp import PDFResourceManager
 import re
 import itertools
 import collections
+
+import os
+from binascii import b2a_hex
+from mode_imageconvert import removeAllFile
+
+# 이미지 저장해주는 함수
+images_folder = './images'
+def save_image(lt_image):
+    """Try to save the image data from this LTImage object, and return the file name, if successful"""
+    result = None
+    if lt_image.stream:
+        file_stream = lt_image.stream.get_rawdata()
+        if file_stream:
+            file_ext = determine_image_type(file_stream[0:4])
+            if file_ext:
+                #file_name = ''.join([str(image_index), '_', lt_image.name, file_ext])
+                file_name = ''.join([lt_image.name, file_ext])
+                if write_file(images_folder, file_name, file_stream, flags='wb'):
+                    result = file_name
+            else:
+                result = lt_image.name + " No Image"
+ 
+    return result
+
+# 이미지 타입 결정해주는 함수
+def determine_image_type (stream_first_4_bytes):
+    """Find out the image file type based on the magic number comparison of the first 4 (or 2) bytes"""
+    file_type = None
+    #bytes_as_hex = b2a_hex(stream_first_4_bytes)
+    bytes_as_hex = b2a_hex(stream_first_4_bytes).decode(encoding='utf-8')
+    # print(bytes_as_hex)
+    if bytes_as_hex.startswith('ffd8'):
+        file_type = '.jpg'
+    elif bytes_as_hex == '89504e47':
+        file_type = '.png'
+    elif bytes_as_hex == '47494638':
+        file_type = '.gif'
+    elif bytes_as_hex.startswith('424d'):
+        file_type = '.bmp'
+    elif bytes_as_hex.startswith('49492a'):
+        file_type = '.tif'
+
+    return file_type
+
+# 이미지 저장하는 함수
+def write_file (folder, filename, filedata, flags='w'):
+    """Write the file data to the folder and filename combination
+    (flags: 'w' for write text, 'wb' for write binary, use 'a' instead of 'w' for append)"""
+    result = False
+    if os.path.isdir(folder):
+        try:
+            file_obj = open(os.path.join(folder, filename), flags)
+            file_obj.write(filedata)
+            file_obj.close()
+            result = True
+        except IOError:
+            pass
+    return result
 
 # 한글, 영문 판단 해주는 기계
 def isEnglishOrKorean(input_s):
@@ -44,9 +102,15 @@ def pdfopen(PDFfileName):
 
 # PDF 파일을 읽어주는 함수 (pdfminer 이용)
 def pdfread(device, interpreter, pages):
+    # 이미지 폴더 초기화
+    removeAllFile("images/")
+
     text_list = []
     textfont_list = []
     textmiddle_list = []
+    textmiddle_average = 0.0
+    textfont_average = 0.0
+    textfont_cnt = 0
 
     obj_cnt = 0
     title_cnt = 0
@@ -54,6 +118,8 @@ def pdfread(device, interpreter, pages):
     title_num = 0
     title_data = ""
     cnt = 1
+    image_name = []
+    image_list = []
     for page in pages:
         print("PDF 파일 읽는 중.... " + str(cnt) + " page")
         interpreter.process_page(page)
@@ -75,16 +141,42 @@ def pdfread(device, interpreter, pages):
                         temp.append(lobj.get_text())
                         tempfont.append(round(lobj.bbox[3] - lobj.bbox[1], 2))
                         tempmiddle.append(round(lobj.bbox[0], 2))
+
+                        textfont_average += lobj.bbox[0]
+                        textfont_cnt += 1
+                        if textmiddle_average < (lobj.bbox[2] - lobj.bbox[0]):
+                            textmiddle_average = (lobj.bbox[2] - lobj.bbox[0])
                 obj_cnt += 1
+
+            if isinstance(obj,LTFigure):
+                for ltimages in obj._objs:
+                    result = save_image(ltimages)
+                    if result:
+                        image_name.append(result)
+                    else:
+                        image_name.append("")
+                    image_list.append(cnt)
 
         text_list.append(temp)
         textfont_list.append(tempfont)
         textmiddle_list.append(tempmiddle)
         cnt += 1
+
+    image_temp1 = []
+    image_temp2 = []
+    for y in range(len(image_name)):
+        if image_name[y] != "" and image_name.count(image_name[y]) == 1:
+            image_temp1.append(image_name[y])
+            image_temp2.append(image_list[y])
+            # print(image_name[y], image_list[y])
+    image_name = image_temp1
+    image_list = image_temp2
+
+    textfont_average = int(textfont_average / textfont_cnt)
     print("PDF 파일 로드 완료!")
     print("")
 
-    return text_list, textfont_list, textmiddle_list, title_num, title_data
+    return text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list, textmiddle_average/2, textfont_average
 
 # 논문 Title을 찾고, 특수 문자를 제거해준다.
 def title_return(title_data):
@@ -145,10 +237,11 @@ def maxsize_return(text_list, textfont_list):
     return collect_loc
 
 # PDF 파일 다단 구분해주기 (pdfminer 이용)
-def pdfsort(text_list, textfont_list, textmiddle_list):
+def pdfsort(text_list, textfont_list, textmiddle_list, textmiddle_average, textfont_average):
     text_list2 = []
     textfont_list2 = []
     figure_data = []
+    figure_list = []
 
     for y in range(len(text_list)):
         if len(text_list[y]) > 0:
@@ -160,13 +253,18 @@ def pdfsort(text_list, textfont_list, textmiddle_list):
             refer_font = 0.0
 
             for x in range(len(text_list[y])):
-                if text_list[y][x].count('Figure') and text_list[y][x].find('Figure') < 3:
+                if text_list[y][x].count('그림') and text_list[y][x].find('그림') < 3:
                     figure_data.append(text_list[y][x])
-                elif text_list[y][x].count('그림') and text_list[y][x].find('그림') < 3:
+                    figure_list.append(y+1)
+                elif text_list[y][x].count('Figure') and text_list[y][x].find('Figure') < 3:
                     figure_data.append(text_list[y][x])
-                
+                    figure_list.append(y+1)
+                elif text_list[y][x].count('Fig') and text_list[y][x].find('Fig') < 3:
+                    figure_data.append(text_list[y][x])
+                    figure_list.append(y+1)
+    
             for x in range(len(text_list[y])):
-                if textmiddle_list[y][x] <= 280:
+                if textmiddle_list[y][x] <= 272:
                     # 참고문헌 뒤 삭제
                     temp = text_list[y][x].replace(' ', '')
                     temp = re.sub("[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]", '', temp)
@@ -185,36 +283,46 @@ def pdfsort(text_list, textfont_list, textmiddle_list):
                     temp_list.append(refer_text)
                     tempfont_list.append(refer_font)
 
-                if textmiddle_list[y][x] > 280:
+                if textmiddle_list[y][x] > 272:
                     temp_list.append(text_list[y][x])
                     tempfont_list.append(textfont_list[y][x])
             
             text_list2.append(temp_list)
             textfont_list2.append(tempfont_list)
 
-    figure_list = []
+    # print(figure_data)
+    figure_name = []
+    figure_cnt = []
     for y in range(len(figure_data)):
-        figure_list.append("==================================================================================================================================================")
+        figure_name.append("==================================================================================================================================================")
+        figure_cnt.append(-1)
 
     for y in range(len(figure_data)):
         for x in range(1, len(figure_data)+1):
-            if figure_data[y].count('Figure ' + str(x)) or figure_data[y].count('그림 ' + str(x)):
-                if figure_data[y].count('Figure') == 1 or figure_data[y].count('그림') == 1:
-                    if len(figure_list[x-1]) > len(figure_data[y]):
-                        temp = re.sub("[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]", '', figure_data[y])
-                        temp = temp.split(' ')
+            temp = re.sub("[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]", '', figure_data[y]).strip()
+            temp = temp.split(' ')
 
-                        if len(temp[1]) == 1:
-                            figure_list[x-1] = figure_data[y]
-                            break
+            try:
+                if (temp[0] == "그림" and int(temp[1]) == x) or (temp[0] == "Figure" and int(temp[1]) == x) or (temp[0] == "Fig" and int(temp[1]) == x):
+                    if len(figure_name[x-1]) > len(figure_data[y]):
+                        figure_name[x-1] = figure_data[y]
+                        figure_cnt[x-1] = figure_list[y]
+                        break
+            except:
+                pass
 
-    figure_temp = []
-    for y in range(len(figure_list)):
-        if figure_list[y] == "==================================================================================================================================================":
+    figure_temp1 = []
+    figure_temp2 = []
+    for y in range(len(figure_name)):
+        if figure_name[y] == "==================================================================================================================================================":
             break
-        figure_temp.append(figure_list[y])
+        figure_temp1.append(figure_name[y])
+        figure_temp2.append(figure_cnt[y])
+        # print(figure_name[y], figure_cnt[y])
+    figure_name = figure_temp1
+    figure_list = figure_temp2
 
-    return text_list2, textfont_list2, figure_temp
+    return text_list2, textfont_list2, figure_name, figure_list
 
 # PDF 파일을 텍스트 사이즈로 묶어주는 함수 (pdfminer 이용)
 def pdfgrap(text_list, textfont_list):
@@ -227,9 +335,9 @@ def pdfgrap(text_list, textfont_list):
 
             for x in range(1, len(text_list[y])):
                 if textfont_list[y][x-1] == textfont_list[y][x]:
-                    text_list2[len(text_list2)-1] += text_list[y][x]
+                    text_list2[len(text_list2)-1] += text_list[y][x].strip()
                 else:
-                    text_list2.append(text_list[y][x])
+                    text_list2.append(text_list[y][x].strip())
                     textfont_list2.append(textfont_list[y][x])
 
     return text_list2, textfont_list2
@@ -288,11 +396,11 @@ def pdfcutter(text_list, textfont_list, title_num, collect_loc):
             cnt = 0
 
         elif abs(textfont_list[y] - collect_loc) < 0.1 and isEnglishOrKorean(text_list[y]) != 'none' and cnt == 0:
-            text_list2.append(text_list[y])
+            text_list2.append(text_list[y].strip())
             textfont_list2.append(textfont_list[y])
             cnt = 1
         
         elif abs(textfont_list[y] - collect_loc) < 0.1 and isEnglishOrKorean(text_list[y]) != 'none' and cnt == 1:
-            text_list2[len(text_list2) - 1] += text_list[y]
+            text_list2[len(text_list2) - 1] += text_list[y].strip()
 
     return text_list2, textfont_list2

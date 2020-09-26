@@ -7,12 +7,11 @@ from mode_pdfconvert import pdfsort
 from mode_pdfconvert import pdfgrap
 from mode_pdfconvert import pdfcutter
 
-from mode_summarize import summarize_function
+from mode_summarize import lexlank_function
 from mode_summarize import keywords_function
 from mode_summarize import visualize_function
 
 from mode_crawling import crawling_setting
-from mode_imageconvert import printAllFile
 
 from hanspell import spell_checker
 
@@ -27,7 +26,7 @@ if __name__ == "__main__":
         exit()
 
     # PDF를 읽고, test_list를 가져오고, title을 가져오고, 띄어쓰기를 교정하며, 가장 많이 사용한 텍스트 크기를 반환한다.
-    text_list, textfont_list, textmiddle_list, title_num, title_data = pdfread(device, interpreter, pages)
+    text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list, textmiddle_average, textfont_average = pdfread(device, interpreter, pages)
     title_data = title_return(title_data).strip()
     # print(title_data)
 
@@ -39,17 +38,13 @@ if __name__ == "__main__":
         print("")
     except:
         link_data = -1
-
-    print("PDF 이미지 추출 중...")
-    printAllFile(PDFfileName)
-    print("PDF 이미지 추출 완료!")
-    print("")
+    
     text_list = list_return(text_list)
     collect_loc = maxsize_return(text_list, textfont_list)
     # print(collect_loc)
 
     # 다단 나누고, 같은 글자 크기끼리 리스트를 합친다.
-    text_list, textfont_list, figure_list = pdfsort(text_list, textfont_list, textmiddle_list)
+    text_list, textfont_list, figure_name, figure_list = pdfsort(text_list, textfont_list, textmiddle_list, textmiddle_average, textfont_average)
     text_list, textfont_list = pdfgrap(text_list, textfont_list)
     text_list, textfont_list = pdfcutter(text_list, textfont_list, title_num, collect_loc)
 
@@ -90,16 +85,41 @@ if __name__ == "__main__":
                 print_result += str(x) + " : " + content3[x] + "\n"
         print_result += "\n"
 
-        print_result += "참고 문헌\n"
-        for x in range(len(reference)):
-            print_result += reference[x] + "\n"
-        print_result += "\n"
+        if len(reference) > 0:
+            print_result += "참고 문헌\n"
+            for x in range(len(reference)):
+                print_result += reference[x] + "\n"
+            print_result += "\n"
 
-    if len(figure_list) > 0:
-        print_result += "그림\n"
-        for x in range(len(figure_list)):
-            print_result += figure_list[x] + "\n"
-        print_result += "\n"
+    # 그림 데이터를 정제한다.
+    figure_image_name = []
+    figure_image_src = []
+    if len(figure_name) > 0:
+        max_cnt = max(image_list)
+        max_list = []
+        count_list = []
+        for x in range(max_cnt+1):
+            max_list.append(image_list.count(x))
+            count_list.append(0)
+
+            if x >= 1:
+                max_list[x] += max_list[x-1]
+        # print(max_list)
+        # print(count_list)
+
+        for x in range(len(figure_name)):
+            if (count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1]) < max_list[figure_list[x]]:
+                if image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])].count('No Image') == 0:
+                    figure_image_name.append(figure_name[x])
+                    figure_image_src.append("images/" + image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])])
+                count_list[figure_list[x] - 1] += 1
+
+        if len(figure_image_name) > 0:
+            print_result += "그림\n"
+            for x in range(len(figure_image_name)):
+                print_result += figure_image_name[x] + " " + figure_image_src[x] + "\n"
+            print_result += "\n"
+
 
     print_result += "논문 내용\n"
     # 맞춤법을 교정한다.
@@ -120,18 +140,25 @@ if __name__ == "__main__":
     print("")
 
     # 요약서비스를 이용한다
-    summarize_data = summarize_function(final_result)
+    print("요약 서비스 시작!")
+    summarize_data = lexlank_function(final_result)
+    summarize_result = "본문 요약 (10줄)\n"
+    for x in range(len(summarize_data)):
+        summarize_result += summarize_data[x] + "\n\n"
+    print("요약 완료!")
+    print("")
 
     print("키워드 추출 시작!")
     summarize_tags = keywords_function(final_result)
     print(summarize_tags)
     visualize_function(summarize_tags)
     print("키워드 추출 완료!")
+    print("")
 
     fileOut = open('output1.txt', 'w', encoding='utf-8')
     print(print_result, file=fileOut)
     fileOut.close()
 
     fileOut = open('output2.txt', 'w', encoding='utf-8')
-    print(summarize_data, file=fileOut)
+    print(summarize_result, file=fileOut)
     fileOut.close()
