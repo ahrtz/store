@@ -158,4 +158,8 @@ dmypy.json
 pyvenv.cfg
 pip-selfcheck.json
 
+#=> VSCode
+.vscode/*
+!.vscode/settings.json
+
 # End of https://www.toptal.com/developers/gitignore/api/django,venv
