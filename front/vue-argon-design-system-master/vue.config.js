@@ -30,6 +30,7 @@ module.exports = {
         }
       }
     },
+    disableHostCheck: true,
     port: 8080
   }
 };
