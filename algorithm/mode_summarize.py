@@ -12,7 +12,6 @@ def summarize_function(result):
 def lexlank_function(result):
     # 참조 : https://wikidocs.net/72820
     # LexRank : https://github.com/theeluwin/lexrankr
-
     try:
         lexrank = LexRank()
         lexrank.summarize(result)

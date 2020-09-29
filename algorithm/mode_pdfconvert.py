@@ -15,8 +15,9 @@ from binascii import b2a_hex
 from mode_imageconvert import removeAllFile
 
 # 이미지 저장해주는 함수
-images_folder = './images'
-def save_image(lt_image):
+def save_image(lt_image, PDFpathName):
+    images_folder = 'images/' + PDFpathName
+
     """Try to save the image data from this LTImage object, and return the file name, if successful"""
     result = None
     if lt_image.stream:
@@ -101,9 +102,9 @@ def pdfopen(PDFfileName):
     return device, interpreter, pages
 
 # PDF 파일을 읽어주는 함수 (pdfminer 이용)
-def pdfread(device, interpreter, pages):
+def pdfread(device, interpreter, pages, PDFpathName):
     # 이미지 폴더 초기화
-    removeAllFile("images/")
+    removeAllFile("images/" + PDFpathName)
 
     text_list = []
     textfont_list = []
@@ -124,7 +125,7 @@ def pdfread(device, interpreter, pages):
     char_list = ""
 
     for page in pages:
-        print("PDF 파일 읽는 중.... " + str(cnt) + " page")
+        # print("PDF 파일 읽는 중.... " + str(cnt) + " page")
         interpreter.process_page(page)
         layout = device.get_result()
 
@@ -154,7 +155,7 @@ def pdfread(device, interpreter, pages):
             if isinstance(obj,LTFigure):
                 for ltimages in obj._objs:
                     if isinstance(ltimages, LTImage):
-                        result = save_image(ltimages)
+                        result = save_image(ltimages, PDFpathName)
                         if result:
                             image_name.append(result)
                         else:
@@ -184,8 +185,8 @@ def pdfread(device, interpreter, pages):
     else:
         textfont_average = 0
 
-    print("PDF 파일 로드 완료!")
-    print("")
+    # print("PDF 파일 로드 완료!")
+    # print("")
 
     return text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list, textmiddle_average/2, textfont_average, char_list
 
@@ -206,7 +207,7 @@ def title_return(title_data):
 
 # 띄어쓰기를 교정해주는 함수이다.
 def list_return(text_list):
-    print("띄어쓰기 교정 중...")
+    # print("띄어쓰기 교정 중...")
     for y in range(len(text_list)):
         for x in range(len(text_list[y])):
             temp = text_list[y][x].replace('\n', ' ')
@@ -216,8 +217,8 @@ def list_return(text_list):
                     break
                 temp = temp.replace('  ',' ')
             text_list[y][x] = temp
-    print("띄어쓰기 교정 완료!")
-    print("")
+    # print("띄어쓰기 교정 완료!")
+    # print("")
     return text_list
 
 # 가장 많이 쓰인 텍스트 사이즈를 반환해준다.
