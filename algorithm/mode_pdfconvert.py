@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*- 
 
-from pdfminer.layout import LAParams, LTTextBox, LTTextLine, LTTextBoxHorizontal, LTFigure
+from pdfminer.layout import LAParams, LTTextBox, LTTextLine, LTTextBoxHorizontal, LTFigure, LTImage, LTChar, LTLine
 from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.converter import PDFPageAggregator
@@ -120,6 +120,9 @@ def pdfread(device, interpreter, pages):
     cnt = 1
     image_name = []
     image_list = []
+
+    char_list = ""
+
     for page in pages:
         print("PDF 파일 읽는 중.... " + str(cnt) + " page")
         interpreter.process_page(page)
@@ -150,12 +153,16 @@ def pdfread(device, interpreter, pages):
 
             if isinstance(obj,LTFigure):
                 for ltimages in obj._objs:
-                    result = save_image(ltimages)
-                    if result:
-                        image_name.append(result)
-                    else:
-                        image_name.append("")
-                    image_list.append(cnt)
+                    if isinstance(ltimages, LTImage):
+                        result = save_image(ltimages)
+                        if result:
+                            image_name.append(result)
+                        else:
+                            image_name.append("")
+                        image_list.append(cnt)
+
+                    if isinstance(ltimages, LTChar):
+                        char_list += ltimages.get_text()
 
         text_list.append(temp)
         textfont_list.append(tempfont)
@@ -172,11 +179,15 @@ def pdfread(device, interpreter, pages):
     image_name = image_temp1
     image_list = image_temp2
 
-    textfont_average = int(textfont_average / textfont_cnt)
+    if textfont_cnt > 0:
+        textfont_average = int(textfont_average / textfont_cnt)
+    else:
+        textfont_average = 0
+
     print("PDF 파일 로드 완료!")
     print("")
 
-    return text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list, textmiddle_average/2, textfont_average
+    return text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list, textmiddle_average/2, textfont_average, char_list
 
 # 논문 Title을 찾고, 특수 문자를 제거해준다.
 def title_return(title_data):
