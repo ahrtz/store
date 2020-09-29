@@ -183,11 +183,11 @@ def mode_main():
     # print("키워드 추출 완료!")
     # print("")
 
-    fileOut = open('output1_' + PDFpathName +'.txt', 'w', encoding='utf-8')
+    fileOut = open('outputs/output1_' + PDFpathName +'.txt', 'w', encoding='utf-8')
     print(print_result, file=fileOut)
     fileOut.close()
 
-    fileOut = open('output2_' + PDFpathName +'.txt', 'w', encoding='utf-8')
+    fileOut = open('outputs/output2_' + PDFpathName +'.txt', 'w', encoding='utf-8')
     print(summarize_result, file=fileOut)
     fileOut.close()
     print("프로그램 완료! 종료하겠습니다.")

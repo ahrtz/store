@@ -1,3 +1,56 @@
+링크 : https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002214346
+
+논문 제목(한글) : 텍스트 마이닝 기법을 활용한 환경공간정보 연구 동향 분석
+
+논문 제목(영어) : Analysis of the Research Trends by Environmental Spatial-Information Using Text-Mining Technology
+
+피인용 횟수 : 5
+
+열람 횟수 : 129
+
+학술지 : 한국지리정보학회지
+
+논문정보 : 2017,vol.20,no.1,통권74호pp.113-126(14pages)
+
+발행기관 : 한국지리정보학회
+
+저자 정보
+0 : 오관영/ohkwanyoung(제1) (한국환경정책·평가연구원)
+1 : 이명진/LeeMoungJin(교신) (한국환경정책·평가연구원)
+2 : 박보영/ParkBoyoung(참여) (한국환경정책·평가연구원)
+3 : 이정호/JungHoLee(참여) (한국환경정책·평가연구원)
+4 : 윤정호/JeonghoYoon(참여) (한국환경정책·평가연구원)
+
+논문 초록
+본 연구의 목적은 빅데이터 분석 기법 중 하나인 텍스트 마이닝 기법을 활용하여 환경 분야의 환경공간정보 활용 연구 동향을 정량적으로 분석하는 것이다. 분석에 활용된 자료는 NDSL (National Digital Science Library)을 통하여 획득한 국내 논문으로 총 869편을 대상으로 하였다. 논문에서 추출된 단어들은 "환경일반", "기후", "대기", 등 환경 분야 10개, "위성영상", "수치지도", "재난재해" 등 환경공간정보 20개로 설정된 분류체계에 따라 재분류 되었다. 재분류된 분류 키워드를 통해, 논문에서 해당 키워드의 출현 빈도 및 시계열 변화를 파악하였으며, 상호 간 연관분석을 수행하였다. 첫째, 빈도 분석 결과 환경 분야에서는 "환경일반"(40.85%)이 환경공간정보에서는 "위성영상" (24. 87%)이 가장 높은 활용 빈도를 나타냈다. 둘째, 환경 분야에 대한 시계열 분석 결과 1996년부터 2000년까지는 "기후"에 대한 연구 비중이 높았으나, 2001년부터는 "환경일반"에 대한 연구가 증가하였다. 환경공간정보에서는 "위성영상"에 대한 수요가 전 기간에 걸쳐 가장 높았으며, 활용 비율 또한 점차적으로 증가하고 있었다. 셋째, 환경 분야와 환경공간정보에 대한 연관분석 결과 총 80개의 연관 규칙이 생성되었으며, 환경 분야 중 "환경일반"이 "위성영상", "전자지도" 등 총 17개의 환경공간정보와 가장 많은 수의 연관 규칙을 생성하였다.
+
+This study aimed to quantitatively analyze the trends in environmental research that utilize environmental geospatial information through text mining, one of the big data analysis technologies. The analysis was conducted on a total of 869 papers published in the Republic of Korea, which were collected from the National Digital Science Library (NDSL). On the basis of the classification scheme, the keywords extracted from the papers were recategorized into 10 environmental fields including "general environment", "climate", "air quality", and 20 environmental geospatial information fields including "satellite image", "numerical map", and "disaster". With the recategorized keywords, their frequency levels and time series changes in the collected papers were analyzed, as well as the association rules between keywords. First, the results of frequency analysis showed that "general environment"(40.85%) and "satellite image"(24.87%) had the highest frequency levels among environmental fields and environmental geospatial information fields, respectively. Second, the results of the time series analysis on environmental fields showed that the share of "climate" between 1996 and 2000 was high, but since 2001, that of "general environment" has increased. In terms of environmental geospatial information fields, the demand for "satellite image" was highest throughout the period analyzed, and its utilization share has also gradually increased. Third, a total of 80 correlation rules were generated for environmental fields and environmental geospatial information fields. Among environmental fields, "general environment" generated the highest number of correlation rules (17) with environmental geospatial information fields such as "satellite image" and "digital map".
+
+키워드
+0 : 텍스트 마이닝 (Text Mining)
+1 : 환경공간정보 (Environmental Geospatial Information)
+2 : 빈도 분석 (Frequency Analysis)
+3 : 시계열 분석 (Time Series Analysis)
+4 : 연관 분석 (Association Analysis)
+
+참고 문헌
+1. [학술지(정기간행물)] - 배규용 / 2013 / 텍스트 마이닝 기법을 활용한 기후변화관련 식품분야 논문초록 분석 / 한국데이터정보과학회지 24 (6) : 1429 ~ 1437
+2. [학술지(정기간행물)] - Cho, H. G. / 1998 / A study on circulation and management of spatial data / Journal of the Korean Association of Geographic Information Studies 1 (1) : 28 ~ 38
+3. [학술대회논문] - Feldman, R. / 1996 / Mining associations in text in the presence of background knowledge / Proceedings of the Second International Conference on Knowledge Discovery and Data Mining : 343 ~ 346
+4. [학술대회논문] - Feldman, R. / 1995 / Knowledge discovery in Textual Databases (KDT) / Proceedings of the First International Conference on Knowledge Discovery and Data Mining : 112 ~ 117
+5. [학술지(정기간행물)] - Hotho, A. / 2005 / A brief survey of text mining / A brief survey of text mining 20 (1) : 19 ~ 62
+6. [학술지(정기간행물)] - 김한준 / 2011 / 연관규칙 마이닝을 활용한 뉴스기사 키워드의 연관성 탐사 / 한국인터넷방송통신학회 논문지 11 (6) : 63 ~ 71
+7. [인터넷자원] - / / Korea National Spatial Data Infrastructure Portal
+8. [보고서] - Lee, M.S. / 2014 / Big data analysis on demands for environmental policies : 47 ~
+9. [학술지(정기간행물)] - 임시영 / 2014 / 텍스트마이닝 기술을 이용한 공간정보 분야의 연구 동향에 관한 고찰 -국가연구개발사업 보고서 및 논문을 중심으로- / Spatial Information Research 22 (4) : 11 ~ 20
+10. [학술지(정기간행물)] - 임시영 / 2014 / 텍스트마이닝 기법을 이용한 U-City와 Smart City의 연구 동향에 대한 분석 / 한국지형공간정보학회지 22 (3) : 87 ~ 97
+11. [인터넷자원] - / / Mindsinsight
+12. [인터넷자원] - / / NDSL(National Digital Science Library)
+13. [학술지(정기간행물)] - 사공호상 / 2007 / 내용분석 기법을 활용한 GIS관련 연구 동향 분석- 최근 14년(1993~2006) 간 학회지 투고논문을 중심으로 - / 한국지리정보학회지 10 (3) : 104 ~ 112
+14. [학술지(정기간행물)] - 신현식 / 2013 / 키워드 연결 관계를 통한 계량정보 분석 / 한국전자통신학회 논문지 8 (10) : 1467 ~ 1475
+15. [학술지(정기간행물)] - 오관영 / 2016 / 세분류 토지피복지도 분류체계 개선방안 연구 - 환경부 토지피복지도를 중심으로 - / 대한원격탐사학회지 32 (2) : 105 ~ 118
+16. [학술지(정기간행물)] - 윤희천 / 2010 / 지형공간정보를 활용한 수치영상기반의 다목적 재해정보지도 구축 / 한국지리정보학회지 13 (3) : 91 ~ 101
+
 논문 내용
 본 연구는 텍스트 마이닝 기법을 통해 환경 공간 정보의 환경 분야 활용에 대한 연구 동향을 파악하는 것이다.
  따라서 텍스트 마이닝 기법을 위한 연구 자료는 국내에서 발행된 연구논문을 대상으로 하는 것이 타당하다.
