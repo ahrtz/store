@@ -148,16 +148,43 @@ def maxsize_return(text_list, textfont_list):
 def pdfsort(text_list, textfont_list, textmiddle_list):
     text_list2 = []
     textfont_list2 = []
+    figure_data = []
+
     for y in range(len(text_list)):
         if len(text_list[y]) > 0:
             temp_list = []
             tempfont_list = []
+
+            refer_location = -1
+            refer_text = ""
+            refer_font = 0.0
+
             for x in range(len(text_list[y])):
-                if textmiddle_list[y][x] <= 280:
+                if text_list[y][x].count('Figure') and text_list[y][x].find('Figure') < 3:
+                    figure_data.append(text_list[y][x])
+                elif text_list[y][x].count('그림') and text_list[y][x].find('그림') < 3:
+                    figure_data.append(text_list[y][x])
+                
+            for x in range(len(text_list[y])):
+                if textmiddle_list[y][x] <= 272:
+                    # 참고문헌 뒤 삭제
+                    temp = text_list[y][x].replace(' ', '')
+                    temp = re.sub("[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]", '', temp)
+
+                    if temp == '참고문헌' or temp == 'Reference' or temp == 'reference':
+                        refer_location = x
+                        refer_text = text_list[y][x]
+                        refer_font = textfont_list[y][x]
+                        break
+
                     temp_list.append(text_list[y][x])
                     tempfont_list.append(textfont_list[y][x])
 
             for x in range(len(text_list[y])):
+                if refer_location == x:
+                    temp_list.append(refer_text)
+                    tempfont_list.append(refer_font)
+
                 if textmiddle_list[y][x] > 280:
                     temp_list.append(text_list[y][x])
                     tempfont_list.append(textfont_list[y][x])
@@ -165,7 +192,29 @@ def pdfsort(text_list, textfont_list, textmiddle_list):
             text_list2.append(temp_list)
             textfont_list2.append(tempfont_list)
 
-    return text_list2, textfont_list2
+    figure_list = []
+    for y in range(len(figure_data)):
+        figure_list.append("==================================================================================================================================================")
+
+    for y in range(len(figure_data)):
+        for x in range(1, len(figure_data)+1):
+            if figure_data[y].count('Figure ' + str(x)) or figure_data[y].count('그림 ' + str(x)):
+                if figure_data[y].count('Figure') == 1 or figure_data[y].count('그림') == 1:
+                    if len(figure_list[x-1]) > len(figure_data[y]):
+                        temp = re.sub("[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]", '', figure_data[y])
+                        temp = temp.split(' ')
+
+                        if len(temp[1]) == 1:
+                            figure_list[x-1] = figure_data[y]
+                            break
+
+    figure_temp = []
+    for y in range(len(figure_list)):
+        if figure_list[y] == "==================================================================================================================================================":
+            break
+        figure_temp.append(figure_list[y])
+
+    return text_list2, textfont_list2, figure_temp
 
 # PDF 파일을 텍스트 사이즈로 묶어주는 함수 (pdfminer 이용)
 def pdfgrap(text_list, textfont_list):

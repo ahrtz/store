@@ -71,6 +71,14 @@ def make_scrap(request,report_id):
         return Response(serializer.data)
     return HttpResponse(status = 404)
 
+@api_view(['POST'])
+def delete_scrap(request,scrap_id):
+    scrap = get_object_or_404(Scraps,id=scrap_id)
+    scrap.delete()
+    return HttpResponse(status=200)
+
+
+
 @api_view(['GET'])
 def searchtitle(request,keyword): # 제목
     translator=Translator()

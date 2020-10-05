@@ -5,33 +5,42 @@ import time
 import requests
 # from urllib.request import urlopen
 import xml.etree.ElementTree as ET
+from fake_useragent import UserAgent
+
+
+
 
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
 import django
 django.setup()
 from reports.models import Summary_report
-
-
-DOWNLAD_PATH = "C:/Users/multicampus/Downloads/"
+from webdriver_manager.chrome import ChromeDriverManager
+ua = UserAgent()
+driver = webdriver.Chrome(ChromeDriverManager().install())
+DOWNLAD_PATH = "C:/Users/ahrtz/Downloads/"
 
 def crawler_thesis_chk_setting(start, end):
     """
     kci checkbox setting
     :return:
     """
-    path = "F://Install/chromedriver_win32/chromedriver"
-    driver = webdriver.Chrome(path)
+    # path = "F://Install/chromedriver_win32/chromedriver"
+    # driver = webdriver.Chrome(path)
 
     url = "https://www.kci.go.kr/kciportal/po/member/popup/loginForm.kci"
+    headers = {
+    'User-Agent': ua.random,
+}
+
     driver.get(url)
     driver.implicitly_wait(10)
 
     # 로그인 => 추후에 id, pw 지우기
     login = driver.find_element_by_name("uid")
-    login.send_keys("ksb0925")
+    login.send_keys("ahrtzzinn")
     login = driver.find_element_by_name("upw")
-    login.send_keys("30286450")
+    login.send_keys("Kingtop11-")
     login.send_keys('\n')
 
     #
@@ -82,11 +91,11 @@ def crawler_thesis_chk_setting(start, end):
         driver.execute_script("lf_exceldown()")
         time.sleep(10)
         print(i)
-
+    driver.close()
 
 def extract_abstract_using_selenium():
-    path = "F://Install/chromedriver_win32/chromedriver"
-    driver = webdriver.Chrome(path)
+    # path = "F://Install/chromedriver_win32/chromedriver"
+    # driver = webdriver.Chrome(path)
 
     url = "https://www.kci.go.kr/kciportal/po/member/popup/loginForm.kci"
     driver.get(url)
@@ -154,6 +163,7 @@ def extract_abstract_using_selenium():
 
 def extract_abstract_using_openAPI(start, end):
     # i: excel 번호
+    print('api 시작')
     for i in range(start, end):
         rb = xlrd.open_workbook(DOWNLAD_PATH + "논문검색리스트Excel (" + str(i) + ").xls")
         rb_sheet = rb.sheet_by_index(0)
@@ -241,7 +251,7 @@ def extract_abstract_using_openAPI(start, end):
 
 import sqlite3
 import pandas as pd
-DATA_DIR = 'F:/SSAFY/BigDataPJT/LAST/s03p23a406/data/sbk'
+DATA_DIR = 'C:/ssafy 2nd/reports-tmp/backend'
 DUMP_FILE_EN = os.path.join(DATA_DIR, "abstract_en.pkl")
 DUMP_FILE_KO = os.path.join(DATA_DIR, "abstract_ko.pkl")
 def sqlite_to_pandas():
@@ -275,6 +285,7 @@ def isEnglishOrKorean(input):
     return True
 
 if __name__ == '__main__':
-    # crawler_thesis_chk_setting(26, 27)    # 시작 페이지, 끝페이지
-    extract_abstract_using_openAPI(26, 31)    # 시작 엑셀번호, 끝 엑셀번호
+    # crawler_thesis_chk_setting(251, 258)    # 시작 페이지, 끝페이지
+    # crawler_thesis_chk_setting(31, 257)    # 시작 페이지, 끝페이지
+    extract_abstract_using_openAPI(1, 8)    # 시작 엑셀번호, 끝 엑셀번호
     # sqlite_to_pandas()

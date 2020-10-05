@@ -34,4 +34,4 @@ def visualize_function(summarize_tags):
         max_font_size=300)
 
     wc.generate_from_frequencies(dict(summarize_tags))
-    wc.to_file('wordcloud.png')
+    wc.to_file('images/wordcloud.png')
