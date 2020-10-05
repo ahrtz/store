@@ -16,7 +16,7 @@
                         :disabled="selectedList.length >= 3 && selectedList.indexOf(topic.id) == -1"
                     >
                     <label style="margin-left: 10px">
-                        {{ topic.sub_category }}
+                        {{ topic.main_category }}
                     </label>
                 </div>
                 <h5>공학</h5>
@@ -32,7 +32,7 @@
                         :disabled="selectedList.length >= 3 && selectedList.indexOf(topic.id) == -1"
                     >
                     <label style="margin-left: 10px">
-                        {{ topic.sub_category }}
+                        {{ topic.main_category }}
                     </label>
                 </div>
                 <base-alert type="danger" v-if="errors[0]">
@@ -41,6 +41,7 @@
             </validation-provider>
             <footer>
                 <base-button type="primary" :disabled="invalid" @click="onSubmit">등록</base-button>
+                <base-button type="primary" v-if="insmod" @click="closeModal()">닫기</base-button>
             </footer>
         </validation-observer>
     </div>
@@ -91,6 +92,9 @@ export default {
         }
     },
     methods: {
+        closeModal() {
+            this.$emit('closemodal')
+        },
         async onSubmit() {
             var favoritesList = []
             for (var i in this.selectedList) {
@@ -103,7 +107,7 @@ export default {
             if (this.insmod == false && success == true) {
                 this.insmod = true
             }
-            this.$emit('closemodal')
+            this.closeModal()
         },
         changeSelection(val) {
             if (this.$store.getters.getIsAuth == true) {
@@ -129,10 +133,10 @@ export default {
     created() {
         this.$axios.get('/api/favorites/').then(response => {
             for (var i in response.data) {
-                if (i < 14) {
+                if (response.data[i].sub_category == "자연과학") {
                     this.priorityList.nature.push(response.data[i])
                 }
-                else {
+                else if (response.data[i].sub_category == "공학") {
                     this.priorityList.engineering.push(response.data[i])
                 }
             }

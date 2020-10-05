@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
-import time
 
 # Selenium Setting
 def crawling_setting(title_data):
@@ -18,7 +17,8 @@ def crawling_setting(title_data):
         login.send_keys("ksb0925")
         login = driver.find_element_by_name("upw")
         login.send_keys("30286450")
-        login.send_keys('\n')
+        login = driver.find_element_by_xpath("//input[@type='image']")
+        login.click()
 
         text = driver.find_element_by_id("mainSearchKeyword")
         text.send_keys(title_data)
