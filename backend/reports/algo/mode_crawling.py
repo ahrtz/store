@@ -3,11 +3,15 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import re
 from googletrans import Translator
+import time
+from django.conf import settings
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 # Selenium Setting
 def crawling_setting(title_data):
     try:
-        chromedriver = 'chromedriver.exe'
+        chromedriver = webdriver.Chrome(ChromeDriverManager().install())
         driver = webdriver.Chrome(chromedriver)
 
         url = "https://www.kci.go.kr/kciportal/po/member/popup/loginForm.kci"

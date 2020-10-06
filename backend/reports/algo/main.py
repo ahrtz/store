@@ -24,13 +24,13 @@ import sys
 import time
 import threading
 import os
-from django.conf import settings
+
 from django.conf import settings
 from django.conf.urls.static import static
 # if __name__ == "__main__":
 def getpdf(filename):
     # print("텍스트 파일을 추출할 PDF 파일명을 입력하세요.")
-    tmp3 = settings.BASE_DIR / 'reports/algo/documents'/filename
+    tmp3 = settings.BASE_DIR / 'reports/images'/filename
     # PDFfileName = 'documents/' + input() + '.pdf'
 
     # PDF를 열고, interpreter, pages 변수를 가져온다.
@@ -46,6 +46,7 @@ def getpdf(filename):
 
     translator = Translator()
     translator_cnt = 0
+    print(char_list,'$#@')
     if len(char_list) > 0:
         # print("논문 형식에 따라, 논문 전체 내용을 요약합니다.")
 
@@ -161,7 +162,7 @@ def getpdf(filename):
                 if (count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1]) < max_list[figure_list[x]]:
                     if image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])].count('No Image') == 0:
                         figure_image_name.append(figure_name[x])
-                        figure_image_src.append("images/" + image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])])
+                        figure_image_src.append("reports/algo/images/" + image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])])
                     count_list[figure_list[x] - 1] += 1
 
             if len(figure_image_name) > 0:
@@ -252,6 +253,10 @@ def getpdf(filename):
     # visualize_function(PDFpathName, summarize_tags)
     # print("키워드 추출 완료!")
     # print("")
+    output_name='res'+filename +'.txt'
+    fileIn = open(settings.BASE_DIR / 'reports/algo/outputs'/ output_name, 'wt', encoding='utf-8')
+    print(print_result, file=fileIn)
+    fileIn.close()
 
     output1_name='final_'+filename +'.txt'
     fileOut = open(settings.BASE_DIR / 'reports/algo/outputs'/ output1_name, 'wt', encoding='utf-8')
@@ -282,17 +287,22 @@ def main_crawling(filename):
     thread.start()
     # abstract_short = (thread.result())
 
+
+
     output1_name='final_'+filename +'.txt'
     fileIn = open(settings.BASE_DIR / 'reports/algo/outputs'/ output1_name, 'rt', encoding='utf-8')
     abstract_long= fileIn.read()
+    fileIn.close()
 
     output2_name='summarize_'+filename +'.txt'
     fileIn = open(settings.BASE_DIR / 'reports/algo/outputs'/ output2_name, 'rt', encoding='utf-8')
     abstract_short = fileIn.read()
+    fileIn.close()
     
     output3_name='tag_'+filename +'.txt'
     fileIn = open(settings.BASE_DIR / 'reports/algo/outputs'/ output3_name, 'rt', encoding='utf-8')
     key = fileIn.read()
+    fileIn.close()
     
     # abstract_long,abstract_short,key=thread.join()
     return abstract_long,abstract_short,key

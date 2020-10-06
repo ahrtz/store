@@ -10,7 +10,7 @@ import sqlite3
 from sklearn.metrics.pairwise import cosine_similarity
 
 # 아이템 기반 협업 필터링(item based collaborative filtering)
-def get_item_based_collabor(subject):
+def get_item_based_collabor(subject):  ## 이건 스크랩 별로 없어도
     ## scrap: 장고 dbsql 접근
     con = sqlite3.connect("./db.sqlite3")
     cur = con.cursor()
@@ -44,7 +44,7 @@ def get_item_based_collabor(subject):
 
 # 잠재 요인(latent factor)기반 - 협업 필터링 Matrix Factorization
 # 개인에게 맞춤형이 추천이 아닌, 특정 논문과 비슷한 논문 추천
-def get_matrix_factorization(title):
+def get_matrix_factorization(title): # 이거 사용하는걸로 대신 스크랩 많아야 된다
     ## scrap: 장고 dbsql 접근
     con = sqlite3.connect("./db.sqlite3")
     cur = con.cursor()

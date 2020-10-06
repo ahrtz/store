@@ -128,12 +128,12 @@ def pdfread(device, interpreter, pages, PDFpathName):
         # print("PDF 파일 읽는 중.... " + str(cnt) + " page")
         interpreter.process_page(page)
         layout = device.get_result()
-
         temp = []
         tempfont = []
         tempmiddle = []
 
         for obj in layout:
+            # print(obj)
             if isinstance(obj, LTTextBox):
                 for lobj in obj:
                     if isinstance(lobj,LTTextLine):
