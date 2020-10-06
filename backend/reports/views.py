@@ -1,7 +1,9 @@
+from rest_framework import serializers
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 from rest_framework.viewsets import ModelViewSet
 from .models import Reports,Scraps,Summary_report
 from .serializers import ReportsSerializers,ScrapsSerializers,ReportsListSerializers
+# ImageSerializer
 from reports.algo  import main
 from django.http import HttpResponse
 from rest_framework.response import Response
@@ -9,7 +11,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import api_view
 from googletrans import Translator
-
+import os
+from django.conf import settings
 
 class FileUploadViewSet(ModelViewSet):
     permission_classes = []
@@ -24,7 +27,7 @@ class FileUploadViewSet(ModelViewSet):
                        abstract_long='',abstract_short='',
                        key=''
                        )
-        abstract_long,abstract_short,key=main.getpdf(str(self.request.data['datafile']))
+        abstract_long,abstract_short,key=main.main_crawling(str(self.request.data['datafile']))
         serializer.save(
                        datafile=self.request.data.get('datafile'),
                        abstract_long=abstract_long,abstract_short=abstract_short,
@@ -71,6 +74,14 @@ def make_scrap(request,report_id):
         return Response(serializer.data)
     return HttpResponse(status = 404)
 
+@api_view(['POST'])
+def delete_scrap(request,scrap_id):
+    scrap = get_object_or_404(Scraps,summary_id=scrap_id)
+    scrap.delete()
+    return HttpResponse(status=200)
+
+
+
 @api_view(['GET'])
 def searchtitle(request,keyword): # 제목
     translator=Translator()
@@ -91,3 +102,12 @@ def searchkeyword(request,keyword):
     page = paginator.paginate_queryset(report, request)
     serializer = ReportsListSerializers(page,many=True)
     return paginator.get_paginated_response(serializer.data)
+
+
+@api_view(['GET'])
+def getimage(request,name):
+    path_dir = str(settings.BASE_DIR / 'images'/ name)
+    file_list = os.listdir(path_dir)
+    # serializer = ImageSerializer(path_dir=path_dir,images_id=file_list)
+    # print(path_dir,file_list)
+    return Response({'path':path_dir,'img_list':file_list},status=200)

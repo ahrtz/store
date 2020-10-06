@@ -1,3 +1,4 @@
+from django.db.models.fields import files
 from rest_framework import serializers
 from .models import Reports,Scraps,Summary_report
 from accounts.serializers import UserSerializer
@@ -21,3 +22,4 @@ class ScrapsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Scraps
         fields='__all__'
+
