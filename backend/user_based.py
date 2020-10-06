@@ -27,7 +27,7 @@ def get_item_based_collabor(subject):
     # print(paper_data)
 
     user_scrap_paper = pd.merge(scrap_data, paper_data, on='summary_id')
-    print("1",user_scrap_paper)
+    print("1",user_scrap_paper) 
 
     scrap_user_paper = user_scrap_paper.pivot_table('rating', index='title_kor', columns='user_id')
     user_scrap_paper = user_scrap_paper.pivot_table('rating', index='user_id', columns='title_kor')
@@ -79,6 +79,7 @@ def get_matrix_factorization(title):
     
     paper_title = user_scrap_paper.columns
     paper_title_list = list(paper_title)
+    # title로 바껴야함
     coffey_hands = paper_title_list.index('Bio-EPDM/tungsten oxide nanocomposite foam with improved thermal storage and sea water resistance')
     corr_coffey_hands = corr[coffey_hands]
     print(list(paper_title[(corr_coffey_hands >= 0.9)])[:50])
