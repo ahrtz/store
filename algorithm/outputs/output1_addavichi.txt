@@ -1,0 +1,144 @@
+링크 : https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002542344
+
+논문 제목(한글) : 빅데이터 분석을 활용한 가짜 리뷰 필터링 시스템 ADDAVICHI
+
+논문 제목(영어) : Development of Filtering System ADDAVICHI for Fake Reviews using Big Data Analysis
+
+피인용 횟수 : 0
+
+열람 횟수 : 161
+
+학술지 : 한국인터넷방송통신학회논문지
+
+논문정보 : 2019,vol.19,no.6,pp.1-8(8pages)
+
+발행기관 : 한국인터넷방송통신학회
+
+저자 정보
+0 : 정다비치/DavichiJeong(제1) (한국산업기술대학교)
+1 : 노영주/RhoYoungJu(교신) (한국산업기술대학교)
+
+논문 초록
+최근 ‘바이럴 마케팅’ 으로 인해서 홍보에만 치중하는 블로그 게시물 등으로 인해 소비자의 불신이 깊어졌다.
+또한, 이용후기를 거짓으로 작성하거나, 과장 확대하는 등의 마케팅 사업은 신문이나 TV 광고에 비해 가격이 저렴하면서도 효과가 커 각광받는 사업 중 하나로서 광고비 규모는 2016년 기준 ‘3조 3941억’으로 주요 광고수단으로 자리잡고있다. 이러한 ‘바이럴 마케팅’으로부터 정보를 걸러주는 도구가 필요한 인터넷 환경이 되었다. 본 논문에서 제시하는 가짜리뷰 필터링 어플리케이션 ADDAVICHI는 사용자가 ‘이벤트’, ‘맛집’ 등의 컨텐츠를 검색하면 블로그 키워등, 총 검색수, 신뢰도, 만족도 등을 추출하고 분석하여 제시한다. 신뢰도는 블로그에 있는 광고게시물 수와, 전체 게시물 수를 보여주고, 만족도는 신뢰도에서 걸러진 청정 게시물을 긍정 게시물과 부정게시물로 나눠서 보여준다. 마지막으로 키워드는긍정 게시물에서 나온 리뷰 상위 세 단어 리스트를 보여준다. 이러한 방법으로 사용자가 광고 글로부터 벗어나서 정보를해석할 수 있도록 지원한다.
+
+Recently, consumer distrust has deepened due to blog posts focusing only on public relations due to 'viral marketing'. In addition, marketing projects such as false writing or exaggerated use of the latter phase are one of the most popular programs in 2016 as they are cheaper and more effective than newspaper and TV ads, and the size of advertising costs is set to be a major means of advertising at '3 trillion 394.1 billion won. From this 'viral marketing,' it has become an Internet environment that needs tools to filter information. The fake review filtering application ADDAVICHI presented in this paper extracts, analyzes, and presents blog keywords, total number of searches, reliability and satisfaction when users search for content such as "event" and "taste restaurant." Reliability shows the number of ad posts on a blog, the total number of posts, and satisfaction shows a clean post with confidence divided into positive and negative posts. Finally, the keyword shows a list of the top three words in the review from a positive post. In this way, it helps users interpret information away from advertising.
+
+키워드
+0 : Mobile
+1 : text mining
+2 : significant advertising review
+3 : content positive/negative
+
+참고 문헌
+1. [인터넷자원] - / / Viral Marketing / Wikipedia
+2. [인터넷자원] - / / Advertising industry in 2016, 15 trillion 189.7 billion won / Newswatch
+3. [학술지(정기간행물)] - 장재영 / 2013 / 텍스트 마이닝을 위한 그래프 기반 텍스트 표현 모델의 연구 동향 / 한국인터넷방송통신학회 논문지 13 (5) : 37 ~ 47
+4. [인터넷자원] - / / [famous restaurant, uncomfortable truth]Unreliable online restaurant recommendation. “Customer deception” vs “information provision” / heraldcorp
+5. [인터넷자원] - / / Bidirectional recurrent neural networks
+6. [인터넷자원] - / / KoNLPy: Korean NLP in Python / KoNLPy.org
+7. [인터넷자원] - / / Beautiful Soup, Beautiful Soup Documentation
+8. [인터넷자원] - / / Word2vec / Wikipedia
+9. [인터넷자원] - Minsub Won / / A Study on the Sentiment Analysis of Film Review Using BiLSTM, GitHub Project Documents
+10. [인터넷자원] - / / Softmax function / Wikipedia
+11. [인터넷자원] - / / TensorFlow / Wikipedia
+12. [인터넷자원] - / / Radim Řehůřek, Gensim / Wikipedia
+13. [인터넷자원] - / / Introduction to Python's Collections Module, Stacj Abuse
+14. [인터넷자원] - / / Seleniu, SeleniumHQ
+15. [인터넷자원] - / / OSS Project hanNanum / Semamtic Web Research Center
+16. [인터넷자원] - / / kkma Project / Seoul National University IDS Laboratory
+17. [인터넷자원] - Yong Woon Lee / / A bunch of silver coins Project
+18. [학술대회논문] - S. Baccianella / 2010 / Sentiwordnet 3.0:an enhanced lexical resource for sentiment analysis and opinion mining / Proceedings of the Seventh International Conference on Language Resources and Evaluation (LREC 2010)
+19. [인터넷자원] - / / Web crawler / Wikipedia
+20. [인터넷자원] - / / DiningCode,. Home Page
+21. [학술대회논문] - Ga-ram Kim / 2017 / Utilization Plan of Graph-based Text Representation Model for Text Mining / Proceedings of KIIT Conference : 432 ~ 433
+22. [학술지(정기간행물)] - 조은숙 / 2016 / 모바일 앱의 성능향상을 위한 커스터마이제이션 방안 / 한국산학기술학회논문지 17 (11) : 208 ~ 213
+
+그림
+그림 1. 파이썬을 이용한 네이버 웹 크롤링 코드 예  images/Im1.jpg
+그림 2. BiLSTM 모델 구조도  images/Im2.jpg
+그림 4. 데이터 형태소 분석 파이프라인  images/Im4.jpg
+그림 8. 어플리케이션 시작 화면과 아이콘 화면  images/Im9.jpg
+그림 10. 검색 화면 1  images/Im11.jpg
+그림 11. 검색 화면 예2  images/Im12.jpg
+그림 13. 시스템 구성도 2  images/Im18.jpg
+
+논문 내용
+바이럴 마케팅(viral marketing)이란 위키피디아(wikipedia)에서는 소셜미디어, 이메일 등 매체를 통해이러한 경향으로 저렴하고 효과가 큰 주요 마케팅 방법 대중이 자발적으로 메시지를 퍼트리는 마케팅 방법으로 이럴 마케팅 업체가 성행함에 따라 검색어나 블로그, 카페는 물론이고 유명 소셜 네트워크 (SNS) 등에서도 순수하게 관련 정보를 제공하는 듯한 페이지를 운영하며 홍보효과를 극대화하려는 방식을 활용하고 있다.
+ 하지만 바이럴 마케팅의 경우 홍보에만 치중하다 보니 이용후기를 거짓으로 작성하거나 과장, 확대하는 경우도 많은 것으로 알려졌다.
+ 신문이나 TV 광고에 비해 가격이 저렴하면서도 효과는 더 크다 보니 홍보수단으로 각광받고 있다.
+별 광고비 규모는 ‘3조 3941억’으로 매우 높고, 매체별 개별로 가게 되면 온라인 광고 수익이 가장 높게 나타나고 있다.
+ 또한 ㈜ 애드픽네트워크 관계자는 2017년에 비해 2018년 바이럴 마케팅 광고비가 더욱더 많아질 것이라 예측했다.
+ 현재는 어린 10대 층만이 이러한 것에 영향을 미치는 것이 아닌, 20대 ~ 50대 연령까지 바이럴 마케팅을 통해 소비가 이루어지는 경향이 있다.
+으로 바이럴 마케팅이 활용되고 있으며, 이와 함께 이용후기를 거짓 작성하거나 과장 확대하는 등의 방법이 늘어나 이용 소비자의 불신도 함께 깊어지고 있다.
+본 논문에서는 소비자 불신을 개선하기 위한 방법으로 ADDAVICH 시스템 연구개발을 진행하였다.
+ 텍스트 마 ADDAVICH에서는 웹 그 롤링을 이용하여 수집한 블로여 블로그 총 검색 수, 신뢰도, 만족도, 키워드를 추출하고 분석하여 제시하는 방법을 적용하였다.
+ 웹 그 롤링은 Web 인덱싱을 체계적으로 하는 browser라고 할 수 있으며, 각 웹 검색기에서 대표적으로 사용된 기 위한 웹 크롤리에서는 Python 라이브러리를 통해 임베딩 벡터로 변환되고, 다시 안드로이드 시스템에서 사용할 수 있는 PHP 화면으로 변환하는 밥법의 사용된다 (그림 1 참조).
+ 텍스트 감성분석은 그림 2와 같이 BRNN인 BiLSTM(bidirectional long short-term memory) 모델을 이용하는 방법이 Doc2Vec Logistic Regression이나 Term-existance Naive Bayes 보다 상대적으로 BiLSTM 감성분석은 정답이 있는 네이버 리뷰 데이터 15만 건에 대해서 품사 태깅 하고, 태깅 한 단어들에 대해 Word2Vec을 이용해 학습시켜 임베딩 벡터로 변환한다.
+그리고 단어 벡터들을 BilSTM에 넣어서 양쪽 끝 state 들를 이용해 분류한다.
+패키지들을 이용해서 네이버 블로그 글에 대한 긍정/부정 분석을 하고, 이를 통해 청정 게시글에 대한 신뢰도 분석이 가능하다.
+ KoNLPy는 한국어 자연어 처리를 위한 Python 패키 KoNLPy의 Twitter 객체에서 nouns 함수를 통해서 text에서 명사만 분리/추출하며, 객체 안의 명사 중 빈도수 별로 정렬하여, 큰 명사부터 순서대로 입력받은 정수 개수만큼 저장되어있는 객체를 반환한다.
+ 이를 통해 청정 게시글에 대한 상위 키워드를 추출한다.
+ 광고 필터링은 네이버 블로그 상의 정보를 기준으로 이루어진다.
+ 네이버 블로그 상의 정보 중에서 필요한 정보는 콘텐츠 관련 다른 게시물 수, 콘텐츠 관련 사진 수, 후원, 무료, 광고, 업체, 제공 등의 어휘 사용, 콘텐츠 관련 글 내용 등의 내용을 종합시켜 해당 블로그의 정보를 판단한다.
+ 이를 통해 광고 게시글 또는 청정 게시글에 대한 정보를 얻는다.
+ 네이버나 다음에서 제공하는 리뷰 페이지는 다음 페이지를 넘기기 위해 웹 브라우저 상의 액션이 이루어져야 모든 리뷰 목록을 볼 수 있다.
+ 이러한 액션을 자동으로 Python 환경에서 수행되며 상품 URL을 통해 웹 브라우저를 실행시키고 상품 리뷰를 수집한다.
+이렇게 크롤리 한 리뷰는 한 나눔 형태소 분석기 파이프라인 구조를 이용하여 형태소 분석을 수행한다.
+ 한글의 형태소 분석은 음소로부터 문장까지 그림 3과 같은 구조로 이루어진다.
+ 형태소 분석기에는 한 나눔 형태 있으나 한 나눔 형태소 분석기를 적용하였다.
+한 나눔 분석기는 그림 4와 같이 차트 기반의 형태소 분석 기법을 사용하고 있으며, v0.
+8.
+4 버전 기준으로 데이터는 총 언어자원은행에 등록된 기준으로 69개의 문서에 포함된 총 56,339개의 문장, 768,708개 어절이 있으며 품사 정확도는 89%이다.
+ 한 나눔 형태소 분석기는 HMM(Hidden MarkovModel) 기반의 품사 태깅 방식을 채용하고 있으며, 그림 5는 8가지 품사 패턴 구조와 패턴의 추출 예시를 담고 있다.
+ 패턴 추출 과정은 상품의 특징 단어를 기준으로±2 위치의 단어를 가져오는데, 여기서 상품의 특징 단어는 상품의 가격, 디자인 등이 될 수 있다.
+ 가져온 단어를 8가지 패턴과 비교하여 8가지 패턴에 해당한다면 감정 분석 과정으로 넘어간다.
+ 추출된 패턴에 포함하는 감정 어가 긍정, 부정, 중립 중에서 어떤 의미인 지를 판별하기 위해 감정의 사전을 사용한다.
+ 감정의 사전의 구축은 영어권에서 대표적 감성 사감 정어 사전은 긍정적 의미인 경우 1점, 부정적 의미인 경우 –1점을 두었으며, 중립적인 경우 0점을 부여한다.
+ 그림 6은 긍정 어휘 추출 예를 보여준다.
+ SWN에 수록된 어휘는 총 117,659 개이다.
+ 이 중에서 긍정 및 부정 수치를 각각 0.
+5를 기준으로 하여 그 이상인 단어들만 추출한다면, 감성 어휘는 대략 13,000 개 정도 나오게 되는데 이 어휘를 구글 번역기를 이용해 번역하고, 중복 제거해 대략 9,000 개 정도의 감성 어휘 목록을 선별할 수 있게 된다.
+ 그림 7은 구글 번역기의 문제점을 해결하기 위해 마련한 극성, 품사 정보 재정의 자료이다.
+ 그림 7에서 첫 번째 그림은 강한 긍정 / 긍정 / 중립/ 부정 / 강한 부정 / 상대 극성 / 강한 상대 극성의 7가지로 나눈다.
+ 두 번째 그림은 명사 / 형용사 / 동사 / 부사/ 여러 단어 및 구의 5가지 품사 정보로 나눈다.
+이렇게 감성 어휘를 재정의해서 구분하게 되면, 표 1에서와 같이 총 3,665개의 감성사전 규모가 된다.
+네이버 블로그, 다음 티스토리 상에는 포스트 된 수, 팔로워 된 수 등의 정보가 제공된다.
+ 이러한 정보와, 다음과 같은 여러 정보를 종합해 일차적으로 가중치를 부여 광고성 블로그 글은 댓글과 블로거 사이의 관계 등을 파악해 신뢰성과 명성을 수치화할 수 있다.
+ 여기서 광고성 블로그는 이 수치가 떨어지면서 자연스럽게 가중치가 낮아지게 되는데, 예를 들면, 옛날에 쓴 글을 지운 뒤 다시 쓰는 것을 반복한다던가, 댓글 부대를 동원하는 것도 광고성 블로그를 판별하는 기준 중 하나이다.
+ 실제 다이 기법을 사용하여 광고성 블로그를 필터링한다.
+추가적인 필터링 방법으로는 “이 블로그 글은 무료로 제품을 제공받고 쓰는 제품입니다”라는 글 형식의 블로그나, 추천인 아이디를 마지막에 써서 사용자를 유도하는 형식의 글은 필터링을 한다.
+ 또한 지나친 고화질의 사진, 같은 단어의 반복 등의 패턴에서도 광고성 리뷰를 찾는다.
+ ADDAVICH 시스템은 그림 8과 같은 시작 화면과 아이콘으로 시작한다.
+본 논문에서 소개하는 애플리케이션은 사용자가 ‘플러그인’이나 ‘다른 애플리케이션’을 통해 들어가는 것이 아니라 직접 애플리케이션에 들어가서 사용해야 한다.
+ 향후 WEB 버전도 개발 예정이나, 본 논문에서는 어플 니케이 그림 9에서 보이는 ‘검색 창’을 이용하여 원하는 콘텐츠를 검색할 수 있으며, 홈 버튼을 누르면 초기화 상태로 돌아간다.
+ 그림 10, 11은 검색 화면 예시를 보여준다.
+회원가입 중에는 중복 제한 기능이 있다.
+ 또한 아이디 체크가 완료되면 아이디를 수정할 수 없다.
+ 화면은 로그인 화면, 회원 가입 화면으로 나누어진다.
+회원가입 화면을 누를 시 회원가입 창으로 나누어지며, 로그인 이후에는 어플을 종료했다 다시 로그인해도 자동 로그인 처리가 된다.
+본 논문의 애플리케이션에서 처음 검색을 하면, 긍정/ 부정 / 광고 이미지가 표시되는 대신, 로딩 이미지가 표시된다.
+ 또한 신뢰도 / 만족도 / 키워드 역시 빈칸으로 나오게 된다.
+ 처리가 완료되면 표출되는 방식이다.
+현재는 네이버 블로그 게시글로만 검색을 진행했다.
+화면을 설명하자면, 처음 부분에는 검색어, 검색 수, 중간 부분에는 신뢰도, 만족도 키워드, 끝부분에는 ‘네이버 블로그’ 게시글 내용이 표시된다.
+ 표 2는 다른 시스템과 비교한 도표이다.
+다이닝 코드는 ‘맛 집’이라는 한정된 콘텐츠를 가지고 있고, ‘맛 집’이라는 콘텐츠 특성상 광고량에 대한 정보가 필요 없다.
+ 또한 소셜 매트릭스, PulseK는 연관 키워드, 긍정/부정에 대한 정보는 알려주지만 ‘광고 데이터’에 대한 필터링이 없어 가짜 리뷰를 많이 포함했다면 정확한 긍정, 부정 여부를 확인할 수 없다.
+반면에 본 논문에서 소개하는 ADDAVICHI (가짜 리뷰 필터링)은 연관 키워드, 긍정/부정에 대한 정보를 알려줄 뿐만 아니라 ‘광고 데이터’에 대한 필터링, ‘광고량’에 대한 정보를 화면에 명시적으로 표시하고, 랭킹을 사용자가 적합화하여 데이터로 나타낼 수 있는 차별점이 있다.
+ 표 3은 이런 관점에서 다른 콘텐츠와 비교 분석한 도표이다.
+다이닝 코드의 경우 필터링, 만족도 부문에서는 높은 지표를 보이나, 시기별 ‘맛 집’을 보여주는 기능인 지속성, 한꺼번에 비교해주는 ‘비교’ 기능은 없다.
+소셜 매트릭스, PulseK의 경우 키워드에 따라 긍정/부정 추이를 알 수 있는 만족도, 시기별 ‘콘텐츠’의 긍정/부정 추이를 알 수 있는 지속성에서는 높은 지표를 보이나, 필터링, 비교 부문 기능이 없어 낮은 지표를 보인다.
+본 논문에서 소개하는 ADDAVICHI (가짜 리뷰 필터링)은 모든 부문에서 고른 지표를 보여 이 부문이 다른 프로그램과의 차별점이다.
+ 그림 12, 13은 본 논문에서 설명하고 있는 ADDAVICH 시스템 및 구성을 보여주는 그림이다.
+본 논문의 애플리케이션은 Android Studio와 PHP, MySQL, Tensorflow 및 형태소 분석 Python 애플리케이션을 사용하여 구성하였다.
+ 본 논문에서는 개발한 ADDAVICHI 시스템에서 적용한 기술과 결과 시스템을 설명하였다.
+홍보에만 치중하는 ‘바이럴 마케팅’ 때문에 이용후기를 거짓으로 작성하거나 과장, 확대해 불신감을 안겨줄 수 있는 정보일지라도, 본 애플리케이션을 이용하여 필터링 된 데이터를 보여줄 수 있어 사용자의 광고 노출을 줄일 수 있다.
+ 사용자에게 좀 더 공정한 데이터를 제공하여 정보의 왜곡을 줄이고자 하였다.
+현재는 광고 필터링에 머신 러닝 기법으로 지속적으로 학습되고 누적되지 않아 이에 관한 추가적인 연구개발이 필요하다.
+ 또한, GUI 디자인이 사용자의 관심을 끌기에 부족한 면이 있다.
+ 실용화 단계에서는 사용자에게 보다 편리함을 줄 수 있는 기능을 추가할 필요가 있다.
+현재는 네이버 블로그 정보만을 이용해서 필터링하지만, 향후에는 정답 데이터를 학습시켜 좀 더 필터링 성능을 향상시킬 계획이다.
+ 표 4는 ADDAVICHI 시스템의 향후 개선 전략을 정리한 내용이다.
+저 자 소 개.
+
