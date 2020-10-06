@@ -36,7 +36,7 @@
                 </base-dropdown>
 
                 <div tag="li" class="nav-item">
-                    <router-link slot="title" to="/scrap" class="nav-link" role="button">마이스크랩</router-link>
+                    <router-link slot="title" to="/scrap" class="nav-link" role="button" v-if="this.$store.getters.getIsAuth == true">마이스크랩</router-link>
                 </div>
             </ul>
         </base-nav>

@@ -27,5 +27,7 @@ export default {
     //스크랩
     GET_SCRAPLIST : 'getScraplist',
     ADD_SCRAP : 'addScrap',
+    DELETE_SCRAP : 'deleteScrap',
+
 
 }

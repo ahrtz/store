@@ -1,18 +1,20 @@
 <template>
   <div class="example-drag bg">
     <div class="text-center p-5 upload">
-      <ul v-if="files.length" style="  list-style:none;">
+      <ul v-if="files.length" style="list-style: none">
         <i class="fa fa-file-pdf-o fa-5x" aria-hidden="true"></i>
         <br />
         <br />
         <h4>pdf 파일을 올려주세요</h4>
         <!-- <li v-for="(file) in files" :key="file.id" style="font-size : 150%;"> -->
-        <div style="font-size : 150%;">
-          <span>{{files[files.length-1].name}}</span>
+        <div style="font-size: 150%">
+          <span>{{ files[files.length - 1].name }}</span>
           <!-- <span>{{files[files.length-1].size | formatSize}}</span> B -->
-          <span v-if="files[files.length-1].error">{{files[files.length-1].error}}</span>
-          <span v-else-if="files[files.length-1].success">success</span>
-          <span v-else-if="files[files.length-1].active">active</span>
+          <span v-if="files[files.length - 1].error">{{
+            files[files.length - 1].error
+          }}</span>
+          <span v-else-if="files[files.length - 1].success">success</span>
+          <span v-else-if="files[files.length - 1].active">active</span>
           <span v-else></span>
         </div>
         <!-- </li> -->
@@ -30,7 +32,12 @@
           <i class="fa fa-plus"></i>
           Change file
         </file-upload>
-        <button class="btn btn-md btn-danger" @click="sendfile(files[files.length-1])">요약 실행</button>
+        <button
+          class="btn btn-md btn-danger"
+          @click="sendfile(files[files.length - 1])"
+        >
+          요약 실행
+        </button>
       </ul>
       <ul v-else>
         <!-- <td colspan="7"> -->
@@ -121,14 +128,21 @@ export default {
 
   methods: {
     async sendfile(file) {
-      this.$emit("update");
+      //확장자 pdf 외 거르기
+      var len = file.name.length;
+      var type = file.name.substring(len - 3, len);
+      // console.log(type)
 
-      await this.$store
-        .dispatch(Constant.SEND_FILE, { file: file.file })
-        .then(() => {
-          this.$router.push("/nmdetail");
-        });
-
+      if (type != "pdf") {
+        alert("pdf 형식의 논문만 요약 가능합니다.");
+      } else {
+        this.$emit("update");
+        await this.$store
+          .dispatch(Constant.SEND_FILE, { file: file.file })
+          .then(() => {
+            this.$router.push("/nmdetail");
+          });
+      }
     },
   },
 };
