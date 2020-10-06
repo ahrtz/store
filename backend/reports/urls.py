@@ -12,6 +12,7 @@ urlpatterns = [
     path("",include(router.urls)),
     path('scrap/list/',views.scrap_list),
     path('scrap/make/<int:report_id>',views.make_scrap),
+    path('scrap/delete/<int:scrap_id>',views.delete_scrap),
     path('list/',views.reports_list),
     path('detail/<int:report_id>',views.reports_detail),
     path('searcht/<str:keyword>/',views.searchtitle),

@@ -24,7 +24,7 @@ class FileUploadViewSet(ModelViewSet):
                        abstract_long='',abstract_short='',
                        key=''
                        )
-        abstract_long,abstract_short,key=main.getpdf(str(self.request.data['datafile']))
+        abstract_long,abstract_short,key=main.main_crawling(str(self.request.data['datafile']))
         serializer.save(
                        datafile=self.request.data.get('datafile'),
                        abstract_long=abstract_long,abstract_short=abstract_short,
@@ -70,6 +70,14 @@ def make_scrap(request,report_id):
         serializer.save(user=request.user,summary=report)
         return Response(serializer.data)
     return HttpResponse(status = 404)
+
+@api_view(['POST'])
+def delete_scrap(request,scrap_id):
+    scrap = get_object_or_404(Scraps,id=scrap_id)
+    scrap.delete()
+    return HttpResponse(status=200)
+
+
 
 @api_view(['GET'])
 def searchtitle(request,keyword): # 제목
