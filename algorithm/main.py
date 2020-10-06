@@ -11,7 +11,6 @@ from mode_pdfconvert import isEnglishOrKorean
 from mode_summarize import lexlank_function
 from mode_summarize import keywords_function
 from mode_summarize import visualize_function
-from mode_summarize import papago_translate_function
 
 from mode_crawling import crawling_setting
 
@@ -21,6 +20,7 @@ import sys
 import time
 import threading
 from multiprocessing import Pool # Pool import하기
+from googletrans import Translator
 
 def mode_main():
     print("텍스트 파일을 추출할 PDF 파일명을 입력하세요.")
@@ -36,16 +36,19 @@ def mode_main():
     # PDF를 읽고, test_list를 가져오고, title을 가져오고, 띄어쓰기를 교정하며, 가장 많이 사용한 텍스트 크기를 반환한다.
     text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list, textmiddle_average, textfont_average, char_list = pdfread(device, interpreter, pages, PDFpathName)
     title_data = title_return(title_data).strip()
-    # print(title_data)
+    print(title_data)
 
+    translator = Translator()
+    translator_cnt = 0
     if len(char_list) > 0:
         # print("논문 형식에 따라, 논문 전체 내용을 요약합니다.")
 
-        # print_result = "논문 내용\n"
+        print_result = "논문 내용\n"
         # 맞춤법을 교정한다.
         # print("맞춤법 교정 시작!")
         result = char_list.strip().split(".")
         final_result = ""
+        translate_result = ""
         for y in range(len(result)):
             # print("맞춤법 교정 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
             if len(result[y]) > 0:
@@ -53,9 +56,19 @@ def mode_main():
                     temp = spell_checker.check(result[y] + '.')
                     final_result += temp.as_dict()['checked']
                     print_result += temp.as_dict()['checked'] + "\n"
+                    if translator_cnt == 0:
+                        if translator.translate(temp.as_dict()['checked']).src == 'ko':
+                            translator_cnt = 1
+                        elif translator.translate(temp.as_dict()['checked']).src == 'en':
+                            translate_result += translator.translate(temp.as_dict()['checked'], dest='ko').text
                 except:
-                    final_result += result[y] + "."
+                    final_result += result[y] + ". "
                     print_result += result[y] + ".\n"
+                    if translator_cnt == 0:
+                        if translator.translate(result[y]).src == 'ko':
+                            translator_cnt = 1
+                        elif translator.translate(result[y]).src == 'en':
+                            translate_result += translator.translate(result[y], dest='ko').text
         # print("맞춤법 교정 완료!")
         # print("")
 
@@ -151,7 +164,6 @@ def mode_main():
                     print_result += figure_image_name[x] + " " + figure_image_src[x] + "\n"
                 print_result += "\n"
 
-
         print_result += "논문 내용\n"
         # 맞춤법을 교정한다.
         # print("맞춤법 교정 시작!")
@@ -165,32 +177,69 @@ def mode_main():
                     temp = spell_checker.check(result[y] + '.')
                     final_result += temp.as_dict()['checked']
                     print_result += temp.as_dict()['checked'] + "\n"
-
-                    if isEnglishOrKorean(temp.as_dict()['checked']) == "english":
-                        translate_result += papago_translate_function(temp.as_dict()['checked']) + "\n"
+                    if translator_cnt == 0:
+                        if translator.translate(temp.as_dict()['checked']).src == 'ko':
+                            translator_cnt = 1
+                            translate_result += temp.as_dict()['checked']
+                        elif translator.translate(temp.as_dict()['checked']).src == 'en':
+                            translate_result += translator.translate(temp.as_dict()['checked'], dest='ko').text
                     else:
-                        translate_result += temp.as_dict()['checked'] + "\n"
+                        translate_result += temp.as_dict()['checked']
                 except:
                     final_result += result[y] + ". "
                     print_result += result[y] + ".\n"
-
-                    if isEnglishOrKorean(result[y]) == "english":
-                        translate_result += papago_translate_function(result[y]) + "\n"
+                    if translator_cnt == 0:
+                        if translator.translate(result[y]).src == 'ko':
+                            translator_cnt = 1
+                            translate_result += result[y] + ". "
+                        elif translator.translate(result[y]).src == 'en':
+                            translate_result += translator.translate(result[y], dest='ko').text
                     else:
-                        translate_result += result[y] + "\n"
+                        translate_result += result[y] + ". "
         # print("맞춤법 교정 완료!")
         # print("")
 
+    if len(final_result) < 100:
+        # print("논문 내용이 뽑히지 않아 다시 진행중...")
+        import tika
+        tika.initVM()
+        from tika import parser
+        parsed = parser.from_file(PDFfileName)
+        temp = parsed["content"]
+        temp = temp.replace('\n', '')
+
+        print_result += temp + "\n"
+        final_result = temp
+        result = temp.strip().split(".")
+        final_result = ""
+        translate_result = ""
+        for y in range(len(result)):
+            if translator.translate(result[y]).src == 'ko':
+                translate_result = temp
+                break
+
+            # print("번역 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
+            translate_result += translator.translate(result[y], dest='ko').text + ". "
+        # print("추출 완료!")
 
     # 요약서비스를 이용한다
     # print("요약 서비스 시작!")
-    summarize_data = lexlank_function(translate_result)
+    summarize_data = lexlank_function(final_result)
     summarize_result = "본문 요약 (10줄)\n"
     for x in range(len(summarize_data)):
-        summarize_result += summarize_data[x] + "\n\n"
+        try:
+            if translator.translate(summarize_data[x]).src == 'en':
+                summarize_result += "원문 : " + summarize_data[x] + "\n"
+                summarize_result += "번역 : " + translator.translate(summarize_data[x], dest='ko').text + "\n\n"
+            else:
+                summarize_result += summarize_data[x] + "\n\n"
+        except:
+            summarize_result += summarize_data[x] + "\n\n"
+    
     # print("요약 완료!")
     # print("")
 
+    # print(translate_result)
     # print("키워드 추출 시작!")
     summarize_tags = keywords_function(translate_result)
     # print(summarize_tags)
@@ -215,12 +264,13 @@ def main_crawling():
 # 멀티 프로세싱 : https://beomi.github.io/2017/07/05/HowToMakeWebCrawler-with-Multiprocess/
 # https://medium.com/@keyhyuk.kim/python-%ED%81%AC%EB%A1%A4%EB%9F%AC-%EB%A9%80%ED%8B%B0%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%A9%80%ED%8B%B0%EC%8A%A4%EB%A0%88%EB%93%9C%EB%A1%9C-%EC%84%B1%EB%8A%A5-%EC%A5%90%EC%96%B4%EC%A7%9C%EA%B8%B0-a7712bcbaa4
 if __name__=='__main__':
+    mode_main()
     start_time = time.time()
 
     cnt = 0
     while True:
         if cnt > 3:
-            sys.exit()
+            break
 
         if (time.time() - start_time) > 10:
             main_crawling()

@@ -63,23 +63,3 @@ def visualize_function(PDFpathName, summarize_tags):
         wc.to_file('images/' + PDFpathName + '/wordcloud.png')
     except:
         pass
-
-def papago_translate_function(txt):
-    encText = urllib.parse.quote(txt)
-    data = "source=en&target=ko&text=" + encText
-    
-    url = "https://openapi.naver.com/v1/papago/n2mt"
-    
-    request = urllib.request.Request(url)
-    request.add_header("X-Naver-Client-Id", "wYRlTYlyvgQCJJ3lxZzo")
-    request.add_header("X-Naver-Client-Secret", "B0cwT7BY6j")
-    response = urllib.request.urlopen(request, data=data.encode("utf-8"))
-    
-    rescode = response.getcode()
-    if(rescode==200):
-        response_body = response.read()
-        string = response_body.decode('utf-8')
-        json_obj = json.loads(string)
-        return json_obj['message']['result']['translatedText']
-    else:
-        return ""

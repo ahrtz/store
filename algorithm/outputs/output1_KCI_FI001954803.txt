@@ -6,7 +6,7 @@
 
 피인용 횟수 : 7
 
-열람 횟수 : 308
+열람 횟수 : 315
 
 학술지 : 한국비교정부학보
 
@@ -21,7 +21,7 @@
 논문 초록
 The study is concerned with policy implementation and alternative policy options of big data which has characteristics such as volume, velocity, and  variability. Nowadays, what is so called, the issue of big data is ubiquitous in recent years, such as openness public data, solving alternatives of social problems using big data, etc. Especially, the role and issue of government will be focused on the application of big data. It is evident that scientific policy implementation and citizens’ administrative convenience should be improved by way of using big data technology in government. Unfortunately, there is no rule out that the gathering and analysis of unreliable big data will cause the error or noise of the policy. In order to reduce the error or noise of the big data related policy, it is necessary to have the expert or specialized person of big data more than anything else. There is no doubt that the number of experts of big data are equal to the regional competitive power in the near future. Notwithstanding, the infrastructure of Information Technology is inferior to the national capital regions; accordingly, the regional governments have to dependent on the central government in terms of the structure in system establishment, analysis, application of big data. This kind of disparity will cause the regional inequality in the era of big data. Therefore, the regional government should foster and support the IT or big data experts with the relation of the regional universities.
 
-Big Data, Social Networking Service, Data-Classes, Policy Implementation
+
 
 키워드
 0 : 빅데이터
