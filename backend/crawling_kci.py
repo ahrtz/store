@@ -251,7 +251,8 @@ def extract_abstract_using_openAPI(start, end):
 
 import sqlite3
 import pandas as pd
-DATA_DIR = 'C:/ssafy 2nd/reports-tmp/backend'
+DATA_DIR = 'F:/SSAFY/BigDataPJT/LAST/s03p23a406/data/sbk'
+DUMP_FILE_ALL = os.path.join(DATA_DIR, "all_data.pkl")
 DUMP_FILE_EN = os.path.join(DATA_DIR, "abstract_en.pkl")
 DUMP_FILE_KO = os.path.join(DATA_DIR, "abstract_ko.pkl")
 def sqlite_to_pandas():
@@ -262,8 +263,12 @@ def sqlite_to_pandas():
     result = pd.DataFrame.from_records(data=query.fetchall(), columns=cols)
     result_ko = []
     result_en = []
+    result_all = []
 
     for index, row in result.iterrows():
+        if row.abstract is None:
+            continue
+        result_all.append(row)
         if isEnglishOrKorean(row.abstract):
             result_en.append(row)
         else:
@@ -271,10 +276,13 @@ def sqlite_to_pandas():
     
     endf = pd.DataFrame.from_records(data=result_en, columns=cols)
     kodf = pd.DataFrame.from_records(data=result_ko, columns=cols)
+    alldf = pd.DataFrame.from_records(data=result_all, columns=cols)
     pd.to_pickle(endf, DUMP_FILE_EN)
     pd.to_pickle(kodf, DUMP_FILE_KO)
+    pd.to_pickle(alldf, DUMP_FILE_ALL)
     print(len(result_en))
     print(len(result_ko))
+    print(len(result_all))
 
 
 def isEnglishOrKorean(input):
@@ -285,7 +293,6 @@ def isEnglishOrKorean(input):
     return True
 
 if __name__ == '__main__':
-    # crawler_thesis_chk_setting(251, 258)    # 시작 페이지, 끝페이지
-    # crawler_thesis_chk_setting(31, 257)    # 시작 페이지, 끝페이지
-    extract_abstract_using_openAPI(1, 8)    # 시작 엑셀번호, 끝 엑셀번호
-    # sqlite_to_pandas()
+    # crawler_thesis_chk_setting(26, 27)    # 시작 페이지, 끝페이지
+    # extract_abstract_using_openAPI(26, 31)    # 시작 엑셀번호, 끝 엑셀번호
+    sqlite_to_pandas()
