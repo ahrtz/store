@@ -65,37 +65,26 @@
         <table class="table align-items-center" style="margin: 10px">
           <thead class="thead-light">
             <tr>
-              <th>논문명</th>
+              <!-- <th></th> -->
+              <th>논문명 / 키워드</th>
               <th>분류</th>
-              <th>저자 발행기관</th>
-              <th>초록</th>
-              <th>상세보기</th>
+              <th>저자 / 발행기관</th>
+              <th></th>
+              <th></th>
+              
             </tr>
           </thead>
           <tbody class="list">
             <tr>
               <td colspan="6">
                 <!-- v-for="(nm,index) in nms.slice(this.perPage*(currentPage-1),perPage*(currentPage))" -->
-                <nmcard v-for="(nm, index) in nms" :key="index" :nm="nm" />
+                <nmcard v-for="(nm, index) in nms" :key="index" 
+                :nm="nm" 
+                :keywords="nm.keyword_kor.replace(' · ',', ').split(', ')"
+                :subcnt="nm.sub_author.split(',').length"
+                />
               </td>
-              <!-- <th scope="row">
-                <div class="media align-items-center">
-                  <div class="media-body">
-                    <span class="name mb-0 text-sm">Argon Design System</span>
-                  </div>
-                </div>
-              </th>
-              <td class="budget">$2500 USD</td>
-              <td>
-                <span class="status">pending</span>
-              </td>
-              <td>
-                <div class="avatar-group">ddd</div>
-              </td>
-              <td>
-                <span class="completion mr-2">60%</span>
-              </td>
-              <td class="text-right"></td>-->
+              
             </tr>
           </tbody>
         </table>
