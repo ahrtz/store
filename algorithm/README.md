@@ -99,14 +99,19 @@ pip install gensim newspaper3k
 pip install lexrankr
 pip install wordcloud
 pip install matplotlib
-pip install konlpy
+pip install konlpy googletrans
+pip install beautifulsoup4
+pip install pool
+pip install googletrans
+pip install multithreading
+pip install selenium
 
 https://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud
 사이트에서 자신에 맞는 wordcloud 파일 다운로드
 pip install wordcloud-1.8.0-cp36-cp36m-win_amd64.whl
 ```
 
-## 04. 사용 설명서
+## 04. 사용 설명서 (2020.10.06.수 Version 1.0 Update)
 ```sh
 (1) 폴더, 파일 이름
 documents Folder : PDF 파일을 저장하는 장소입니다. 파일 입력시 반영 됩니다.
@@ -155,6 +160,7 @@ print_result : PDF에서 추출한 개요, 논문 내용을 output1.txt에 출�
 
 summarize_data : lexlank 프로그램을 이용한 본문 요약 리스트 입니다. (10줄)
 summarize_result : 본문 요약 리스트를 output2.txt에 출력할 수 있도록 도와주는 변수입니다.
+translate_result : 영어 논문의 경우 한글 논문으로 반영하는 번역 텍스트 입니다.
 
 summarize_tags : 키워드 추출 변수입니다.
 ```

@@ -264,7 +264,6 @@ def main_crawling():
 # 멀티 프로세싱 : https://beomi.github.io/2017/07/05/HowToMakeWebCrawler-with-Multiprocess/
 # https://medium.com/@keyhyuk.kim/python-%ED%81%AC%EB%A1%A4%EB%9F%AC-%EB%A9%80%ED%8B%B0%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%A9%80%ED%8B%B0%EC%8A%A4%EB%A0%88%EB%93%9C%EB%A1%9C-%EC%84%B1%EB%8A%A5-%EC%A5%90%EC%96%B4%EC%A7%9C%EA%B8%B0-a7712bcbaa4
 if __name__=='__main__':
-    mode_main()
     start_time = time.time()
 
     cnt = 0
