@@ -24,7 +24,7 @@ class FileUploadViewSet(ModelViewSet):
                        abstract_long='',abstract_short='',
                        key=''
                        )
-        abstract_long,abstract_short,key=main.getpdf(str(self.request.data['datafile']))
+        abstract_long,abstract_short,key=main.main_crawling(str(self.request.data['datafile']))
         serializer.save(
                        datafile=self.request.data.get('datafile'),
                        abstract_long=abstract_long,abstract_short=abstract_short,

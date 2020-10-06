@@ -1,62 +1,56 @@
-from .mode_pdfconvert import pdfopen
-from .mode_pdfconvert import pdfread
-from .mode_pdfconvert import title_return
-from .mode_pdfconvert import list_return
-from .mode_pdfconvert import maxsize_return
-from .mode_pdfconvert import pdfsort
-from .mode_pdfconvert import pdfgrap
-from .mode_pdfconvert import pdfcutter
-from .mode_pdfconvert import isEnglishOrKorean
+from mode_pdfconvert import pdfopen
+from mode_pdfconvert import pdfread
+from mode_pdfconvert import title_return
+from mode_pdfconvert import list_return
+from mode_pdfconvert import maxsize_return
+from mode_pdfconvert import pdfsort
+from mode_pdfconvert import pdfgrap
+from mode_pdfconvert import pdfcutter
+from mode_pdfconvert import isEnglishOrKorean
 
-from .mode_summarize import lexlank_function
-# from .mode_summarize import summarize_function
-from .mode_summarize import keywords_function
-# from .mode_summarize import visualize_function
+from mode_summarize import lexlank_function
+from mode_summarize import keywords_function
+from mode_summarize import visualize_function
 
-from .mode_crawling import crawling_setting
-# from .mode_imageconvert import printAllFile
+from mode_crawling import crawling_setting
 
-from multiprocessing import Pool # Pool import하기
-from googletrans import Translator
-from .hanspell.hanspell import spell_checker
+from hanspell import spell_checker
 
 import sys
 import time
 import threading
-import os
-from django.conf import settings
-from django.conf import settings
-from django.conf.urls.static import static
-# if __name__ == "__main__":
-def getpdf(filename):
-    # print("텍스트 파일을 추출할 PDF 파일명을 입력하세요.")
-    tmp3 = settings.BASE_DIR / 'reports/algo/documents'/filename
-    # PDFfileName = 'documents/' + input() + '.pdf'
+from multiprocessing import Pool # Pool import하기
+from googletrans import Translator
+
+def mode_main():
+    print("텍스트 파일을 추출할 PDF 파일명을 입력하세요.")
+    PDFpathName = input()
+    PDFfileName = 'documents/' + PDFpathName + '.pdf'
 
     # PDF를 열고, interpreter, pages 변수를 가져온다.
-    device, interpreter, pages = pdfopen(tmp3)
+    device, interpreter, pages = pdfopen(PDFfileName)
     if device == -1 and interpreter == -1 and pages == -1:
         print("PDF 파일을 잘못 입력했습니다.")
         exit()
 
     # PDF를 읽고, test_list를 가져오고, title을 가져오고, 띄어쓰기를 교정하며, 가장 많이 사용한 텍스트 크기를 반환한다.
-    text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list, textmiddle_average, textfont_average, char_list = pdfread(device, interpreter, pages, filename)
+    text_list, textfont_list, textmiddle_list, title_num, title_data, image_name, image_list, textmiddle_average, textfont_average, char_list = pdfread(device, interpreter, pages, PDFpathName)
     title_data = title_return(title_data).strip()
     print(title_data)
 
     translator = Translator()
     translator_cnt = 0
     if len(char_list) > 0:
-        # print("논문 형식에 따라, 논문 전체 내용을 요약합니다.")
+        print("논문 형식에 따라, 논문 전체 내용을 요약합니다.")
 
         print_result = "논문 내용\n"
         # 맞춤법을 교정한다.
-        # print("맞춤법 교정 시작!")
+        print("맞춤법 교정 시작!")
         result = char_list.strip().split(".")
         final_result = ""
         translate_result = ""
         for y in range(len(result)):
-            # print("맞춤법 교정 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
+            print("맞춤법 교정 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
             if len(result[y]) > 0:
                 try:
                     temp = spell_checker.check(result[y] + '.')
@@ -75,16 +69,16 @@ def getpdf(filename):
                             translator_cnt = 1
                         elif translator.translate(result[y]).src == 'en':
                             translate_result += translator.translate(result[y], dest='ko').text
-        # print("맞춤법 교정 완료!")
-        # print("")
+        print("맞춤법 교정 완료!")
+        print("")
 
     else:
         try:
             # KCI 사이트에서 관련 정보를 가져온다.
-            # print("PDF 논문 분석 중...")
+            print("PDF 논문 분석 중...")
             link_data, title_data_ko, title_data_en, title_data_plus1, title_data_plus2, journalInfo1, journalInfo2, journalInfo3, name1, name2, content1, content2, content3, content4, reference = crawling_setting(title_data)
-            # print("PDF 논문 분석 완료!")
-            # print("")
+            print("PDF 논문 분석 완료!")
+            print("")
         except:
             link_data = -1
     
@@ -104,8 +98,7 @@ def getpdf(filename):
             result += text_list[y] + " "
 
         if link_data == -1:
-            pass
-            # print("KCI에 등록되어 있지 않은 논문이거나 사이트 액세스 오류입니다.")
+            print("KCI에 등록되어 있지 않은 논문이거나 사이트 액세스 오류입니다.")
         else:
             # 관련 정보를 추가한다.
             print_result = "링크 : " + link_data + "\n\n"
@@ -172,12 +165,12 @@ def getpdf(filename):
 
         print_result += "논문 내용\n"
         # 맞춤법을 교정한다.
-        # print("맞춤법 교정 시작!")
+        print("맞춤법 교정 시작!")
         result = result.strip().split(".")
         final_result = ""
         translate_result = ""
         for y in range(len(result)):
-            # print("맞춤법 교정 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
+            print("맞춤법 교정 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
             if len(result[y]) > 0:
                 try:
                     temp = spell_checker.check(result[y] + '.')
@@ -202,15 +195,15 @@ def getpdf(filename):
                             translate_result += translator.translate(result[y], dest='ko').text
                     else:
                         translate_result += result[y] + ". "
-        # print("맞춤법 교정 완료!")
+        print("맞춤법 교정 완료!")
         # print("")
 
     if len(final_result) < 100:
-        # print("논문 내용이 뽑히지 않아 다시 진행중...")
+        print("논문 내용이 뽑히지 않아 다시 진행중...")
         import tika
         tika.initVM()
         from tika import parser
-        parsed = parser.from_file(tmp3)
+        parsed = parser.from_file(PDFfileName)
         temp = parsed["content"]
         temp = temp.replace('\n', '')
 
@@ -224,12 +217,12 @@ def getpdf(filename):
                 translate_result = temp
                 break
 
-            # print("번역 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
+            print("번역 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
             translate_result += translator.translate(result[y], dest='ko').text + ". "
-        # print("추출 완료!")
+        print("추출 완료!")
 
     # 요약서비스를 이용한다
-    # print("요약 서비스 시작!")
+    print("요약 서비스 시작!")
     summarize_data = lexlank_function(final_result)
     summarize_result = "본문 요약 (10줄)\n"
     for x in range(len(summarize_data)):
@@ -242,75 +235,45 @@ def getpdf(filename):
         except:
             summarize_result += summarize_data[x] + "\n\n"
     
-    # print("요약 완료!")
-    # print("")
+    print("요약 완료!")
+    print("")
 
     # print(translate_result)
-    # print("키워드 추출 시작!")
+    print("키워드 추출 시작!")
     summarize_tags = keywords_function(translate_result)
-    # print(summarize_tags)
-    # visualize_function(PDFpathName, summarize_tags)
-    # print("키워드 추출 완료!")
-    # print("")
+    print(summarize_tags)
+    visualize_function(PDFpathName, summarize_tags)
+    print("키워드 추출 완료!")
+    print("")
 
-    output1_name='final_'+filename +'.txt'
-    fileOut = open(settings.BASE_DIR / 'reports/algo/outputs'/ output1_name, 'wt', encoding='utf-8')
-    print(final_result, file=fileOut)
+    fileOut = open('outputs/output1_' + PDFpathName +'.txt', 'w', encoding='utf-8')
+    print(print_result, file=fileOut)
     fileOut.close()
 
-    output2_name='summarize_'+filename +'.txt'
-    fileOut = open(settings.BASE_DIR / 'reports/algo/outputs'/ output2_name, 'wt', encoding='utf-8')
-    print(title_data+';^'+summarize_data[0], file=fileOut)
+    fileOut = open('outputs/output2_' + PDFpathName +'.txt', 'w', encoding='utf-8')
+    print(summarize_result, file=fileOut)
     fileOut.close()
-    
-    output3_name='tag_'+filename +'.txt'
-    fileOut = open(settings.BASE_DIR / 'reports/algo/outputs'/ output3_name, 'wt', encoding='utf-8')
-    print(summarize_tags, file=fileOut)
-    fileOut.close()
-    # fileOut = open('outputs/output2_' + filename +'.txt', 'wt', encoding='utf-8')
-    # print(summarize_result, file=fileOut)
-    # fileOut.close()
-
-    # print(final_result,title_data,summarize_data,summarize_tags)
-    # print( title_data,'#',summarize_data[0])
     print("프로그램 완료! 종료하겠습니다.")
     print("")
-    # return final_result,title_data+';^'+summarize_data[0],summarize_tags
-    
-def main_crawling(filename):
-    thread = threading.Thread(target=getpdf(filename=filename))
+
+def main_crawling():
+    thread = threading.Thread(target=mode_main)
     thread.start()
-    # abstract_short = (thread.result())
 
-    output1_name='final_'+filename +'.txt'
-    fileIn = open(settings.BASE_DIR / 'reports/algo/outputs'/ output1_name, 'rt', encoding='utf-8')
-    abstract_long= fileIn.read()
-
-    output2_name='summarize_'+filename +'.txt'
-    fileIn = open(settings.BASE_DIR / 'reports/algo/outputs'/ output2_name, 'rt', encoding='utf-8')
-    abstract_short = fileIn.read()
-    
-    output3_name='tag_'+filename +'.txt'
-    fileIn = open(settings.BASE_DIR / 'reports/algo/outputs'/ output3_name, 'rt', encoding='utf-8')
-    key = fileIn.read()
-    
-    # abstract_long,abstract_short,key=thread.join()
-    return abstract_long,abstract_short,key
 # 멀티 프로세싱 : https://beomi.github.io/2017/07/05/HowToMakeWebCrawler-with-Multiprocess/
 # https://medium.com/@keyhyuk.kim/python-%ED%81%AC%EB%A1%A4%EB%9F%AC-%EB%A9%80%ED%8B%B0%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%A9%80%ED%8B%B0%EC%8A%A4%EB%A0%88%EB%93%9C%EB%A1%9C-%EC%84%B1%EB%8A%A5-%EC%A5%90%EC%96%B4%EC%A7%9C%EA%B8%B0-a7712bcbaa4
-# if __name__=='__main__':
-#     mode_main()
-#     start_time = time.time()
+if __name__=='__main__':
+    mode_main()
+    '''
+    start_time = time.time()
 
-#     cnt = 0
-#     while True:
-#         if cnt > 3:
-#             break
+    cnt = 0
+    while True:
+        if cnt > 3:
+            break
 
-#         if (time.time() - start_time) > 10:
-#             main_crawling()
-#             start_time = time.time()
-#             cnt += 1
-
-
-
+        if (time.time() - start_time) > 10:
+            main_crawling()
+            start_time = time.time()
+            cnt += 1
+    '''
