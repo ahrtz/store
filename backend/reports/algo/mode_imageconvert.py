@@ -1,15 +1,14 @@
-import fitz
+import os
 
-doc = fitz.open("documents/KCI_FI001975757.pdf")
+def removeAllFile(filePath):
+    try:
+        if not(os.path.isdir(filePath)):
+            os.makedirs(os.path.join(filePath))
+    except:
+        pass
 
-for x in range(len(doc)):
-    for img in doc.getPageImageList(x):
-        xref = img[0]
-        pix = fitz.Pixmap(doc, xref)
-        if pix.n < 5:
-            pix.writePNG("p%s-%s.png" % (x, xref))
-        else:
-            pix1 = fitz.Pixmap(fitz.csRGB, pix)
-            pix1.writePNG("p%s-%s.png" % (x, xref))
-            pix1 = None
-        pix = None
+    if os.path.exists(filePath):
+        for file in os.scandir(filePath):
+            os.remove(file.path)
+    
+    return '모든 파일 삭제 완료!'
