@@ -9,6 +9,7 @@ import warnings
 import sqlite3
 from sklearn.metrics.pairwise import cosine_similarity
 
+# 아이템 기반 협업 필터링(item based collaborative filtering)
 def get_item_based_collabor(subject):
     ## scrap: 장고 dbsql 접근
     con = sqlite3.connect("./db.sqlite3")
@@ -41,36 +42,48 @@ def get_item_based_collabor(subject):
     
     return item_based_collabor_df['Bio-EPDM/tungsten oxide nanocomposite foam with improved thermal storage and sea water resistance'].sort_values(ascending=False)[:6]
 
+# 잠재 요인(latent factor)기반 - 협업 필터링 Matrix Factorization
+# 개인에게 맞춤형이 추천이 아닌, 특정 논문과 비슷한 논문 추천
 def get_matrix_factorization(title):
-    scrap_data = pd.read_pickle(".pkl")
-    paper_data = pd.read_pickle(".pkl")
+    ## scrap: 장고 dbsql 접근
+    con = sqlite3.connect("./db.sqlite3")
+    cur = con.cursor()
+    query = cur.execute("SELECT * FROM reports_scraps")
+    cols = [column[0] for column in query.description]
+    result = pd.DataFrame.from_records(data=query.fetchall(), columns=cols)
+    scrap_data = pd.DataFrame.from_records(data=result, columns=cols)
+    paper_data = pd.read_pickle("all_data.pkl")
 
     scrap_data['rating'] = [1 for _ in range(len(scrap_data))]
     paper_data['summary_id'] = paper_data['id']
 
     user_scrap_paper = pd.merge(scrap_data, paper_data, on='summary_id')
     user_scrap_paper = user_scrap_paper.pivot_table('rating', index='user_id', columns='title_kor').fillna(0)
-    user_scrap_paper.shape
+    print(user_scrap_paper.shape)
     
     scrap_user_paper = user_scrap_paper.values.T
-    scrap_user_paper.shape
+    print(scrap_user_paper.shape)
     
-    # latemt값이 왜 12인지는 정확히 모르겠음
-    SVD = TruncatedSVD(n_components=12)
+    # latent값 => user data가 많이 쌓이면 다른것도 가능
+    SVD = TruncatedSVD(n_components=2)
     matrix = SVD.fit_transform(scrap_user_paper)
     matrix.shape
     
     corr = np.corrcoef(matrix)
-    corr.shape
+    print(corr.shape)
+    corr2 = corr[:200, :200]
+    print(corr2.shape)
+
     plt.figure(figsize=(16, 10))
     sns.heatmap(corr2)
     
     paper_title = user_scrap_paper.columns
     paper_title_list = list(paper_title)
-    coffey_hands = paper_title_list.index("title~~")
+    coffey_hands = paper_title_list.index('Bio-EPDM/tungsten oxide nanocomposite foam with improved thermal storage and sea water resistance')
     corr_coffey_hands = corr[coffey_hands]
-    list(movie_title[(corr_coffey_hands >= 0.9)])[:50]
+    print(list(paper_title[(corr_coffey_hands >= 0.9)])[:50])
 
+# 개인 히스토리를 기반으로 논문 추천
 def get_matrix_factorization_user_based():
     scrap_data = pd.read_pickle(".pkl")
     paper_data = pd.read_pickle(".pkl")
@@ -110,7 +123,8 @@ def recommend_paper_using_matrix_factorization(df_svd_preds, user_id, org_paper_
     return user_history, recommendations
 
 if __name__ == '__main__':
-    print(get_item_based_collabor('subject'))
+    # print(get_item_based_collabor('subject'))
+    get_matrix_factorization("  ")
 
 
 

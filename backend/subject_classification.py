@@ -118,13 +118,13 @@ def get_similarity(tokenized_doc, papers):
     print(df)
 
 def recommend(tokenized_doc, classes):
-    results = []
-    if len(classes) > 1:
-        results.append(classes[0][0])
-        results.append(classes[1][0])
-    else:
-        results.append(classes[0][0])
-    print(results)
+    # results = []
+    # if len(classes) > 1:
+    #     results.append(classes[0][0])
+    #     results.append(classes[1][0])
+    # else:
+    #     results.append(classes[0][0])
+    # print(results)
     
     # abstract / 분류
     # => 영어로 바꾸고 => 모델 돌려서 나온 분류 : 진짜 분류 비교
@@ -140,6 +140,15 @@ def recommend(tokenized_doc, classes):
     # is_subject = papers['label'] == results[0]
     is_subject = papers['subject'] == '화학공학'
     papers = papers[is_subject]
+    print(papers.columns.tolist())
+    print(papers['keyword_clean'])  #keyword clean 중 split(' ')으로 찢기
+    
+    papers_df = papers
+    papers_df['keyword_clean'] = papers['keyword_clean'].str.split(' ')
+    papers_df = papers.explode('keyword_clean')
+    print(papers_df)
+
+    contains = df1[df1['key'].str.contains('corrosion')]
 
     # tokenized_keyword = []
     # for item in papers['keyword_kor']:
@@ -148,12 +157,13 @@ def recommend(tokenized_doc, classes):
     # papers['tokenized_keyword'] = tokenized_keyword
     # df = papers[['id', 'tokenized_keyword']]
 
-    get_similarity(tokenized_doc, papers)
+    # get_similarity(tokenized_doc, papers)
 
 
 if __name__ == '__main__':
     abstract = "The effects of flow field upon the distribution of ionic concentration, electric potential, concentration boundary layer thickness, and electric current density were investigated. A modified numerical scheme is proposed to simulate the corresponding electrochemical system which is governed by nonlinear partial differential equations. Seven types of geometries and various flow fields with Reynolds numbers up to 2100 are considered. The obtained results indicate the current numerical method can successfully simulate the increase of current density on the cathode as the applied potential cell increases, and that rise will continue until the limiting current density is reached. To predict the effect of fluid flow, the proposed scheme is applied for various Peclet numbers. The increase of current density for Peclet numbers between 1 and 104 is quite evident. But for large Peclet numbers between 104 and 107 , the current density increases gradually. The results also show that as the anode size is doubled, the maximum current density occurs at the leading and trailing edges. However, if the cathode size is doubled, the maximum current density occurs at the center regions of it. Knowing the regions where current density is extremum helps electochemical system designers to control the parameters of the corresponding process."
-    abstract = data_preprocessing(abstract)
-    classes = data_classification(abstract)
+    # abstract = data_preprocessing(abstract)
+    # classes = data_classification(abstract)
+    classes = []
     recommend(abstract, classes)
 
