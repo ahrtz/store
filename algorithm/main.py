@@ -6,15 +6,18 @@ from mode_pdfconvert import maxsize_return
 from mode_pdfconvert import pdfsort
 from mode_pdfconvert import pdfgrap
 from mode_pdfconvert import pdfcutter
+from mode_pdfconvert import isEnglishOrKorean
 
 from mode_summarize import lexlank_function
 from mode_summarize import keywords_function
 from mode_summarize import visualize_function
+from mode_summarize import papago_translate_function
 
 from mode_crawling import crawling_setting
 
 from hanspell import spell_checker
 
+import sys
 import time
 import threading
 from multiprocessing import Pool # Pool import하기
@@ -154,6 +157,7 @@ def mode_main():
         # print("맞춤법 교정 시작!")
         result = result.strip().split(".")
         final_result = ""
+        translate_result = ""
         for y in range(len(result)):
             # print("맞춤법 교정 중.... " + str(round((y+1) / (len(result)+1) * 100, 2)) + "%")
             if len(result[y]) > 0:
@@ -161,15 +165,26 @@ def mode_main():
                     temp = spell_checker.check(result[y] + '.')
                     final_result += temp.as_dict()['checked']
                     print_result += temp.as_dict()['checked'] + "\n"
+
+                    if isEnglishOrKorean(temp.as_dict()['checked']) == "english":
+                        translate_result += papago_translate_function(temp.as_dict()['checked']) + "\n"
+                    else:
+                        translate_result += temp.as_dict()['checked'] + "\n"
                 except:
                     final_result += result[y] + ". "
                     print_result += result[y] + ".\n"
+
+                    if isEnglishOrKorean(result[y]) == "english":
+                        translate_result += papago_translate_function(result[y]) + "\n"
+                    else:
+                        translate_result += result[y] + "\n"
         # print("맞춤법 교정 완료!")
         # print("")
 
+
     # 요약서비스를 이용한다
     # print("요약 서비스 시작!")
-    summarize_data = lexlank_function(final_result)
+    summarize_data = lexlank_function(translate_result)
     summarize_result = "본문 요약 (10줄)\n"
     for x in range(len(summarize_data)):
         summarize_result += summarize_data[x] + "\n\n"
@@ -177,9 +192,9 @@ def mode_main():
     # print("")
 
     # print("키워드 추출 시작!")
-    summarize_tags = keywords_function(final_result)
+    summarize_tags = keywords_function(translate_result)
     # print(summarize_tags)
-    visualize_function(summarize_tags)
+    visualize_function(PDFpathName, summarize_tags)
     # print("키워드 추출 완료!")
     # print("")
 
@@ -204,8 +219,8 @@ if __name__=='__main__':
 
     cnt = 0
     while True:
-        if cnt == 3:
-            break
+        if cnt > 3:
+            sys.exit()
 
         if (time.time() - start_time) > 10:
             main_crawling()

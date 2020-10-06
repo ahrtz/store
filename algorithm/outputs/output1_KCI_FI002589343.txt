@@ -1,3 +1,35 @@
+링크 : https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002589343
+
+논문 제목(한글) : 코로나19 바이러스가 부동산 임대 계약에 미친 영향—코로나19 바이러스의 법률적 성질로 인한 논쟁 및 시사점
+
+논문 제목(영어) : The influence of COVID-19 on housing lease contract - The debate and thinking caused by the legal nature of COVID-19
+
+피인용 횟수 : 0
+
+열람 횟수 : 831
+
+학술지 : 법학연구
+
+논문정보 : 2020,vol.61,no.2,통권104호pp.167-181(15pages)
+
+발행기관 : 부산대학교법학연구소
+
+저자 정보
+0 : 호팅팅/HUTINGTING(단독) (고려대학교일반대학원법학과)
+
+논문 초록
+중국의 코로나19 바이러스 발생과 유행은 중국 국민들의 정상적인 사회생활과 생산 질서에 지대한 영향을 미쳤다. 중국 전역에서 힘을 모아 노력한 결과 눈에 띄는 성과를 거두었지만, 코로나19 바이러스가 사회 및 경제생활에 미친 결과가 점차 나타나고 있다. 본문에서는 2003년 사스 발생 당시 각 전문가의 의견을 결합하여 코로나19 바이러스의 법률적 성질을 이해하고 각종 부동산 임대 계약에 미치는 영향에 대해 연구하였다.
+
+The occurrence and popularity of COVID-19 in China greatly interferes with the normal social life and production order of the people. Although remarkable achievements have been made under the concerted efforts of the people of the country, the influence of COVID-19 on social and economic life has gradually emerged. This paper attempts to interpret the legal nature of  COVID-19 and study the impact of COVID-19 on the housing lease contract, based on the opinions of various countries when SARS occurred in 2003.
+
+키워드
+0 : 코로나19 바이러스 (COVID-19)
+1 : 법률적 성질 (legal nature)
+2 : 부동산 임대 계약 (the housing lease contract)
+3 : 불가항력 (irresistible force)
+4 : 우발사건 (a contingency)
+5 : 사정 변경 (change in circumstance)
+
 논문 내용
 변경을 통해 해결할 수는 없는지, 코로나 19 바이러스로 인해 매출이 하락하여 대외 지급상에 발생한 어려움을 해결해 줄 수 없는지 등의 문제에 대해 2020년 1월 30일 광저우시 부동산 임대 협회(廣州市房地產租賃協會)가 발표한 <시 전체 임대 사업자(집주인)의 임대료 감면 제안서(致全市業主(房東) 的減租倡議書)>가 큰 파장을 불러일으켰다.
  이제 안 서는 임대 사업자가 향후 수개월간 임대료를 감면해 줄 것을 호소했다.

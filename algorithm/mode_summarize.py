@@ -4,6 +4,8 @@ from konlpy.tag import Twitter
 from collections import Counter
 from wordcloud import WordCloud
 from mode_pdfconvert import isEnglishOrKorean
+import urllib.request
+import json
 
 def summarize_function(result):
     # 문장 요약 : https://anpigon.github.io/blog/dclick/@anpigon/-textrank-summariser-1540351206980/
@@ -47,7 +49,7 @@ def keywords_function(result):
     except:
         return []
 
-def visualize_function(summarize_tags):
+def visualize_function(PDFpathName, summarize_tags):
     try:
         # 사이트 : https://liveyourit.tistory.com/58
         wc = WordCloud(font_path='C:\\Windows\\Fonts\\NanumGothicBold.ttf', \
@@ -58,6 +60,26 @@ def visualize_function(summarize_tags):
             max_font_size=300)
 
         wc.generate_from_frequencies(dict(summarize_tags))
-        wc.to_file('images/wordcloud.png')
+        wc.to_file('images/' + PDFpathName + '/wordcloud.png')
     except:
         pass
+
+def papago_translate_function(txt):
+    encText = urllib.parse.quote(txt)
+    data = "source=en&target=ko&text=" + encText
+    
+    url = "https://openapi.naver.com/v1/papago/n2mt"
+    
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", "wYRlTYlyvgQCJJ3lxZzo")
+    request.add_header("X-Naver-Client-Secret", "B0cwT7BY6j")
+    response = urllib.request.urlopen(request, data=data.encode("utf-8"))
+    
+    rescode = response.getcode()
+    if(rescode==200):
+        response_body = response.read()
+        string = response_body.decode('utf-8')
+        json_obj = json.loads(string)
+        return json_obj['message']['result']['translatedText']
+    else:
+        return ""
