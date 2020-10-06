@@ -4,6 +4,8 @@ from konlpy.tag import Twitter
 from collections import Counter
 from wordcloud import WordCloud
 from mode_pdfconvert import isEnglishOrKorean
+import urllib.request
+import json
 
 def summarize_function(result):
     # 문장 요약 : https://anpigon.github.io/blog/dclick/@anpigon/-textrank-summariser-1540351206980/
@@ -47,7 +49,7 @@ def keywords_function(result):
     except:
         return []
 
-def visualize_function(summarize_tags):
+def visualize_function(PDFpathName, summarize_tags):
     try:
         # 사이트 : https://liveyourit.tistory.com/58
         wc = WordCloud(font_path='C:\\Windows\\Fonts\\NanumGothicBold.ttf', \
@@ -58,6 +60,6 @@ def visualize_function(summarize_tags):
             max_font_size=300)
 
         wc.generate_from_frequencies(dict(summarize_tags))
-        wc.to_file('images/wordcloud.png')
+        wc.to_file('images/' + PDFpathName + '/wordcloud.png')
     except:
         pass

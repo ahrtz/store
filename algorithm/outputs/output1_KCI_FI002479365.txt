@@ -1,0 +1,308 @@
+링크 : https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002479365
+
+논문 제목(한글) : Deciphering Monetary Policy Board Minutes with Text Mining: The Case of South Korea
+
+논문 제목(영어) : 1
+
+피인용 횟수 : 3
+
+열람 횟수 : 121
+
+학술지 : TheKoreanEconomicReview
+
+논문정보 : 2019,vol.35,no.2,pp.471-511(41pages)
+
+발행기관 : 한국경제학회
+
+저자 정보
+0 : 이영준/YoungJoonLee(제1) (연세대학교경영연구소)
+1 : 김수연/SoohyonKim(참여) (연세대학교)
+2 : 박기영/KiYoungPark(교신) (연세대학교)
+
+논문 초록
+We quantify the Monetary Policy Board minutes of the Bank of Korea (BOK) by using text mining. We propose a novel approach that uses a field-specific Korean dictionary and contiguous sequences of words (n-grams) to capture the subtlety of central bank communications. Our text-based indicator helps explain the current and future BOK monetary policy decisions when considering an augmented Taylor rule, suggesting that it contains additional information beyond the currently available macroeconomic variables.
+In explaining the current and future monetary policy decisions, our indicator remarkably outperforms English-based textual classifications, a media-based measure of economic policy uncertainty, and a data-based measure of macroeconomic uncertainty. Our empirical results also emphasize the importance of using a field-specific dictionary and the original Korean text.
+
+
+
+키워드
+0 : Monetary Policy
+1 : Text Mining
+2 : Taylor Rule
+3 : Machine Learning
+4 : Bank of Korea
+
+참고 문헌
+1. [학술지(정기간행물)] - Apel, M / 2014 / How Informative Are Central Bank Minutes / Review of Economics 65 : 655 ~
+2. [학술지(정기간행물)] - Baker, S. R / 2016 / Measuring Economic Policy Uncertainty / The Quarterly Journal of Economics 131 : 1593 ~ 1636
+3. [학술지(정기간행물)] - Bennani, H / 2016 / The(Home)Bias of European Central Bankers : New Evidence Based on Speeches / Applied Economics 49 : 1114 ~ 1131
+4. [보고서] - Bholat, D / 2017 / Sending Firm Messages: Text Mining Letters from PRA Supervisors to Banks and Building Societies They Regulate
+5. [단행본] - Bholat, D / 2015 / Text Mining for Central Banks / Centre for Central Banking Studies Handbook : 1 ~ 19
+6. [학술지(정기간행물)] - Born, B / 2014 / Central Bank Communication on Financial Stability / Economic Journal 124 : 701 ~ 734
+7. [학술대회논문] - Choi, H / 2012 / Predicting the Present with Google Trends / Special Issue: Selected Papers from the 40th Australian Conference of Economists 88 : 2 ~ 9
+8. [학술지(정기간행물)] - Dey, A / 2018 / Senti-N-gram : An N-Gram Lexicon for Sentiment Analysis / Expert Systems with Applications 103 : 92 ~ 105
+9. [보고서] - Gentzkow, M / 2017 / Text As Data
+10. [학술대회논문] - Hamilton, W. L / 2016 / Inducing Domain-Specific Sentiment Lexicons from Unlabeled Corpora / Proceedings of the Conference on Empirical Methods in Natural Language Processing. Conference on Empirical Methods in Natural Language Processing : 595 ~ 605
+11. [학술지(정기간행물)] - Hansen, S / 2016 / Shocking Language: Understanding the Macroeconomic Effects of Central Bank Communication / Journal of International Economics 99 : S114 ~ S133
+12. [인터넷자원] - Hutto, C / / Vader: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text
+13. [학술지(정기간행물)] - Jegadeesh, N / 2013 / Word Power: A New Approach for Content Analysis / Journal of financial economics
+14. [학술지(정기간행물)] - Jurado, K / 2015 / Measuring Uncertainty / American Economic Review 105 : 1177 ~ 1216
+15. [학술지(정기간행물)] - Kennedy, J. E / 1994 / The Information in Diffusion Indexes for Forecasting Related Economic Aggregates / Economics Letters 44 : 113 ~ 117
+16. [학술지(정기간행물)] - 김원혁 / 2016 / 글로벌 금융위기 전후 한국의 통화정책 반응함수 추정 / 경제학연구 64 (4) : 5 ~ 43
+17. [학술지(정기간행물)] - 이동주 / 2010 / 꼬꼬마 : 관계형 데이터베이스를 활용한 세종 말뭉치 활용 도구 / 정보과학회 컴퓨팅의 실제 논문지 16 (11) : 1046 ~ 1050
+18. [인터넷자원] - Lee, Y. J / / eKoNLPy: A Korean NLP Python Library for Economic Analysis
+19. [보고서] - Lee, Y. J / 2019 / Measuring Monetary Policy Surprises Using Text Mining: The Case of South Korea
+20. [단행본] - Liu, B / 2009 / Handbook of Natural Language Processing / Marcel Dekker, Inc
+21. [학술지(정기간행물)] - Loughran, T / 2011 / When Is a Liability Not a Liability? Textual Analysis, Dictionaries, and 10-Ks / The Journal of Finance
+22. [보고서] - Lucca, D / 2011 / Measuring Central Bank Communication: An Automated Approach with Application to FOMC Statements
+23. [기타자료] - McLaren, N / 2011 / Using Internet Search Data as Economic Indicators / Bank of England Quarterly Bulletin
+24. [학술지(정기간행물)] - Meinusch, A / 2017 / Quantitative Easing and Tapering Uncertainty: Evidence from Twitter / International Journal of Central Banking
+25. [학술대회논문] - Nopp, C / 2015 / Detecting Risks in the Banking System by Sentimental Analysis / Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing
+26. [보고서] - Nyman, R / 2018 / News and Narratives in Financial Systems: Exploiting Big Data for Systemic Risk Assessment
+27. [학술지(정기간행물)] - Picault, M / 2017 / Words Are Not All Created Equal: A New Measure of ECB Communication / Journal of International Money and Finance 79 : 136 ~ 156
+28. [학술지(정기간행물)] - Porter, M. F / 1980 / An Algorithm for Suffix Stripping / Program 14 : 130 ~ 137
+29. [보고서] - Pyo, D.-J / 2017 / News Media Sentiment and Asset Prices: Text-mining Approach
+30. [학술지(정기간행물)] - Ribeiro, F. N / 2016 / Sentibench-a Benchmark Comparison of State-of-the-practice Sentiment Analysis Methods / EPJ Data Science 5 : 1 ~ 29
+31. [인터넷자원] - Shin, K / / Inflation Targeting in South Korea: Experience and Evaluation
+32. [학술지(정기간행물)] - Shin, M / 2018 / Measuring International Uncertainty: The Case of Korea / Economics Letters 162 : 22 ~ 26
+33. [학술지(정기간행물)] - Söderlind, P / 1997 / New Techniques to Extract Market Expectations from Financial Instruments / Journal of Monetary Economics 40 : 383 ~ 429
+34. [단행본] - Stone, P. J / 1966 / The General Inquirer: A Computer Approach to Content Analysis / MIT Press
+35. [학술지(정기간행물)] - Tetlock, P. C / 2007 / Giving Content to Investor Sentiment: The Role of Media in the Stock Market / The Journal of finance 62 : 1139 ~ 1168
+36. [기타자료] - Tobback, E / 2016 / Between Hawks and Doves: Measuring Central Bank Communication : 1 ~ 41
+37. [학술대회논문] - Turney, P. D / 2002 / Thumbs Up or Thumbs Down?: Semantic Orientation Applied to Unsupervised Classification of Reviews / Proceedings of the 40th Annual Meeting on Association for Computational Linguistics, Association for Computational Linguistics : 417 ~ 424
+38. [기타자료] - Warsh, K / 2014 / Transparency and the Bank of England's Monetary Policy Committee /
+39. [기타자료] - Won, J.-H / 2017 / Text Mining Techniques for Classification of Economic Sentiment / BOK Quarterly Bulletin
+40. [학술대회논문] - Zhao, Z / 2017 / Ngram2vec: Learning Improved Word Representations from Ngram Co-occurrence Statistics / Proceedings of the Conference on Empirical Methods in Natural Language Processing : 244 ~ 253
+
+논문 내용
+which include 151 minutes of MPB meetings; 206,223 news articles; and 25,325bond analyst reports.
+ Table 2 shows the types and numbers of documents and theaverage and maximum number of sentences.
+ Although our target texts are the MPBminutes, we use a large amount of other documents to build field-specific lexicons.
+MPB Minutes.
+ The MPB minutes are released at 4 pm on the first Tuesday twosections: MPB members’ discussion on economic situation, FX and internationalfinance, financial markets, and monetary policy.
+individual members.
+We download the files of MPB minutes from May 2005 to December 2017 (151and (b) in Figure 2 display the number of sentences in MPB minutes for eachsection over time.
+ The length of the minutes has increased after the global financialcrisis.
+articles contain information on the general economy, monetary policy, financialmarket, and public perception on the BOK’s future monetary policy stances.
+ We useonly the articles from the top three news agencies (in terms of number of articlesproduced) because of the numerous duplicate articles from the originators.
+ Thenumber of news articles for our final use is 206,223.
+ Among them, 42% (86,538) arefrom Yonhab Infomax, 33% (68,728) from EDAILY, and 25% (50,957) fromYonhab News.
+ We remove the header and footer from the articles.
+ Panels (c) and (d) in Figure 2 show the number of news articles over time.
+Bond Analysts’ Reports.
+ We also use bond analysts’ reports for the following tworeasons: first, bond analyst reports show the experts’ views on the monetary policyand the bond market; second, we incorporate the informal styles of writing into ourlexicons.
+ Generally, bond analysts write in a more informal manner compared withjournalists.
+ We obtain the reports from WIEfn, a financial information service2005 to December 2017.
+Our corpus is large in size and covers various topics.
+ Figure 3 shows the varioustopics of our corpus, which we extract using Latent Dirichlet Allocation method, atopic modeling method.
+ Table 3 shows the relative frequencies of the topics.
+ part of word, such as nouns, verbs, adjectives, and so on.
+ Normalization is theprocess of transforming a text into a single canonical form.
+ Normalization includesthe following: punctuation removal, stop word removal, conversion of numbers toA typical text pre-processing procedure for English includes (i) converting allwords to lower case, (ii) removing numbers and punctuation by using a Porter(1980) stemming algorithm to reduce inflected words to their word roots (e.
+g.
+,“increasing” to “increase,” “unemployment” to “unemploy”) or lemmatization (e.
+g.
+,“better” to “good”), and (iii) removing stop words (e.
+g.
+, a, the, an, of, to, etc.
+).
+3.
+2.
+2.
+ eKoNLPySeveral issues exist in converting the Korean text into numerical expressions (e.
+g.
+,bag of words and word embedding).
+ The first issue is related to spacing.
+ UnlikeEnglish, postpositions are not space-delimited, and spacing rules are not strictlyobserved.
+ Second, numerous foreign words exist that do not follow the foreignlanguage notation standards; many of these words are field-specific.
+ Third, varioussynonyms increase the number of word combinations and dilute the frequency of n-grams.
+ Fourth, numerous verbs and adjectives conjugate irregularly.
+ Irregularconjugation also aggravates the explosion of dimension in n-gram models, whichhinders polarity classification.
+ The first issue of spacing is relatively well taken careof by currently available Korean morpheme analyzers.
+ For example, one can use (2018), one of our coauthors, for this reason.
+ eKoNLPy constructs a dictionaryspecific to economics and finance and uses its own morphological analyzer.
+Related to the second issue, eKoNLPy is equipped with pre-supplied 4,202 field-specific terms acquired from readily available economic term dictionaries on theInternet to fully support economics and finance domain-specific terms (i.
+e.
+, jargonand foreign words to the dictionary for POS tagging.
+ For the third issue, eKoNLPypre-defines 1,325 pairs of synonyms in the dictionary and supports the function ofreplacing synonyms to deal with various notations of synonyms.
+ The last issue, thatis, conjugation of adjectives and verbs, can be handled by stemming or whereas KoNLPy cannot.
+ Not all words are used to express opinions, thereby necessitating the conduct offeature selection to restrict words or phrases to a targeted list of words that expressopinions.
+ Restricting words also facilitates the speed of processing by reducing thedimension of term (word) vectors.
+ In addition, single words often lose the context.
+For example, whereas the word “recovery” in isolation appears to carry a positivethewords are combined, such as a bi-gram phrase, “lower unemployment,” theHowever, increasing the length of n-grams has a trade-off.
+ With extremely long n-grams (say, 10-grams), we might fall into the problem of over-fitting to the sample;as the lexicons are highly specific to the target documents, applying those lexicons toother types of documents is difficult, such as news articles or experts’ writings.
+exists in the number of features, and the probability of seeing the n-grams with thesamefeatures becomes small.
+ This explosion of dimension also causescomputational problems regarding memory size and speed of processing.
+avoid the explosion of dimension, we use the limited word set in forming n-gramsby limiting the part-of-speech tag of words to nouns (NNG), adjectives (VA, VAX),classification and to avoid multiple counting, we consider only the highest n-gramwhen multiple overlapping n-grams are found in each sentence.
+ We also drop n-The final word set comprised 2,712 words, and we obtain the resulting 73,428 n-grams.
+ Notably, our n-grams naturally include single words (1-grams) because wefor measuring the sentiments of sentences or documents.
+ If no well-known lists of polarity words exist, such as Harvard-IV or LMdictionary, we must classify the polarity of our selected features (n-grams in our case) supervised vs.
+ unsupervised (automated) approaches depending on whether it needshuman intervention or not.
+ Google Cloud Sentiment Analysis API is an example ofsupervised classification in which the classifier is trained on the massive amount ofdocuments.
+ An example of unsupervised approach is semantic orientation by usingpointwise mutual information (PMI) to measure the similarity between words andSecond refers to machine-learning- vs.
+ lexical-based methods.
+ The former usestraining corpora annotated with polarity information, and the latter uses polaritylexicons.
+ In the lexical-based approach, three methods exist to obtain the polaritylexicons, namely, manual, dictionary-based, and corpus-based.
+ The manual methodapproach searches the dictionary, starting from the seed words, to determine theirsynonyms and antonyms.
+ This approach requires a well-constructed lexicalinability to determine field-specific polarity words.
+ The corpus-based method findspolarity words by searching patterns that occur together, along with seed words in alarge corpus.
+ This approach has a major advantage in that it can find field- andcontext-specific sentiment words and their polarities by using a corpus of thatdomain.
+ Thus, the corpus-based approach becomes the most suitable for economicsor finance area, where jargon or words with different connotations are prevalent.
+We classify polarity of n-grams in two ways.
+ One is the market approach thatclassifies polarity from market information by using machine learning.
+ The other isthe corpus-based approach that classifies polarity by using word (n-gram in our case) because it assumes that all features are independent given the class (hawkish or dovish in our case).
+ Although NBC is not a feature selection tool, this independenceassumption makes us use the conditional probability of each feature as a polarityscore.
+Machine learning methods, including NBC, are mostly supervised ones, whichdepend on the existence of labeled training documents.
+ Training documents aregenerally obtained from the review by the public when it is available.
+ Otherwise, several experts must manually label training documents.
+ The former is unavailablefor monetary policy.
+ The latter is labor- and cost-intensive and is subject to experts’judgments.
+ To circumvent these problems and exploit the information of financialmarket, we label news articles and reports in our corpus as hawkish (dovish) if theWe randomly divide our labeled sentences (more than 4 million sentences) into afeatures for each sentence, we train the classifier and check its accuracy.
+ The trainedNBC yields the conditional probability of each feature given the class (hawkish/dovish), which we use as a polarity score of the feature:An n-gram is roughly labeled as “hawkish” if it presents itself more often inGiven that we use random sampling and a probabilistic classifier, every trainingyields different posterior probability of each class.
+ To obtain good predictiveperformance, we repeat this procedure 30 times and use the average of the polaritythe direct performance measure of our lexicon, the average accuracy of NBC is 86%(positive precision: 90%, positive recall: 84%, negative precision: 82%, negativerecall: 88%).
+We classify the polarity of our lexicon as hawkish (dovish) if the polarity score isgreater (less) than 1, excluding lexicon in the gray area by using intensity of 1.
+3 as a together frequently in the same context, they tend to have the same polarity.
+ Then, the polarity of an unknown word can be determined by calculating the relativefrequency of co-occurrence with another word.
+ This process is possible using theconcept of PMI.
+ One can use Semantic Orientation-PMI (SO-PMI) proposed byTurney (2002) for polarity classification.
+Two problems exist, despite the quite intuitive quality of this approach.
+ First, thisapproach sometimes fails to recognize antonyms because it judges the polarity basedon co-occurrence.
+ Second, the outcome is affected by choices of seed words.
+ Toaddress the first problem, we use ngram2vec by Zhao, Liu, Li, Li, and Du (2017) instead of word embedding.
+ They show that n-gram embedding is effective infinding antonyms.
+ For the second problem, we adopt the SentProp framework byHamilton et al.
+ (2016), a state-of-the-art domain-specific sentiment inductionalgorithm.
+ The SentProp framework addresses this issue by bootstrapping seedwords.
+We place the seed set of words (n-grams in our case) and our n-grams in a vectorspace (lexical graph) and measure the proximity of our n-grams to this seed.
+ Thepolarity of an n-gram is proportional to the probability of a random walk from theseed set hitting that n-gram.
+ Each feature will have two probabilities, one forhawkish and the other for dovish.
+ A final polarity score is the relative ratio of thetwo as in Equation (1).
+We train ngram2vec by using the entire 231,699 documents of our corpus.
+ Theparameters we use for training are 5-grams for center words, 5-grams for contextwords, window size of 5, negative sampling size of 5, and 300 dimensions for vector frequency limit of 25, which yield 410,902,512 pairs of n-grams (21.
+7 GB in size).
+With this resulting n-gram vector, we bootstrap by running our propagation 50times over 10 random equally sized subsets of the hawkish and dovish seed sets.
+Table 5 shows the seed sets.
+Similar to the market approach, we classify the polarity of our lexicons ashawkish (dovish) if the polarity score is greater (less) than 1, excluding lexicon inthe gray area by using intensity of 1.
+1 as a threshold.
+ The final number of lexicon is11,710 for hawkish and 12,246 for dovish.
+ Table 6 presents a sample of polaritylexicons.
+We count the number of common n-grams to see if the market and lexicalapproach provide a similar result.
+ Given 39,965 n-grams from the market approachand 23,956 n-grams from the lexical approach, a total of 14,154 common n-gramsexist.
+ Among them, 9,791 n-grams (69% of common n-grams) have the same the performance: Accuracy, Recall, Precision, and F1 score, which we will explain.
+Finally, we compare the performance of our lexicons with Korean SentimentFirst, we compare the performance of our indicators by using the documents notused in building our lexicons.
+ Documents for evaluation are introductorystatements from the BOK Governor’s news conference about monetary policydecisions.
+ With the documents from May 2009 to January 2018, we manually label2,341 sentences as hawkish, neutral, and dovish.
+ To check the consistency of ourclassification, we train an NBC with randomly selected 60% of hawkish and dovishsentences and test the remaining sentences.
+ With 30 times of iteration, the averageaccuracy of classifiers is approximately 86%, which we think is above par accuracy.
+Second, we check the accuracy of our lexicons by using labeled sentences that arecompletely out-of-sample.
+ We use the popular metrics for comparison.
+ Accuracy isthe most intuitive performance measure, which is simply a ratio of correctlypredicted observation to the total observations:where the predicted “Positive” and “Negative” refer to a model’s prediction, and theterms “True” and “False” refer to whether the prediction corresponds to the actualvalue.
+ Precision is the ratio of correctly predicted positive observations to the totalpredicted positive observations.
+ Precision is an informative measure when the costrelated to False Positive is high:Recall is the ratio of correctly predicted positive observations to all observations ofactual Positives:F1 score is the weighted average of Precision and Recall.
+ Therefore, this scoreconsiders False Positives and False Negatives.
+F1 score= ´2´ Recall PrecisionRecall+PrecisionAlthough F1 does not seem to be intuitively straightforward, it is more useful thanAccuracy in case of an uneven class distribution.
+For the lexicon generated by market approach, the accuracy is 68% (positiveprecision: 63%, positive recall: 75%, positive F1: 68%, negative precision: 74%,negative recall: 62%, negative F1: 67%).
+ For the lexicons generated by lexicalapproach, the accuracy is 67% (positive precision: 69%, positive recall: 71%, positiveF1: 70%, negative precision: 65%, negative recall: 62%, negative F1: 63%).
+Finally, to contextualize the numbers, we compare the performance of ourlexicons with KOSAC.
+ Notably, KOSAC is a general-purpose Korean sentimentof KOSAC shows relatively poor performance: the accuracy is only 53% (positiveprecision: 71%, positive recall: 57%, positive F1: 63%, negative precision: 29%,negative recall: 43%, negative F1: 35%), which is lower than 68% and 67% of ours.
+ With the lexicons in hand, the last step is to measure the tone of our targetdocuments.
+ We adopt a two-step approach to measure the tone of documents.
+ First, we calculate the tone of a sentence based on the number of hawkish and dovishfeatures (n-grams) in each sentence.
+ Specifically, the tone of a sentence s is definedby the following formula:tone=No of hawkish features No of dovish featuresNo of hawkish features No of dovish features.
+ It creates a continuous variabletone for each document, which is bound betweensentiment of monetary policy.
+ We denote the indicator based on market and lexicalapproaches byproperties and explanatory power of current and future monetary policy decisions.
+andtonetone We attempt to answer the following questions:1.
+ Can our lexicon-based indicators (, respectively.
+ We examine their statisticaltoneandtone) explain the BOK’scurrent and future monetary policy decisions? In particular, do theseindicators have additional information that are unavailable in the existingmacroeconomic data? 2.
+ Is it important to use a field-specific dictionary? 3.
+ Is it important to use the original Korean text, not Korean-to-English text? For the first question, our answer is an astounding “yes.
+” We consider anaugmented Taylor rule to compare the explanatory powers of our indicators withother macroeconomic variables.
+ Our indicators have additional explanatory power.
+For the second and third questions, we recommend sticking to the original Koreantext and using a dictionary specific to economics and finance terminologies.
+ andFigure 4 shows the time-series ofOn the basis of our methodology, we develop lexicon-based indicators thatcapture the sentiment (or tone) of the BOK MPB’s minutes:The former uses the market approach, whereas the latter uses lexical approach.
+policy rate and other measures of economic uncertainty.
+ Panel (a) in Figure 4 showsthe time-series ofcorrelation coefficient between the two indicators is 0.
+85.
+ This co-movement isinteresting, given that these two indicators are constructed differently.
+ Panel (b) shows that our indicatorcaptures the movements of the BOK policy rate.
+Panels (c) and (d) compare our indicator with other measures, such as economicpolicy uncertainty index by Baker et al.
+ (2016) and uncertainty index by Jurado et al.
+ the central bank becomes dovish, we expect the negative correlation betweentoneand measures of uncertainty.
+ Panel (c) shows that, except for the period ofthe recent financial crisis, our indicator and economic policy uncertainty index donot seem to move in opposite directions.
+ The correlation coefficient between thetonetonetone with those of the BOK Figure 5 compares our indicator, CPI (Picault and Renault (2017), to account for the BOK’s non-standard monetary policy, for a hawkish monetary policy decision (an increase of policy rate by 25 basis points),industrial production and its trend from Hodrick-Prescott filter.
+ Panel (a) clearlyshows that our indicator tracks the changes in monetary policy stance that considerstonewith monetary policy decisionsis defined as the difference between theCPI, and stock market index (KOSPI).
+ Correlation coefficient of Panel (a) in Figure 6 shows the correlation coefficients among the selectedvariables.
+ The BOK policy rate and industrial production have a strong negativecorrelation.
+ BOK policy rate is positively correlated with inflation (p) andwhereas it is negatively correlated with the economic policy uncertainty measure ofthe US and South Korea.
+ We formally test the explanatory power of variousindicators in an augmented Taylor rule specification.
+withtonetMPD , outputtone To assess the relation between the BOK MPB’s policy rate decisions and theinformation content of MPB minutes, we test the explanatory power of our lexicon-based indicators (We basically consider three kinds of specifications: a typical specification expressedin level and two kinds of differenced forms used in Picault and Renault (2017) andApel and Grimaldi (2014).
+andtoneFirst, we consider the following specification:wheregap defined as the difference between CPI and the inflation target (set to 3% before 2016 and 2% thereafter.
+ (from Hodrik-Precott filter.
+).
+ Considering the possibility that the BOK may refer to the movement ofexchange rate for its monetary policy decision, we use the rolling standard deviation for the past twelve months.
+information even after accountingTable 7 shows the result of OLS estimation of (8) with robust standard errorsindicators provide amplegaps are statistically significant, the explanatory power of inflation gap vanishes aswe include the lagged dependent variable in Column (2).
+ Throughout Columns (2) additional regressor.
+ Notably, despite the presence ofindicators ofare highly significant with p-values less than0.
+001 in all specifications.
+ When we include a variable related to exchange rate inColumns (6) and (7), output gap is no longer statistically significant.
+ Althoughexchange rate gap or its volatility are not highly significant, it seems that they takeaway some of the explanatory power of output gap.
+ Moreover, our estimation resultis notably consistent with those of previous studies, such as those of Shin (2015) andandtonetone) on contemporaneous and future decisions.
+is the inflationandor (, with whichis the output gap, where,” wherefor otherKim and Kwark (2016): The BOK is highly concerned about output gap than withinflation gap.
+ The policy rate is highly persistent; thus, including the laggeddependent variable noticeably lowers the magnitudes and statistical significance ofmacro variables.
+Second, we consider the same specification used in Picault and Renault (2017).
+They use an ordered probit model to estimate the coefficients of the forward-looking Taylor rule and compare the explanatory powers of their own lexicon-basedindicators with those of macroeconomic variables and other types of indicators.
+ Forestimation, to ensure stationarity, they estimate the differenced version of Equation whereandindicators (we use two variables following Picault and Renault (2017).
+ First, we focus on to account for the BOK’s non-standard monetary policy.
+ In a forward-lookingapproach, Equation (9) is rewritten asWe useIf the MPB minutes do provide any additional information to previously releasedmacroeconomic data, then, our indicators ofsignificant in Equations (9) and (10).
+ We also expect a positive coefficient: highlyhawkish (dovish) sentiment should be associated with tight (loose) monetary policy.
+Table 8 shows the estimation result when we measure the change in monetarypolicy stance (tonenoticeably raises the value of R2.
+ Comparing Columns (2) and (3), addingraisesobserve similar results.
+ The result from Table 8 strongly suggests that our lexicon-based indicators contain additional information that are not captured byare highly significant.
+ Moreover, addingas the change in policy rate (andtone tonetoneandshould be.
+ Our indicatorstoneor, wetonetoneTable 9 shows the result when the dependent variable isBOK’s non-standard policy.
+ We obtain similar results.
+highly significant, considerably raisingThird, we also estimate the different specification used in Apel and Grimaldi(2014) by using ordered probit:If macroeconomic variables contain all the relevant information for the next policyrate, then, the estimate ofregression equation with or withoutIP growth rate for monthly estimation.
+ We obtain the following result.
+ Thenumbers in parentheses are standard errors.
+ With, we obtainpseudo is highly significant and raises toneandtoneareafter replacing GDP growth rate with This result strongly suggests that our indicatorinformation on the future monetary policy stance beyond information inmacroeconomic variables.
+tpDtyDtpDtyDcontains relevant 1tMPD -1tMPD - One may wonder if the original Korean text should be used.
+ What if onetranslates Korean text into English and applies the standard procedures for EnglishtMPD2tMPD +tonetone, andtone), and three English-based indicators (text? It is a legitimate question given the availability of more advanced and diversetext mining techniques for English text.
+ Moreover, is it really important to use afield-specific dictionary? To answer these questions, we compare our indicatorswith four other indicators: an indicator that specializes in Korean texts and uses ageneral-purpose dictionary (tonetoneis based on Kind Korean Morpheme Analyzer(KKMA) project developed by Seoul National University Intelligent Data SystemsHowever, a general-purpose dictionary was used.
+ For English-based text analysis, we translate all the MPB’s minutes into English by using Google Cloud measures the tone of minutes by using the service ofbased on the general-purpose Harvard IV-4 dictionary, andfield-specific dictionary of Loughran and McDonald (2011).
+that ofdoes not fluctuate substantially even during the recentwithfinancial crisis.
+ Although English-based indicators have more variations than withtoneTable 6 shows the correlation coefficients.
+ The correlation coefficients of, andwithrespectively.
+ Althoughthe statistical association is extremely low.
+
+Table 10 shows the estimation result.
+ When the dependent variable is the currentchange in the BOK policy rate (fails to capture the change in BOK policy rate although it is based on the mosttonetoneisis based on thetonetonewithhas considerably less variations thanseems rather weak.
+ Panel (b) intoneare 0.
+08, 0.
+26, 0.
+10, and 0.
+39, toneare based on the original Korean texts,, andtonetonetonetonetonetoneand, tone, andtone, Columns (1) and (2) show thattonetoneandare statisticallytonesignificant at 10% level.
+ These results suggest that its use of a field-specificdictionary is important.
+ When we compare(Column [5]),the importance of the original Korean text.
+ When the dependent variable is thefuture change in BOK policy ratein terms of its statistical significance andFigure 7 and Table 10, using the original Korean text with a field-specific dictionaryis desirable.
+ The validity of our approach to quantify the information in the MPBminutes is confirmed.
+ toneinsignificant, is statistically(Column [1]) withoutperforms other indicatorsBOK +tonetonetonetpDtyDtpDtyD We develop text-based indicators that quantify the sentiment of monetary policyby using a field-specific Korean dictionary and n-grams.
+ Our indicators helpexplain current and future monetary policy decisions and perform better comparedwith other indicators.
+ Moreover, using a field-specific dictionary and the originalKorean text is important, which would benefit future research in this field.
+Our empirical results suggest several future research avenues.
+ First, examiningwhat kind of information our indicators have (or do not have) compared with theBOK policy rate and macroeconomic variables is important.
+ If we interpret theBOK policy rate as a threshold or latent variable of our indicator of monetary policysentiment, feeding our measure into the standard VAR systems or DSGE modelsthat analyze the effect of monetary policy would be interesting.
+ Alternatively, examining the implication of the discrepancy between our indicator and policy ratewould be interesting.
+ As shown in Panel (b) of Figure 4, our indicatorthe BOK policy rate started diverging from 2016.
+ Whereashawkish, the policy rate does not.
+ One can examine the information content intoneorthogonal to the policy rate.
+ Another direction would be that of Hansenand McMahon (2016).
+ They construct two separate indicators on the state ofeconomy and forward guidance from the Fed statements and use FAVAR toexamine how these two dimensions of central bank communication affect financialmarket and real variables.
+ Second, our measure can be used to evaluate theeffectiveness of central bank communication, Regardless of whether the BOK intends or not, our indicators based on the minuteshelp explain the future decision of monetary policy.
+ In this line of research, Lee, Kim, and Park (2019) propose a new method of measuring monetary policy“surprises” by measuring the differences of media tones around the dates of MPBmeetings.
+ Given that no such thing as futures exists for policy rates in South Korea, a text-based indicator would be a decent alternative.
+ One can also examine howsuccessfully the central bank delivers its intention by comparing the changes intones between central bank minutes and news articles.
+ Third, our methodology canbe easily applied to construct other indicators to measure macroeconomicuncertainty, public expectation about future monetary policy stance, and stockmarket sentiment.
+ One can examine how changes in these measures affect assetprices or real variables.
+Despite our acknowledgement of other efforts that must be conducted in thisfield, we hope that our study serves as a starting point as it demonstrates thefollowing: text mining approach can be a useful addition to the BOK andresearchers’ toolbox of analyzing monetary policy and achieving its objectives.
+tonetoneandbecomes moreincluding forward guidance.
+
