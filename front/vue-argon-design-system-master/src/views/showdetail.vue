@@ -8,7 +8,10 @@
                         <div class="card-header">
                             <h5 class="h3 mb-0">
                                 논문 정보
-                                <button class="btn btn-1 btn-primary pull-right" @click="scrapEssay()" v-if="this.$store.getters.getIsAuth == true">스크랩</button>
+                                <div v-if="this.$store.getters.getIsAuth == true">
+                                    <button class="btn btn-1 btn-primary pull-right" @click="scrapEssay()" v-if="!scrapped">스크랩 추가</button>
+                                    <button class="btn btn-1 btn-primary pull-right" @click="deleteScrap()" v-else>스크랩 삭제</button>
+                                </div>
                             </h5>
                         </div>
                         <div class="card-body">
@@ -115,7 +118,11 @@ export default {
         console.log('wordClickHandler', keyword, frequency, vm)
       },
       scrapEssay() {
-          this.$store.dispatch('addScrap', {essayId: this.$route.params.id})
+          this.$store.dispatch('addScrap', {essayId: this.$route.params.id}).then(() => {
+              this.scrapped = true
+          }).catch(e => {
+              console.log(e.message)
+          })
       },
         async getNMDetail() {
             await this.$store.dispatch(Constant.GET_NM, {sid: this.$route.params.id}).then(() => {
@@ -137,14 +144,35 @@ export default {
                 this.essay.topic = nm.subject
                 this.essay.shortDescription = nm.abstract
             })
+        },
+        async isScrapped() {
+            await this.$store.dispatch(Constant.GET_SCRAPLIST).then(() => {
+                let scraps = this.$store.state.scrapstore.scraps
+                console.log(scraps)
+                for (var sc in scraps) {
+                    if (scraps[sc].summary.id == this.$route.params.id) {
+                        this.scrapped = true
+                        break;
+                    }
+                }
+            })
+        },
+        deleteScrap() {
+            this.$store.dispatch(Constant.DELETE_SCRAP, {id: this.$route.params.id}).then(() => {
+                this.scrapped = false
+            }).catch(e => {
+              console.log(e.message)
+          })
         }
     },
     created: function() {
         this.getNMDetail()
+        this.isScrapped()
     },
     watch: {
         '$route.params.id': function() {
             this.getNMDetail()
+            this.isScrapped()
         }
     },
     data: () => ({
@@ -158,6 +186,7 @@ export default {
       ],
       keywords: [],
       model: 0,
+      scrapped: false,
       defaultWords: [
       ],
       essay: {
