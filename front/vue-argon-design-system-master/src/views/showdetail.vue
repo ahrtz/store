@@ -72,13 +72,13 @@
             <div class="row">
                 <div class="col">
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action active">
-                            추천 논문 1
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">추천 논문 2</a>
-                        <a href="#" class="list-group-item list-group-item-action">추천 논문 3</a>
-                        <a href="#" class="list-group-item list-group-item-action">추천 논문 4</a>
-                        <a href="#" class="list-group-item list-group-item-action disabled">추천 논문 5</a>
+                        <div
+                            v-for="recom in recommend"
+                            :key="recom[0]"
+                            @click="goDetail(recom[0])"
+                            class="list-group-item list-group-item-action"
+                            >{{recom[1]}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,18 +143,24 @@ export default {
                 }
                 this.essay.topic = nm.subject
                 this.essay.shortDescription = nm.abstract
+            }).then(() => {
+                this.getRecommend()
             })
         },
         async isScrapped() {
             await this.$store.dispatch(Constant.GET_SCRAPLIST).then(() => {
                 let scraps = this.$store.state.scrapstore.scraps
-                console.log(scraps)
                 for (var sc in scraps) {
                     if (scraps[sc].summary.id == this.$route.params.id) {
                         this.scrapped = true
                         break;
                     }
                 }
+            })
+        },
+        async getRecommend() {
+            await this.$store.dispatch(Constant.GET_RECOMMEND_SEARCH, {title: this.essay.title}).then(() => {
+                this.recommend = this.$store.state.filestore.recommend_search.result
             })
         },
         deleteScrap() {
@@ -197,6 +203,7 @@ export default {
           shortDescription: '',
           longDescription: ''
       },
+        recommend: [],
       colors: ["primary", "success", "danger", "warning", "info"],
     }),
 };

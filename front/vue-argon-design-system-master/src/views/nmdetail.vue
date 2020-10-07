@@ -79,7 +79,7 @@
                                 controls
                                 indicators>
                         <!-- Text slides with image -->
-                        <b-carousel-slide img-src="/img/theme/img-1-1200x1000.jpg"></b-carousel-slide>
+                        <b-carousel-slide v-for="imgName in image.img_list" :key="imgName" :img-src="'http://localhost:8000/' + image.path + '/' + imgName"></b-carousel-slide>
                         <b-carousel-slide img-src="/img/theme/img-2-1200x1000.jpg"></b-carousel-slide>
                     </b-carousel>
                 </div>
@@ -97,13 +97,13 @@
             <div class="row">
                 <div class="col">
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action active">
-                            추천 논문 1
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">추천 논문 2</a>
-                        <a href="#" class="list-group-item list-group-item-action">추천 논문 3</a>
-                        <a href="#" class="list-group-item list-group-item-action">추천 논문 4</a>
-                        <a href="#" class="list-group-item list-group-item-action disabled">추천 논문 5</a>
+                        <div
+                            v-for="recom in recommend"
+                            :key="recom[0]"
+                            @click="goDetail(recom[0])"
+                            class="list-group-item list-group-item-action"
+                            >{{recom[1]}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,6 +122,7 @@ import { BCarousel } from "bootstrap-vue/esm/components/carousel/carousel";
 import { BCarouselSlide } from "bootstrap-vue/esm/components/carousel/carousel-slide";
 import Card from "@/components/Card";
 import wordcloud from 'vue-wordcloud';
+import Constant from "@/Constant";
 
 export default {
   name: "nmdetail",
@@ -140,6 +141,9 @@ export default {
     methods: {
       wordClickHandler(keyword, frequency, vm) {
         console.log('wordClickHandler', keyword, frequency, vm)
+      },
+      goDetail(nid) {
+          this.$router.push({name: 'showdetail', params: {id: nid}})
       }
     },
     created: function() {
@@ -169,6 +173,14 @@ export default {
         }
         this.essay.longDescription = result.abstract_long
     },
+    async mounted() {
+        await this.$store.dispatch(Constant.GET_RECOMMEND, {title: this.essay.title}).then(() => {
+            this.recommend = this.$store.state.filestore.recommend.result
+        })
+        await this.$store.dispatch(Constant.GET_IMAGE).then(() => {
+            this.image = this.$store.state.filestore.image
+        })
+    },
     data: () => ({
       drawer: null,
       colors: [
@@ -187,9 +199,12 @@ export default {
           topic: 'Computer Science',
           shortDescription: [],
           longDescription: '',
-          whichDescription: false
+          whichDescription: false,
+          filename: ''
       },
       colors: ["primary", "success", "danger", "warning", "info"],
+      recommend: [],
+      image: {},
     }),
 };
 </script>

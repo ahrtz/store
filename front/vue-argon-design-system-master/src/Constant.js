@@ -14,6 +14,10 @@ export default {
     //pdf 파일 전송
     SEND_FILE : 'sendFile',
     GET_RESULT: 'getResult',
+    GET_FILENAME: 'getFileName',
+    GET_RECOMMEND: 'getRecommend',
+    GET_RECOMMEND_SEARCH: 'getRecommendSearch',
+    GET_IMAGE: 'getImage',
     TOKEN: 'TOKEN',
     ERROR_STATE: 'ERROR_STATE',
     IS_AUTH: 'IS_AUTH',
