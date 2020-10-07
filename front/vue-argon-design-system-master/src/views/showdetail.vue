@@ -70,6 +70,7 @@
             </div>
             <div class="row">
                 <div class="col">
+                    <h5 class="h3 mb-0">추천 논문</h5>
                     <div class="list-group">
                         <div
                             v-for="recom in recommend"

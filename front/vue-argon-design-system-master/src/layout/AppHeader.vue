@@ -22,7 +22,7 @@
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <base-dropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl"  v-if="this.$store.getters.getIsAuth == false"> 
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-circle-08" style="width : 10px; height:30px"></i>
+                        <i class="ni ni-circle-08 fa-2x" style="width : 10px; height:30px"></i>
                     </a>
                     <a class="dropdown-item" @click="modals.modal0 = true">로그인</a>
                     <a class="dropdown-item" @click="modals.modal1 = true">회원가입</a>
