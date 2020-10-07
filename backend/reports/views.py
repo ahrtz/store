@@ -158,18 +158,34 @@ def recommendation_file(request,title,filename):# 이거 pdf 이름이랑 제목
         for i in range(10):
             keyword.append(tmp[2*i+1])
         subject=''
-    print(abstract,keyword)
-    result=subject_classification.recommend(abstract,[subject],keywords=keyword)  # abstract 분류 키워드 
-    print(result)
+    # print(abstract,keyword)
+    result_idx,result_title,result_keyword=subject_classification.recommend(abstract,[subject],keywords=keyword)  # abstract 분류 키워드 
+    # print(result)
+    res=[]
+    for i in range(5):
+        temp=[]
+        temp.append(result_idx[i])
+        temp.append(result_title[i])
+        temp.append(result_keyword[i])
+        res.append(temp)
+    print(res)
+
     ## 영어 타이틀 읽어와서 db 검색 잇으면 그거 쓰기 
     ## 없으면 요약본 쓰기 
-    # return  Response({'path':path_dir,'img_list':file_list},status=200)
+    return  Response({'result':res},status=200)
 
 ## 검색쪽 (우리 디비,)
 ## 제목 ,분류 
 @api_view(['GET'])
 def recommendation_db(request,title):#제목
-    res=user_based.get_item_based_collabor(title)
-    print(res)
-    return 
+    result_idx,result_title,result_keyword=user_based.get_item_based_collabor(title)
+    res=[]
+    for i in range(5):
+        temp=[]
+        temp.append(result_idx[i])
+        temp.append(result_title[i])
+        temp.append(result_keyword[i])
+        res.append(temp)
+
+    return Response({'result':res},status=200)
 

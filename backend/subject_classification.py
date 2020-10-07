@@ -120,16 +120,19 @@ def get_similarity(tokenized_doc, papers):
 def recommend(tokenized_doc, classes, keywords):
     results = []
     papers = pd.read_pickle("./keyword_space.pkl")
+    print(len(classes))
     if len(classes) > 1:
         results.append(classes[0][0])
         results.append(classes[1][0])
-    elif len(classes) == 1:
+    elif len(classes) == 1 and classes[0] != '':
         is_subject = papers['subject'] == classes[0]
         papers = papers[is_subject]
     else:
+        print("%#")
         papers = papers
     
     papers_df = papers
+    # print(papers_df)
     papers_df['keyword_clean'] = papers['keyword_clean'].str.split(' ')
     papers_df = papers.explode('keyword_clean')
     # print(papers_df)
@@ -142,7 +145,9 @@ def recommend(tokenized_doc, classes, keywords):
     contains_df = contains.head(5)
     # print(contains_df['id'].tolist())
     # print(contains_df['title_kor'].tolist())
-    return contains_df['id'].tolist(), contains_df['title_kor'].tolist()
+    print(contains_df['keyword_kor'])
+    print(contains_df['keyword_clean'])
+    return contains_df['id'].tolist(), contains_df['title_kor'].tolist(),contains_df['keyword_kor'].tolist()
 
 
 if __name__ == '__main__':
