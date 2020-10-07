@@ -1,10 +1,9 @@
 <template>
     <div>
-        <h1>showdetail 여기가 검색에서 넘어오는 상세정보입니다!!!</h1>
         <div class="container ct-example-row">
             <div class="row">
                 <div class="col">
-                    <div class="card">
+                    <card>
                         <div class="card-header">
                             <h5 class="h3 mb-0">
                                 논문 정보
@@ -66,7 +65,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </card>
                 </div>
             </div>
             <div class="row">
