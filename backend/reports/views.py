@@ -93,7 +93,7 @@ def searchtitle(request,keyword): # 제목
     translator=Translator()
     key=translator.translate(keyword,dest='en').text
     paginator = PageNumberPagination()
-    report = Summary_report.objects.filter(title_eng__contains=key)
+    report = Summary_report.objects.filter(title_kor__contains=key)
     page = paginator.paginate_queryset(report, request)
     # print(page)
     serializer = ReportsListSerializers(page,many=True)
