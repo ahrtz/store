@@ -84,6 +84,8 @@ export default {
       userLogout() {
           this.$axios.post('/api/rest-auth/logout/').then(response => {
               this.$store.commit('IS_AUTH', false)
+              document.cookie = 'csrftoken=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'
+              sessionStorage.removeItem('jwt-auth-token')
               this.$router.push('/').catch(()=>{})
           }).catch(e => {
               console.log(e.message)

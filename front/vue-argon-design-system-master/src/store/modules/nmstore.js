@@ -33,9 +33,9 @@ const nmstore = {
         .catch(exp => alert('getNmList처리에 실패하였습니다!!' + exp));
     },
     //???으로 논문 하나 가져오기
-    [Constant.GET_NM]: (store, payload) => {
+    [Constant.GET_NM]: async (store, payload) => {
 
-      http.get('/reports/detail/' + payload.sid)
+      await http.get('/reports/detail/' + payload.sid)
         .then(response => {
           // console.log(response.data);
           store.commit(Constant.GET_NM, {
