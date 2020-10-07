@@ -29,8 +29,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 # if __name__ == "__main__":
 def getpdf(filename):
+    
     # print("텍스트 파일을 추출할 PDF 파일명을 입력하세요.")
-    tmp3 = settings.BASE_DIR / 'reports/images'/filename
+    tmp3 = settings.BASE_DIR / 'images' / filename
+    tmp3=str(tmp3)
+    print(tmp3,'%#$')
     # PDFfileName = 'documents/' + input() + '.pdf'
 
     # PDF를 열고, interpreter, pages 변수를 가져온다.
@@ -106,7 +109,7 @@ def getpdf(filename):
 
         if link_data == -1:
             pass
-            # print("KCI에 등록되어 있지 않은 논문이거나 사이트 액세스 오류입니다.")
+            print("KCI에 등록되어 있지 않은 논문이거나 사이트 액세스 오류입니다.")
         else:
             # 관련 정보를 추가한다.
             print_result = "링크 : " + link_data + "\n\n"
@@ -162,7 +165,7 @@ def getpdf(filename):
                 if (count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1]) < max_list[figure_list[x]]:
                     if image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])].count('No Image') == 0:
                         figure_image_name.append(figure_name[x])
-                        figure_image_src.append("reports/algo/images/" + image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])])
+                        figure_image_src.append("images/" + image_name[(count_list[figure_list[x] - 1] + max_list[figure_list[x] - 1])])
                     count_list[figure_list[x] - 1] += 1
 
             if len(figure_image_name) > 0:
@@ -207,7 +210,7 @@ def getpdf(filename):
         # print("")
 
     if len(final_result) < 100:
-        # print("논문 내용이 뽑히지 않아 다시 진행중...")
+        print("논문 내용이 뽑히지 않아 다시 진행중...")
         import tika
         tika.initVM()
         from tika import parser
@@ -265,7 +268,7 @@ def getpdf(filename):
 
     output2_name='summarize_'+filename +'.txt'
     fileOut = open(settings.BASE_DIR / 'reports/algo/outputs'/ output2_name, 'wt', encoding='utf-8')
-    print(title_data+';^'+summarize_data[0], file=fileOut)
+    print(title_data+';^'+summarize_result, file=fileOut)
     fileOut.close()
     
     output3_name='tag_'+filename +'.txt'

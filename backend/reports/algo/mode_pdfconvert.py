@@ -17,6 +17,8 @@ from .mode_imageconvert import removeAllFile
 # 이미지 저장해주는 함수
 def save_image(lt_image, PDFpathName):
     images_folder = 'images/' + PDFpathName
+    print(images_folder,'$@#$!')
+    print(lt_image)
 
     """Try to save the image data from this LTImage object, and return the file name, if successful"""
     result = None
@@ -104,7 +106,9 @@ def pdfopen(PDFfileName):
 # PDF 파일을 읽어주는 함수 (pdfminer 이용)
 def pdfread(device, interpreter, pages, PDFpathName):
     # 이미지 폴더 초기화
-    removeAllFile("images/" + PDFpathName)
+    from django.conf import settings
+
+    removeAllFile(str(settings.BASE_DIR / 'images' / PDFpathName))
 
     text_list = []
     textfont_list = []
@@ -155,7 +159,8 @@ def pdfread(device, interpreter, pages, PDFpathName):
             if isinstance(obj,LTFigure):
                 for ltimages in obj._objs:
                     if isinstance(ltimages, LTImage):
-                        result = save_image(ltimages, PDFpathName)
+                        PDFpathName1=PDFpathName+'1'
+                        result = save_image(ltimages, PDFpathName1)
                         if result:
                             image_name.append(result)
                         else:

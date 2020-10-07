@@ -1,11 +1,13 @@
 import os
 
 def removeAllFile(filePath):
-    try:
-        if not(os.path.isdir(filePath)):
-            os.makedirs(os.path.join(filePath))
-    except:
-        pass
+    # try:
+    filePath=filePath+'1'
+    if not(os.path.isdir(filePath)):
+        os.makedirs(os.path.join(filePath))
+    # except:
+        # print(1)
+        # pass
 
     if os.path.exists(filePath):
         for file in os.scandir(filePath):

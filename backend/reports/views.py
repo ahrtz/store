@@ -14,6 +14,10 @@ from googletrans import Translator
 import os
 from django.conf import settings
 
+import subject_classification
+import user_based
+
+
 class FileUploadViewSet(ModelViewSet):
     permission_classes = []
     
@@ -22,6 +26,7 @@ class FileUploadViewSet(ModelViewSet):
     parser_classes = (MultiPartParser, FormParser,JSONParser)
 
     def perform_create(self, serializer):
+        print(self.request.data)
         serializer.save(
                        datafile=self.request.data.get('datafile'),
                        abstract_long='',abstract_short='',
@@ -107,7 +112,23 @@ def searchkeyword(request,keyword):
 @api_view(['GET'])
 def getimage(request,name):
     path_dir = str(settings.BASE_DIR / 'images'/ name)
+    path_dir = path_dir+'1'
     file_list = os.listdir(path_dir)
     # serializer = ImageSerializer(path_dir=path_dir,images_id=file_list)
     # print(path_dir,file_list)
     return Response({'path':path_dir,'img_list':file_list},status=200)
+
+## 요약에서 넘겨주는거 
+## abstract 분류 키워드 
+# @api_view(['POST'])
+# def recommendation_file(request):
+#     subject_classification.recommend()  # abstract 분류 키워드 
+#     ## 영어 타이틀 읽어와서 db 검색 잇으면 그거 쓰기 
+#     ## 없으면 요약본 쓰기 
+#     return 저거 
+
+# ## 검색쪽 (우리 디비,)
+# ## 제목 ,분류 
+# @api_view(['POST'])
+# def recommendation_db(request):
+
