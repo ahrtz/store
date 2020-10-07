@@ -59,7 +59,11 @@ const scrapstore = {
     async [Constant.DELETE_SCRAP](store, payload) {
       console.log('여기');
       console.log(payload.id);
-      await axios.post(`/api/reports/scrap/delete/${payload.id}`)
+      await axios.post(`/api/reports/scrap/delete/${payload.id}`,{
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       .then(response => {
         alert('해당 스크랩이 삭제되었습니다')
         store.dispatch(Constant.GET_SCRAPLIST);

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view name="header"></router-view>
+    <!-- <router-view name="header"></router-view> -->
     <hero />
     <main>
       <fade-transition origin="center" mode="out-in" :duration="250">

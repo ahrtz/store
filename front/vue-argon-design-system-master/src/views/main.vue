@@ -1,15 +1,8 @@
 <template>
   <div>
-    <h1>메인페이지입니다.</h1>
-    <router-link to="/guide">컴포넌트 가이드</router-link>
-    <br />
-    <router-link to="/nmdetail">논문상세페이지 임시 이동 링크</router-link>
-    <br />
-    <router-link to="/search">검색페이지 임시 이동 링크</router-link>
-    <br />
-    <router-link to="/scrap">스크랩 페이지 임시 이동 링크</router-link>
-
+    <!-- <carousel /> -->
     <div style="text-align : center;">
+      <br><br>
       <h1>
         <strong>PDF 논문 요약 서비스</strong>
       </h1>

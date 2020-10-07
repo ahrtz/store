@@ -28,7 +28,8 @@ import scrap from "./views/scrap.vue";
 
 //마이페이지
 import mypage from "./views/mypage.vue";
-
+//백그라운드
+import background from "./views/background.vue";
 
 Vue.use(Router);
 
@@ -149,6 +150,16 @@ export default new Router({
         footer: AppFooter
       },
       beforeEnter: requireAuth()
+    },
+    //실험용 바탕화면
+    {
+      path: "/background",
+      name: "background",
+      components: {
+        header: AppHeader,
+        default: background,
+        footer: AppFooter
+      },
     },
 
 
