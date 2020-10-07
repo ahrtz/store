@@ -18,7 +18,7 @@ const nmstore = {
     //논문 리스트 가져오기 (전체 혹은 필터링 된 논문리스트가 거쳐가는 액션)
     [Constant.GET_NMLIST]: (store, payload) => {
       // console.log('전체리스트 가져오기 도착');
-      http.get('/reports/list/?page='+payload.pg)
+      http.get('/reports/list/?page='+payload.pg + '/')
         .then(response => {
           // console.log('전체리스트 가져오기 스토어 성공');
 
@@ -35,7 +35,7 @@ const nmstore = {
     //???으로 논문 하나 가져오기
     [Constant.GET_NM]: async (store, payload) => {
 
-      await http.get('/reports/detail/' + payload.sid)
+      await http.get('/reports/detail/' + payload.sid + '/')
         .then(response => {
           // console.log(response.data);
           store.commit(Constant.GET_NM, {

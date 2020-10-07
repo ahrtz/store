@@ -24,7 +24,7 @@
             </validation-provider>
             <footer>
                 <base-button type="primary" :disabled="invalid" @click="onSubmit">가입</base-button>
-                <base-button type="primary" @click="closeModal()">닫기</base-button>
+                <base-button type="primary" @click="justClose()">닫기</base-button>
             </footer>
         </validation-observer>
     </div>
@@ -85,6 +85,9 @@ export default {
     methods: {
         closeModal() {
             this.$emit('closemodal')
+        },
+        justClose() {
+            this.$emit('justclose')
         },
         onSubmit() {
             let successful = this.$store.dispatch('signUp', {username: this.uid, password1: this.password, password2: this.passwordVerify})

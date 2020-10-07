@@ -45,7 +45,7 @@
             </my-login>
         </modal>
         <modal :show.sync="modals.modal1">
-            <my-sign-up v-on:closemodal="modals.modal1 = false; modals.modal2 = true">
+            <my-sign-up v-on:closemodal="modals.modal1 = false; modals.modal2 = true" v-on:justclose="modals.modal1 = false;">
             </my-sign-up>
         </modal>
         <modal :show.sync="modals.modal2">

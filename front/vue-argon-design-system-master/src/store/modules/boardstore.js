@@ -70,7 +70,7 @@ const boardstore = {
         const config = {
             headers: {"jwt-auth-token": window.sessionStorage.getItem("jwt-auth-token")}
         }
-        http.put('/api/board/change/' + payload.board.bno, {
+        http.put('/api/board/change/' + payload.board.bno + '/', {
                 bno:payload.board.bno,
                 bwriter: payload.board.bwriter,
                 btitle: payload.board.btitle,
@@ -95,7 +95,7 @@ const boardstore = {
         const config = {
             headers: {"jwt-auth-token": window.sessionStorage.getItem("jwt-auth-token")}
         }
-        http.put('/api/board/read/' + payload.bno, config)
+        http.put('/api/board/read/' + payload.bno + '/', config)
             .then(() => {
                 //store.dispatch(Constant.READ_BOARD, {bno : payload.bno});
             })
@@ -107,7 +107,7 @@ const boardstore = {
         const config = {
             headers: {"jwt-auth-token": window.sessionStorage.getItem("jwt-auth-token")}
         }
-        http.delete('/api/board/delete/' + payload.bno,config)
+        http.delete('/api/board/delete/' + payload.bno + '/',config)
             .then(() => {
                 alert('삭제하였습니다.');
                 store.dispatch(Constant.GET_BOARDLIST, {bstate : payload.bstate});

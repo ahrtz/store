@@ -43,7 +43,7 @@ const scrapstore = {
     },
 
     async [Constant.ADD_SCRAP](store, payload) {
-      await axios.post(`/api/reports/scrap/make/${payload.essayId}`, {
+      await axios.post(`/api/reports/scrap/make/${payload.essayId}/`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -59,7 +59,7 @@ const scrapstore = {
     async [Constant.DELETE_SCRAP](store, payload) {
       console.log('여기');
       console.log(payload.id);
-      await axios.post(`/api/reports/scrap/delete/${payload.id}`,{
+      await axios.post(`/api/reports/scrap/delete/${payload.id}/`,{
         headers: {
           'Content-Type': 'application/json'
         }
