@@ -76,7 +76,7 @@ const nmstore = {
 
   mutations: {
     [Constant.GET_NMLIST]: (state, payload) => {
-      console.log('mutation' + payload.nms);
+      // console.log('mutation' + payload.nms);
       // console.log('뮤테');
       state.nms = payload.nms.results;
       state.count = payload.nms.count;

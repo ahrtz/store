@@ -38,8 +38,8 @@
 
       <div class="col-2">
         <select
-          class="form-control" 
-          v-model="selectval"
+          class="form-control"
+          id="selectval" 
         >
           <option value="title">제목으로 검색</option>
           <option value="keyword">키워드로 검색</option>
@@ -119,8 +119,7 @@ export default {
   data() {
     return {
       page: 1,
-      
-      selectval: "",
+
       inputval: "",
     };
   },
@@ -146,6 +145,8 @@ export default {
   methods: {
     searchnms() {
       // alert(this.selectval);
+      var selectval = document.getElementById("selectval").value;
+
       //타이틀 검색
       if (this.selectval == "title") {
         this.$store.dispatch(Constant.SEARCH_TITLE_NMLIST, {
