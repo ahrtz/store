@@ -3,7 +3,7 @@
         <div class="container ct-example-row">
             <div class="row">
                 <div class="col">
-                    <div class="card">
+                    <card>
                         <div class="card-header">
                             <h5 class="h3 mb-0">논문 정보</h5>
                         </div>
@@ -70,7 +70,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </card>
                 </div>
             </div>
             <div class="row">
@@ -188,7 +188,8 @@ export default {
           shortDescription: [],
           longDescription: '',
           whichDescription: false
-      }
+      },
+      colors: ["primary", "success", "danger", "warning", "info"],
     }),
 };
 </script>
