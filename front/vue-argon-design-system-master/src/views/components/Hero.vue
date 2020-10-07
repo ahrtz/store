@@ -13,7 +13,7 @@
           <p class="lead text-white mt-4">
             더 이상 힘들이지 말고<br />스토어를 이용해보세요!!
           </p>
-          <router-link to="/stepper" class="btn btn-white mt-4">STORE 이용 가이드</router-link>
+          <!-- <router-link to="/stepper" class="btn btn-white mt-4">STORE 이용 가이드</router-link> -->
         </div>
         <div class="col-lg-6 mb-lg-auto">
           <div
@@ -22,10 +22,13 @@
             <b-carousel id="carousel1" controls indicators>
               <!-- Text slides with image -->
               <b-carousel-slide
-                img-src="img/theme/img-1-1200x1000.jpg"
+                img-src="img/theme/논문요약.PNG"
               ></b-carousel-slide>
               <b-carousel-slide
-                img-src="img/theme/img-2-1200x1000.jpg"
+                img-src="img/theme/논문검색.PNG"
+              ></b-carousel-slide>
+              <b-carousel-slide
+                img-src="img/theme/마이스크랩.PNG"
               ></b-carousel-slide>
             </b-carousel>
           </div>
