@@ -17,5 +17,8 @@ urlpatterns = [
     path('detail/<int:report_id>',views.reports_detail),
     path('searcht/<str:keyword>/',views.searchtitle),
     path('searchk/<str:keyword>/',views.searchkeyword),
-    path('images/<str:name>/',views.getimage)
+    path('images/<str:name>/',views.getimage),
+
+    path('recommend/<str:title>/<str:filename>',views.recommendation_file),
+    path('recommend_search/<str:title>',views.recommendation_db)
 ]  

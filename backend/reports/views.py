@@ -16,7 +16,8 @@ from django.conf import settings
 
 import subject_classification
 import user_based
-
+import requests
+import xml.etree.ElementTree as ET
 
 class FileUploadViewSet(ModelViewSet):
     permission_classes = []
@@ -120,15 +121,55 @@ def getimage(request,name):
 
 ## 요약에서 넘겨주는거 
 ## abstract 분류 키워드 
-# @api_view(['POST'])
-# def recommendation_file(request):
-#     subject_classification.recommend()  # abstract 분류 키워드 
-#     ## 영어 타이틀 읽어와서 db 검색 잇으면 그거 쓰기 
-#     ## 없으면 요약본 쓰기 
-#     return 저거 
+@api_view(['GET'])
+def recommendation_file(request,title,filename):# 이거 pdf 이름이랑 제목 둘다 넘겨줘야함
+    kor_title = title
+    print(kor_title)
+    try:
+        url = "https://open.kci.go.kr/po/openapi/openApiSearch.kci?key=19192000&apiCode=articleSearch&title=" + kor_title
+        response = requests.get(url=url)
+        if(response.status_code == 200):
+            xml = response.text
+        tree = ET.ElementTree(ET.fromstring(xml))
+        root = tree.getroot()
+        eng_title = root.find('outputData').find('record').find('articleInfo').find('title-group').find('article-title[@lang="english"]').text
+        print(root)
 
-# ## 검색쪽 (우리 디비,)
-# ## 제목 ,분류 
-# @api_view(['POST'])
-# def recommendation_db(request):
+        print(eng_title)        
+
+        report = Summary_report.objects.filter(title_kor=eng_title)
+        # print(report.values())
+        abstract = report[0].abstract
+        subject = report[0].subject
+        keyword=report[0].keyword_kor   
+    except:
+        output2_name='summarize_'+filename +'.txt'
+        fileIn = open(settings.BASE_DIR / 'reports/algo/outputs'/ output2_name, 'rt', encoding='utf-8')
+        abstract = fileIn.read()
+        fileIn.close()
+
+        output3_name='tag_'+filename +'.txt'
+        fileIn = open(settings.BASE_DIR / 'reports/algo/outputs'/ output3_name, 'rt', encoding='utf-8')
+        key = fileIn.read()
+        fileIn.close()
+        keyword = []
+        tmp=list(key.split("'"))
+        # print(tmp)
+        for i in range(10):
+            keyword.append(tmp[2*i+1])
+        subject=''
+    print(abstract,keyword)
+    result=subject_classification.recommend(abstract,[subject],keywords=keyword)  # abstract 분류 키워드 
+    print(result)
+    ## 영어 타이틀 읽어와서 db 검색 잇으면 그거 쓰기 
+    ## 없으면 요약본 쓰기 
+    # return  Response({'path':path_dir,'img_list':file_list},status=200)
+
+## 검색쪽 (우리 디비,)
+## 제목 ,분류 
+@api_view(['GET'])
+def recommendation_db(request,title):#제목
+    res=user_based.get_item_based_collabor(title)
+    print(res)
+    return 
 
