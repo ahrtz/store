@@ -44,7 +44,7 @@
         {{ sid.title_kor }}
         <br />
         <router-link
-          :to="'/showdetail/' + sid.id"
+          :to="'/showdetail/' + id"
           tag="button"
           class="btn btn-primary"
           >상세보기</router-link

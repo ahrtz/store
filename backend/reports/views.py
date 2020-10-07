@@ -81,7 +81,7 @@ def make_scrap(request,report_id):
 
 @api_view(['POST'])
 def delete_scrap(request,scrap_id):
-    scrap = get_object_or_404(Scraps,id=scrap_id)
+    scrap = get_object_or_404(Scraps,summary_id=scrap_id)
     scrap.delete()
     return HttpResponse(status=200)
 

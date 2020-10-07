@@ -1,8 +1,8 @@
 <template>
-    <header class="header-global">
+    <header class="header-global" >
         <base-nav class="navbar-main" transparent type="" effect="light" expand>
             <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
-                <img src="@/assets/images/logo.png" alt="logo" style="width : 100px; height : 100px;">
+                <img src="@/assets/images/logo.png" alt="logo" style="width : 200px; height : 200px;">
             </router-link>
 
             <div class="row" slot="content-header" slot-scope="{closeMenu}">
@@ -17,7 +17,7 @@
             </div>
 
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                <router-link  class="nav-link" to="/search">논문 검색</router-link>
+                <router-link  class="nav-link" to="/search" style="font-size : 30px;">논문 검색</router-link>
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <base-dropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl"  v-if="this.$store.getters.getIsAuth == false"> 

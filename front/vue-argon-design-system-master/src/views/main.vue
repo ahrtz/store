@@ -1,6 +1,8 @@
 <template>
   <div>
+    <!-- <carousel /> -->
     <div style="text-align : center;">
+      <br><br>
       <h1>
         <strong>PDF 논문 요약 서비스</strong>
       </h1>

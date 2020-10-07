@@ -52,7 +52,7 @@
         v-for="(scrap, index) in scraps"
         :key="index"
         :sid="scrap.summary"
-        :id="scrap.id"
+        :id="scrap.summary.id"
         :keywords="scrap.summary.keyword_kor.replace(' · ',', ').split(', ').slice(0,3)"
         :addr="scrap.summary.subject"
       />
