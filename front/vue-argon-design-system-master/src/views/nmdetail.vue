@@ -35,7 +35,16 @@
                                             키워드 
                                         </div>
                                         <div class="col-10">
-                                            <span v-for="keyword in essay.keywords" :key="keyword" style="display: inline-block; width: 160px; text-align: center">{{keyword}}</span>
+                                            
+                                            <badge
+                                            class="text-uppercase"
+                                            v-for="(keyword, index) in essay.keywords"
+                                            :key="index"
+                                            :type="colors[index % 5]"
+                                            >
+                                            <b v-if="keyword.length > 30">{{ keyword.substring(0,30) }}...</b>
+                                            <b v-else>{{ keyword }}</b>
+                                            </badge>
                                         </div>
                                     </div>
                                 </li>
@@ -49,7 +58,12 @@
                                             요약
                                         </div>
                                         <div class="col-10">
-                                            <span v-if="!essay.whichDescription">{{essay.shortDescription}}</span>
+                                            <div v-if="!essay.whichDescription">
+                                                <span v-for="sentence in essay.shortDescription" :key="sentence">
+                                                    {{sentence}}
+                                                    <br><br>
+                                                </span>
+                                            </div>
                                             <span v-else>{{essay.longDescription}}</span>
                                         </div>
                                     </div>
@@ -147,7 +161,12 @@ export default {
         }
         splitResult = result.abstract_short.split(";^")
         this.essay.title = splitResult[0]
-        this.essay.shortDescription = splitResult[1]
+        splitResult = splitResult[1].split("\n")
+        for (var s in splitResult) {
+            if (splitResult[s] != "") {
+                this.essay.shortDescription.push(splitResult[s])
+            }
+        }
         this.essay.longDescription = result.abstract_long
     },
     data: () => ({
@@ -166,7 +185,7 @@ export default {
           author: 'In Ha, Yoon',
           keywords: [],
           topic: 'Computer Science',
-          shortDescription: '',
+          shortDescription: [],
           longDescription: '',
           whichDescription: false
       }

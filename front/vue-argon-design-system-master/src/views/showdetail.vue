@@ -135,7 +135,7 @@ export default {
                     }
                 }
                 this.essay.topic = nm.subject
-                this.essay.shortDescription = nm.abstract   
+                this.essay.shortDescription = nm.abstract
             })
         }
     },
