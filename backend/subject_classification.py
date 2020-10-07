@@ -118,25 +118,16 @@ def get_similarity(tokenized_doc, papers):
     print(df)
 
 def recommend(tokenized_doc, classes, keywords):
-    # results = []
-    # if len(classes) > 1:
-    #     results.append(classes[0][0])
-    #     results.append(classes[1][0])
-    # else:
-    #     results.append(classes[0][0])
-    # print(results)
-    
-    # abstract / 분류
-    # => 영어로 바꾸고 => 모델 돌려서 나온 분류 : 진짜 분류 비교
-    # => 다르면 진짜 분류 써서 keyword 찢은거 검색하는 식으로
-
-    # classes에서 2개를 가지고
-    # sqlite에서 scrap이나 quote가 높은 논문을 500개정도 뽑은 다음에
-    # cosine 유사도를 통해 추천을 뽑아냄
+    results = []
     papers = pd.read_pickle("./keyword_space.pkl")
-    # is_subject = papers['label'] == results[0]
-    is_subject = papers['subject'] == '생활과학'
-    papers = papers[is_subject]
+    if len(classes) > 1:
+        results.append(classes[0][0])
+        results.append(classes[1][0])
+    elif len(classes) == 1:
+        is_subject = papers['subject'] == classes[0]
+        papers = papers[is_subject]
+    else:
+        papers = papers
     
     papers_df = papers
     papers_df['keyword_clean'] = papers['keyword_clean'].str.split(' ')
@@ -148,15 +139,17 @@ def recommend(tokenized_doc, classes, keywords):
     for key in keywords:
         contains = pd.concat([contains, papers_df[papers_df['keyword_clean'].str.contains(key)]])
     contains = contains.drop_duplicates(['id'])
-    # print(contains.head(10))
-    return contains.head(5)
+    contains_df = contains.head(5)
+    # print(contains_df['id'].tolist())
+    # print(contains_df['title_kor'].tolist())
+    return contains_df['id'].tolist(), contains_df['title_kor'].tolist()
 
 
 if __name__ == '__main__':
+    keywords = ['Textile', 'Handloom', 'structure']   # 요약된 논문의 keyword
     abstract = "The effects of flow field upon the distribution of ionic concentration, electric potential, concentration boundary layer thickness, and electric current density were investigated. A modified numerical scheme is proposed to simulate the corresponding electrochemical system which is governed by nonlinear partial differential equations. Seven types of geometries and various flow fields with Reynolds numbers up to 2100 are considered. The obtained results indicate the current numerical method can successfully simulate the increase of current density on the cathode as the applied potential cell increases, and that rise will continue until the limiting current density is reached. To predict the effect of fluid flow, the proposed scheme is applied for various Peclet numbers. The increase of current density for Peclet numbers between 1 and 104 is quite evident. But for large Peclet numbers between 104 and 107 , the current density increases gradually. The results also show that as the anode size is doubled, the maximum current density occurs at the leading and trailing edges. However, if the cathode size is doubled, the maximum current density occurs at the center regions of it. Knowing the regions where current density is extremum helps electochemical system designers to control the parameters of the corresponding process."
     # abstract = data_preprocessing(abstract) # 요약된 논문의 abstract 데이터 전처리
-    # classes = data_classification(abstract) # 요약된 논문의 분류 구하기
     classes = []    # 요약된 논문의 분류
-    keywords = ['Textile', 'Handloom', 'structure']   # 요약된 논문의 keyword
+    # classes = data_classification(abstract) # 요약된 논문의 분류 구하기
     recommend(abstract, classes, keywords)
 
