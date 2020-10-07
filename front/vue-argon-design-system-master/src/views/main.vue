@@ -2,10 +2,9 @@
   <div>
     <!-- <carousel /> -->
     <div style="text-align : center;">
-      <br><br>
-      <h1>
-        <strong>PDF 논문 요약 서비스</strong>
-      </h1>
+      <br><br><br>
+      <div style="font-size: 4rem; font-family: 'Black Han Sans', sans-serif; text-align:center;">PDF KCI 논문 요약 서비스</div>
+
     </div>
     <div>
       <file v-on:update="showloading" />
