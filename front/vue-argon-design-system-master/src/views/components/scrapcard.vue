@@ -62,7 +62,7 @@
 
         <i class="icon icon-comments_count"></i>
 
-        <i class="reg_date"> 발행연월 {{ sid.issue_year }} </i>
+        <i class="reg_date"> 발행연도 {{ String(sid.issue_year).substring(0, 4) }} </i>
       </div>
     </div>
   </div>
@@ -75,8 +75,8 @@ export default {
   data() {
     return {
       selectedCard: -1,
-      addr: this.sid.subject,
-      keywords: this.sid.keyword_kor.replace(" · ",", ").split(", ").slice(0,3),
+      // addr: this.sid.subject,
+      // keywords: this.sid.keyword_kor.replace(" · ",", ").split(", ").slice(0,3),
       colors: ["primary", "success", "danger", "warning", "info"],
     };
   },
@@ -87,6 +87,14 @@ export default {
     },
     id: {
       type: Number,
+      required: true,
+    },
+    keywords: {
+      type: Array,
+      required: true,
+    },
+    addr: {
+      type: String,
       required: true,
     },
   },

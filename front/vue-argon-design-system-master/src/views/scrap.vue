@@ -1,5 +1,7 @@
 <template>
   <div class="container2">
+        <!-- <router-link to="/background">백그라운드</router-link> -->
+
     <div class="col-12" style="display: flex">
       <div class="col-2">
         <!-- <select
@@ -20,9 +22,10 @@
           class="form-control"
           data-toggle="select"
           data-minimum-results-for-search="Infinity"
-          v-model="selectval"
+          id="selectval"
         >
-          <option value="title">제목으로 검색</option>
+          <!-- v-model="selectval" -->
+          <option value="title" selected>제목으로 검색</option>
           <option value="keyword">키워드로 검색</option>
         </select>
       </div>
@@ -50,6 +53,8 @@
         :key="index"
         :sid="scrap.summary"
         :id="scrap.id"
+        :keywords="scrap.summary.keyword_kor.replace(' · ',', ').split(', ').slice(0,3)"
+        :addr="scrap.summary.subject"
       />
     </div>
     <div v-else>
@@ -82,7 +87,6 @@ export default {
     return {
       page: 1,
       // pagecnt: this.$store.state.scrapstore.pagecnt,
-      selectval: "",
       sv: "", //서치 밸류
     };
   },
@@ -116,15 +120,18 @@ export default {
     async searchscrap() {
       await this.$store.dispatch("getScraplist");
 
+      var selectval = document.getElementById('selectval').value;
+      // alert(selectval);
       //타이틀 검색
-      if (this.selectval == "title") {
+      if (selectval == "title") {
         // console.log(this.sv)
         if (this.sv == "") {
           this.$store.dispatch("getScraplist");
         } else {
           var temp = [];
           for (let i = 0; i < this.scraps.length; i++) {
-            if (this.scraps[i].summary.title_kor.includes(this.sv))
+            // console.log(this.scraps[i].summary.title_kor.indexOf(this.sv))
+            if (this.scraps[i].summary.title_kor.indexOf(this.sv) != -1)
               temp.push(this.scraps[i]);
           }
           this.$store.state.scrapstore.scraps = temp;
@@ -140,7 +147,7 @@ export default {
             var kws = this.scraps[i].summary.keyword_kor
               .replace(" · ", ", ")
               .split(", ");
-            console.dir(kws.length);
+            // console.dir(kws.length);
             for (let j = 0; j < kws.length; j++) {
               if (kws[j].includes(this.sv)) {
                 temp.push(this.scraps[i]);
