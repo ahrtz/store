@@ -10,7 +10,7 @@ import sqlite3
 from sklearn.metrics.pairwise import cosine_similarity
 
 # 아이템 기반 협업 필터링(item based collaborative filtering)
-def get_item_based_collabor(subject):  ## 이건 스크랩 별로 없어도
+def get_item_based_collabor(title):  ## 이건 스크랩 별로 없어도
     ## scrap: 장고 dbsql 접근
     con = sqlite3.connect("./db.sqlite3")
     cur = con.cursor()
@@ -27,20 +27,33 @@ def get_item_based_collabor(subject):  ## 이건 스크랩 별로 없어도
     # print(paper_data)
 
     user_scrap_paper = pd.merge(scrap_data, paper_data, on='summary_id')
-    print("1",user_scrap_paper) 
+    # print("1",user_scrap_paper) 
 
     scrap_user_paper = user_scrap_paper.pivot_table('rating', index='title_kor', columns='user_id')
     user_scrap_paper = user_scrap_paper.pivot_table('rating', index='user_id', columns='title_kor')
     scrap_user_paper.fillna(0, inplace=True)
-    print("2",user_scrap_paper)
-    print("3",scrap_user_paper)
+    # print("2",user_scrap_paper)
+    # print("3",scrap_user_paper)
 
     item_based_collabor = cosine_similarity(scrap_user_paper, scrap_user_paper)
 
     item_based_collabor_df = pd.DataFrame(data=item_based_collabor, index=scrap_user_paper.index, columns=scrap_user_paper.index)
-    print(item_based_collabor_df)
-    
-    return item_based_collabor_df['Bio-EPDM/tungsten oxide nanocomposite foam with improved thermal storage and sea water resistance'].sort_values(ascending=False)[:6]
+    # print(item_based_collabor_df)
+
+    # title로 바껴야됨
+    results = item_based_collabor_df['Bio-EPDM/tungsten oxide nanocomposite foam with improved thermal storage and sea water resistance'].sort_values(ascending=False)[:6]
+    titles_list = results.index.tolist()
+
+    titles_df = pd.DataFrame()
+    for item in titles_list:
+        if title == item:
+            continue
+        print(item)
+        is_title = paper_data['title_kor'] == item
+        titles_df = pd.concat([titles_df, paper_data[is_title]])
+
+    print(titles_df)
+    return titles_df['id'].tolist(), titles_df['title_kor'].tolist()
 
 # 잠재 요인(latent factor)기반 - 협업 필터링 Matrix Factorization
 # 개인에게 맞춤형이 추천이 아닌, 특정 논문과 비슷한 논문 추천
@@ -59,10 +72,10 @@ def get_matrix_factorization(title): # 이거 사용하는걸로 대신 스크�
 
     user_scrap_paper = pd.merge(scrap_data, paper_data, on='summary_id')
     user_scrap_paper = user_scrap_paper.pivot_table('rating', index='user_id', columns='title_kor').fillna(0)
-    print(user_scrap_paper.shape)
+    # print(user_scrap_paper.shape)
     
     scrap_user_paper = user_scrap_paper.values.T
-    print(scrap_user_paper.shape)
+    # print(scrap_user_paper.shape)
     
     # latent값 => user data가 많이 쌓이면 다른것도 가능
     SVD = TruncatedSVD(n_components=2)
@@ -70,9 +83,9 @@ def get_matrix_factorization(title): # 이거 사용하는걸로 대신 스크�
     matrix.shape
     
     corr = np.corrcoef(matrix)
-    print(corr.shape)
+    # print(corr.shape)
     corr2 = corr[:200, :200]
-    print(corr2.shape)
+    # print(corr2.shape)
 
     plt.figure(figsize=(16, 10))
     sns.heatmap(corr2)
@@ -82,7 +95,12 @@ def get_matrix_factorization(title): # 이거 사용하는걸로 대신 스크�
     # title로 바껴야함
     coffey_hands = paper_title_list.index('Bio-EPDM/tungsten oxide nanocomposite foam with improved thermal storage and sea water resistance')
     corr_coffey_hands = corr[coffey_hands]
-    print(list(paper_title[(corr_coffey_hands >= 0.9)])[:50])
+    results = list(paper_title[(corr_coffey_hands >= 0.9)])[:6]
+    print(results)
+    
+    # for item in results:
+
+    # return results['id']
 
 # 개인 히스토리를 기반으로 논문 추천
 def get_matrix_factorization_user_based():
@@ -124,8 +142,8 @@ def recommend_paper_using_matrix_factorization(df_svd_preds, user_id, org_paper_
     return user_history, recommendations
 
 if __name__ == '__main__':
-    # print(get_item_based_collabor('subject'))
-    get_matrix_factorization("  ")
+    print(get_item_based_collabor('title'))
+    # get_matrix_factorization("  ")
 
 
 
