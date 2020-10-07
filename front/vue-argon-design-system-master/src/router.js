@@ -30,6 +30,7 @@ import scrap from "./views/scrap.vue";
 import mypage from "./views/mypage.vue";
 //백그라운드
 import background from "./views/background.vue";
+import stepper from "./views/components/stepper.vue";
 
 Vue.use(Router);
 
@@ -158,6 +159,16 @@ export default new Router({
       components: {
         header: AppHeader,
         default: background,
+        footer: AppFooter
+      },
+    },
+    //스태퍼
+    {
+      path: "/stepper",
+      name: "stepper",
+      components: {
+        header: AppHeader,
+        default: stepper,
         footer: AppFooter
       },
     },

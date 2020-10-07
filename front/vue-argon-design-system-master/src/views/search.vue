@@ -1,5 +1,7 @@
 <template>
   <div class="container2">
+          <div style="font-size: 4rem; font-family: 'Black Han Sans', sans-serif; text-align:left;">논문 검색</div>
+
     <div class="col-12" style="display: flex">
       <div class="col-2">
         <!-- <select
