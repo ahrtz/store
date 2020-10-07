@@ -112,7 +112,8 @@ def searchkeyword(request,keyword):
 
 @api_view(['GET'])
 def getimage(request,name):
-    path_dir = str(settings.BASE_DIR / 'images'/ name)
+
+    path_dir =  'images/' + name
     path_dir = path_dir+'1'
     file_list = os.listdir(path_dir)
     # serializer = ImageSerializer(path_dir=path_dir,images_id=file_list)
