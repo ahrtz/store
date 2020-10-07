@@ -53,7 +53,7 @@ def get_item_based_collabor(title):  ## 이건 스크랩 별로 없어도
         titles_df = pd.concat([titles_df, paper_data[is_title]])
 
     print(titles_df)
-    return titles_df['id'].tolist(), titles_df['title_kor'].tolist()
+    return titles_df['id'].tolist(), titles_df['title_kor'].tolist(),titles_df['keyword_kor'].tolist()
 
 # 잠재 요인(latent factor)기반 - 협업 필터링 Matrix Factorization
 # 개인에게 맞춤형이 추천이 아닌, 특정 논문과 비슷한 논문 추천
