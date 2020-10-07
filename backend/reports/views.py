@@ -178,14 +178,16 @@ def recommendation_file(request,title,filename):# 이거 pdf 이름이랑 제목
 ## 제목 ,분류 
 @api_view(['GET'])
 def recommendation_db(request,title):#제목
-    result_idx,result_title,result_keyword=user_based.get_item_based_collabor(title)
-    res=[]
-    for i in range(5):
-        temp=[]
-        temp.append(result_idx[i])
-        temp.append(result_title[i])
-        temp.append(result_keyword[i])
-        res.append(temp)
+    try:
+        result_idx,result_title,result_keyword=user_based.get_item_based_collabor(title)
+        res=[]
+        for i in range(5):
+            temp=[]
+            temp.append(result_idx[i])
+            temp.append(result_title[i])
+            temp.append(result_keyword[i])
+            res.append(temp)
 
-    return Response({'result':res},status=200)
-
+        return Response({'result':res},status=200)
+    except:
+        return Response({'message':'아직 데이터가 모자라요'},status=200)
