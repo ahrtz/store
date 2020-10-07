@@ -117,6 +117,9 @@ export default {
       wordClickHandler(keyword, frequency, vm) {
         console.log('wordClickHandler', keyword, frequency, vm)
       },
+      goDetail(nid) {
+          this.$router.push({name: 'showdetail', params: {id: nid}})
+      },
       scrapEssay() {
           this.$store.dispatch('addScrap', {essayId: this.$route.params.id}).then(() => {
               this.scrapped = true
