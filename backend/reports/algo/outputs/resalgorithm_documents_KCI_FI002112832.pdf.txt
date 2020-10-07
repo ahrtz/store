@@ -1,14 +1,14 @@
 그림
-<그림 1> 분석의 틀  reports/algo/images/Im1.jpg
-<그림 2> 민선 3기 네트워크 분석  reports/algo/images/Im2.jpg
-<그림 3> 민선 4기 네트워크 분석  reports/algo/images/Im3.jpg
-<그림 4> 민선 5기 네트워크 분석  reports/algo/images/Im4.jpg
-<그림 5> 민선 6기 네트워크 분석  reports/algo/images/Im5.jpg
-<그림 6> 민선 3기 연결 중심성 분석  reports/algo/images/Im6.jpg
-<그림 7> 민선 4기 연결 중심성 분석  reports/algo/images/Im7.jpg
-<그림 8> 민선 5기 연결 중심성 분석  reports/algo/images/Im8.jpg
-<그림 9> 민선 6기 연결 중심성 분석  reports/algo/images/Im9.jpg
-<그림 10> 민선 3기 매개 중심성 분석  reports/algo/images/Im10.jpg
+<그림 1> 분석의 틀  images/Im1.jpg
+<그림 2> 민선 3기 네트워크 분석  images/Im2.jpg
+<그림 3> 민선 4기 네트워크 분석  images/Im3.jpg
+<그림 4> 민선 5기 네트워크 분석  images/Im4.jpg
+<그림 5> 민선 6기 네트워크 분석  images/Im5.jpg
+<그림 6> 민선 3기 연결 중심성 분석  images/Im6.jpg
+<그림 7> 민선 4기 연결 중심성 분석  images/Im7.jpg
+<그림 8> 민선 5기 연결 중심성 분석  images/Im8.jpg
+<그림 9> 민선 6기 연결 중심성 분석  images/Im9.jpg
+<그림 10> 민선 3기 매개 중심성 분석  images/Im10.jpg
 
 논문 내용
 지방은 수도권에 비해 정치, 경제, 문화, 교육 등 많은 분야에서 소외되어 왔다.

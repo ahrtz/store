@@ -39,22 +39,25 @@
                                             키워드 
                                         </div>
                                         <div class="col-10">
-                                            <span v-for="keyword in essay.keywords" :key="keyword" style="display: inline-block; margin-right: 20px">{{keyword}}</span>
+                                            <badge
+                                            class="text-uppercase"
+                                            v-for="(keyword, index) in essay.keywords"
+                                            :key="index"
+                                            :type="colors[index % 5]"
+                                            >
+                                            <b v-if="keyword.length > 30">{{ keyword.substring(0,30) }}...</b>
+                                            <b v-else>{{ keyword }}</b>
+                                            </badge>
                                         </div>
                                     </div>
                                 </li>
-                                <base-button type="success" @click="essay.whichDescription = !essay.whichDescription">
-                                    <span v-if="!essay.whichDescription">요약</span>
-                                    <span v-else>본문</span>
-                                </base-button>
                                 <li class="list-group-item px-0">
                                     <div class="row align-items-center">
                                         <div class="col">
                                             요약
                                         </div>
                                         <div class="col-10">
-                                            <span v-if="!essay.whichDescription">{{essay.shortDescription}}</span>
-                                            <span v-else>{{essay.longDescription}}</span>
+                                            <span>{{essay.shortDescription}}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -62,27 +65,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <b-carousel id="carousel1"
-                                controls
-                                indicators>
-                        <!-- Text slides with image -->
-                        <b-carousel-slide img-src="/img/theme/img-1-1200x1000.jpg"></b-carousel-slide>
-                        <b-carousel-slide img-src="/img/theme/img-2-1200x1000.jpg"></b-carousel-slide>
-                    </b-carousel>
-                </div>
-                <div class="col">
-                    <wordcloud
-                        :data="defaultWords"
-                        nameKey="keyword"
-                        valueKey="frequency"
-                        :showTooltip="false"
-                        :color="Accent"
-                        :wordClick="wordClickHandler">
-                    </wordcloud>
-                </div>  
             </div>
             <div class="row">
                 <div class="col">
@@ -112,6 +94,7 @@ import { BCarousel } from "bootstrap-vue/esm/components/carousel/carousel";
 import { BCarouselSlide } from "bootstrap-vue/esm/components/carousel/carousel-slide";
 import Card from "@/components/Card";
 import wordcloud from 'vue-wordcloud';
+import Constant from "@/Constant";
 
 export default {
   name: "showdetail",
@@ -133,30 +116,37 @@ export default {
       },
       scrapEssay() {
           this.$store.dispatch('addScrap', {essayId: this.$route.params.id})
-      }
-    },
-    /*
-    created: function() {
-        let result = this.$store.getters.getResult
-        let splitResult = result.key.split(/[, ()]+/)
-        var a = new Object()
-        for (var s in splitResult) {
-            if (splitResult[s] != "[" && splitResult[s] != "]") {
-                if (isNaN(parseInt(splitResult[s]))) {
-                    a.keyword = splitResult[s]
+      },
+        async getNMDetail() {
+            await this.$store.dispatch(Constant.GET_NM, {sid: this.$route.params.id}).then(() => {
+                let nm = this.$store.state.nmstore.nm
+                this.essay.title = nm.title_kor != "" ? nm.title_kor : nm.title_eng
+                this.essay.author = nm.main_author + " / " + nm.sub_author
+                if (nm.keyword_kor != "") {
+                    let splitResult = nm.keyword_kor.split(", ")
+                    for (var s in splitResult) {
+                        this.essay.keywords.push(splitResult[s])
+                    }
                 }
-                else {
-                    a.frequency = parseInt(splitResult[s])
-                    defaultWords.push(a)
+                if (nm.keyword_eng != "") {
+                    splitResult = nm.keyword_eng.split(", ")
+                    for (var s in splitResult) {
+                        this.essay.keywords.push(splitResult[s])
+                    }
                 }
-            }
+                this.essay.topic = nm.subject
+                this.essay.shortDescription = nm.abstract   
+            })
         }
-        splitResult = result.abstract_short.split(";^")
-        this.essay.title = splitResult[0]
-        this.essay.shortDescription = splitResult[1]
-        this.essay.longDescription = result.abstract_long
     },
-    */
+    created: function() {
+        this.getNMDetail()
+    },
+    watch: {
+        '$route.params.id': function() {
+            this.getNMDetail()
+        }
+    },
     data: () => ({
       drawer: null,
       colors: [
@@ -176,9 +166,9 @@ export default {
           keywords: [],
           topic: 'Computer Science',
           shortDescription: '',
-          longDescription: '',
-          whichDescription: false
-      }
+          longDescription: ''
+      },
+      colors: ["primary", "success", "danger", "warning", "info"],
     }),
 };
 </script>
