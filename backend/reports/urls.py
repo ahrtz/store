@@ -2,7 +2,8 @@ from django.urls import path, include
 
 from . import views
 from rest_framework import routers
-
+from django.conf import settings  
+from django.conf.urls.static import static  
 router = routers.DefaultRouter()
 router.register(r'addreport',views.FileUploadViewSet,basename='testing')
 
@@ -21,4 +22,5 @@ urlpatterns = [
 
     path('recommend/<str:title>/<str:filename>/',views.recommendation_file),
     path('recommend_search/<str:title>/',views.recommendation_db)
-]  
+]   
+urlpatterns +=  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
