@@ -162,11 +162,11 @@
 
 #### 요약 알고리즘
 
-[여기]()를 클릭하세요.
+[여기](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a406/blob/develop/algorithm/README.md)를 클릭하세요.
 
 #### 추천 알고리즘
 
-[여기]()를 클릭하세요.
+[여기](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a406/blob/develop/doc/Recommend_System.md)를 클릭하세요.
 
 
 
@@ -195,7 +195,7 @@
 * 김순빈 - Soonbeen Kim - ksb940925@gmail.com - @soo-ni
 * 유동균 - Donggyun Yoo - ydk9581@gmail.com - @whydizzy27
 * 윤인하 - Inha Yoon - dlsgk147@naver.com - @dlsgk147
-* 정다비치 - 
+* 정다비치 - Davichi Jeong - davichiar8@gmail.com - @davichiar
 
 
 
