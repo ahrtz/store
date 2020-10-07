@@ -1,6 +1,7 @@
 <template>
   <div class="container2">
         <!-- <router-link to="/background">백그라운드</router-link> -->
+          <div style="font-size: 4rem; font-family: 'Black Han Sans', sans-serif; text-align:left;">마이스크랩</div>
 
     <div class="col-12" style="display: flex">
       <div class="col-2">

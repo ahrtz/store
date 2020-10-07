@@ -22,21 +22,21 @@
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <base-dropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl"  v-if="this.$store.getters.getIsAuth == false"> 
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-circle-08"></i>
+                        <i class="ni ni-circle-08" style="width : 10px; height:30px"></i>
                     </a>
                     <a class="dropdown-item" @click="modals.modal0 = true">로그인</a>
                     <a class="dropdown-item" @click="modals.modal1 = true">회원가입</a>
                 </base-dropdown>
                 <base-dropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl"  v-else> 
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-circle-08"></i>
+                        <i class="ni ni-circle-08 fa-2x"></i>
                     </a>
                     <a class="dropdown-item" @click="userLogout()">로그아웃</a>
                     <a class="dropdown-item" @click="modals.modal2 = true">선호주제</a>
                 </base-dropdown>
 
                 <div tag="li" class="nav-item">
-                    <router-link slot="title" to="/scrap" class="nav-link" role="button" v-if="this.$store.getters.getIsAuth == true">마이스크랩</router-link>
+                    <router-link slot="title" to="/scrap" class="nav-link" role="button" v-if="this.$store.getters.getIsAuth == true" style="font-size : 30px;">마이스크랩</router-link>
                 </div>
             </ul>
         </base-nav>
