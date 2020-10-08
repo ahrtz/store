@@ -22,16 +22,6 @@
                                 <li class="list-group-item px-0">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            분야
-                                        </div>
-                                        <div class="col-10">
-                                            <span>{{essay.topic}}</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item px-0">
-                                    <div class="row align-items-center">
-                                        <div class="col">
                                             키워드 
                                         </div>
                                         <div class="col-10">
@@ -193,10 +183,10 @@ export default {
       model: 0,
       defaultWords: [],
       essay: {
-          title: 'Application of Digital Forensics for Epidemiological Contact Tracing',
-          author: 'In Ha, Yoon',
+          title: '',
+          author: '',
           keywords: [],
-          topic: 'Computer Science',
+          topic: '',
           shortDescription: [],
           longDescription: '',
           whichDescription: false,

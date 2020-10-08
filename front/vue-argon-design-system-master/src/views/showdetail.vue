@@ -201,10 +201,10 @@ export default {
       defaultWords: [
       ],
       essay: {
-          title: 'Application of Digital Forensics for Epidemiological Contact Tracing',
-          author: 'In Ha, Yoon',
+          title: '',
+          author: '',
           keywords: [],
-          topic: 'Computer Science',
+          topic: '',
           shortDescription: '',
           longDescription: ''
       },
