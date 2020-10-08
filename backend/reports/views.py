@@ -72,17 +72,21 @@ def scrap_list(request):
 
 @api_view(['POST'])
 def make_scrap(request,report_id):
-    report = get_object_or_404(Summary_report,id=report_id)
-    serializer = ScrapsSerializers(data=request.data)
-    print(report.title_kor)
-    if serializer.is_valid():
-        serializer.save(user=request.user,summary=report)
-        return Response(serializer.data)
-    return HttpResponse(status = 404)
+    if Scraps.objects.filter(user_id=request.user.id,summary_id=report_id):
+        return Response({'message':'이미스크랩'},status=300)
+    else:
+        report = get_object_or_404(Summary_report,id=report_id)
+        serializer = ScrapsSerializers(data=request.data)
+        print(report.title_kor)
+        if serializer.is_valid():
+            serializer.save(user=request.user,summary=report)
+            return Response(serializer.data)
+        return HttpResponse(status = 404)
 
 @api_view(['POST'])
 def delete_scrap(request,scrap_id):
-    scrap = get_object_or_404(Scraps,summary_id=scrap_id)
+    # print(request.user)
+    scrap = get_object_or_404(Scraps,summary_id=scrap_id,user_id=request.user.id)
     scrap.delete()
     return HttpResponse(status=200)
 
