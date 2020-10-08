@@ -139,7 +139,7 @@ export default {
                     }
                 }
                 if (nm.keyword_eng != "") {
-                    splitResult = nm.keyword_eng.split(", ")
+                    let splitResult = nm.keyword_eng.split(", ")
                     for (var s in splitResult) {
                         this.essay.keywords.push(splitResult[s])
                     }
