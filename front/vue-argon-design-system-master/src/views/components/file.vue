@@ -136,12 +136,16 @@ export default {
       if (type != "pdf") {
         alert("pdf 형식의 논문만 요약 가능합니다.");
       } else {
-        this.$emit("update");
-        await this.$store
-          .dispatch(Constant.SEND_FILE, { file: file.file })
-          .then(() => {
-            this.$router.push("/nmdetail");
-          });
+        if (file.name.indexOf(" ") == -1) {
+          this.$emit("update");
+          await this.$store
+            .dispatch(Constant.SEND_FILE, { file: file.file })
+            .then(() => {
+              this.$router.push("/nmdetail");
+            });
+        } else {
+          alert("파일명에 공백을 제거해주세요!");
+        }
       }
     },
   },
