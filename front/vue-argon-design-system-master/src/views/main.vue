@@ -9,7 +9,7 @@
     <div>
       <file v-on:update="showloading" />
     </div>
-      <div style="font-size: 2rem; font-family: 'Black Han Sans', sans-serif; text-align:center;">※ KCI 논문만 요약이 가능하며 영어 논문 요약의 경우 한글보다 더 오래 걸릴 수도 있습니다.</div>
+      <div style="font-size: 2rem; font-family: 'Black Han Sans', sans-serif; text-align:center;">※ KCI 논문에 최적화되어 있으며 영어 논문 요약의 경우 한글보다 더 오래 걸릴 수도 있습니다.</div>
       <br><br><br>
     <div>
       <introduce />
