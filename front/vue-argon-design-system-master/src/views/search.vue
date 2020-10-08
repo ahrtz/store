@@ -1,5 +1,7 @@
 <template>
   <div class="container2">
+          <div style="font-size: 4rem; font-family: 'Black Han Sans', sans-serif; text-align:left;">논문 검색</div>
+
     <div class="col-12" style="display: flex">
       <div class="col-2">
         <!-- <select
@@ -38,8 +40,8 @@
 
       <div class="col-2">
         <select
-          class="form-control" 
-          v-model="selectval"
+          class="form-control"
+          id="selectval" 
         >
           <option value="title">제목으로 검색</option>
           <option value="keyword">키워드로 검색</option>
@@ -65,37 +67,26 @@
         <table class="table align-items-center" style="margin: 10px">
           <thead class="thead-light">
             <tr>
-              <th>논문명</th>
+              <!-- <th></th> -->
+              <th>논문명 / 키워드</th>
               <th>분류</th>
-              <th>저자 발행기관</th>
-              <th>초록</th>
-              <th>상세보기</th>
+              <th>저자 / 발행기관</th>
+              <th></th>
+              <th></th>
+              
             </tr>
           </thead>
           <tbody class="list">
             <tr>
               <td colspan="6">
                 <!-- v-for="(nm,index) in nms.slice(this.perPage*(currentPage-1),perPage*(currentPage))" -->
-                <nmcard v-for="(nm, index) in nms" :key="index" :nm="nm" />
+                <nmcard v-for="(nm, index) in nms" :key="index" 
+                :nm="nm" 
+                :keywords="nm.keyword_kor.replace(' · ',', ').split(', ')"
+                :subcnt="nm.sub_author.split(',').length"
+                />
               </td>
-              <!-- <th scope="row">
-                <div class="media align-items-center">
-                  <div class="media-body">
-                    <span class="name mb-0 text-sm">Argon Design System</span>
-                  </div>
-                </div>
-              </th>
-              <td class="budget">$2500 USD</td>
-              <td>
-                <span class="status">pending</span>
-              </td>
-              <td>
-                <div class="avatar-group">ddd</div>
-              </td>
-              <td>
-                <span class="completion mr-2">60%</span>
-              </td>
-              <td class="text-right"></td>-->
+              
             </tr>
           </tbody>
         </table>
@@ -130,8 +121,7 @@ export default {
   data() {
     return {
       page: 1,
-      
-      selectval: "",
+
       inputval: "",
     };
   },
@@ -157,6 +147,8 @@ export default {
   methods: {
     searchnms() {
       // alert(this.selectval);
+      var selectval = document.getElementById("selectval").value;
+
       //타이틀 검색
       if (this.selectval == "title") {
         this.$store.dispatch(Constant.SEARCH_TITLE_NMLIST, {

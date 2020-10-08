@@ -1,8 +1,8 @@
 <template>
-    <header class="header-global">
+    <header class="header-global" >
         <base-nav class="navbar-main" transparent type="" effect="light" expand>
             <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
-                <img src="@/assets/images/logo.png" alt="logo" style="width : 100px; height : 100px;">
+                <img src="@/assets/images/logo.png" alt="logo" style="width : 200px; height : 200px;">
             </router-link>
 
             <div class="row" slot="content-header" slot-scope="{closeMenu}">
@@ -17,26 +17,26 @@
             </div>
 
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                <router-link  class="nav-link" to="/search">논문 검색</router-link>
+                <router-link  class="nav-link" to="/search" style="font-size : 30px;">논문 검색</router-link>
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <base-dropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl"  v-if="this.$store.getters.getIsAuth == false"> 
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-circle-08"></i>
+                        <i class="ni ni-circle-08 fa-2x" style="width : 10px; height:30px"></i>
                     </a>
                     <a class="dropdown-item" @click="modals.modal0 = true">로그인</a>
                     <a class="dropdown-item" @click="modals.modal1 = true">회원가입</a>
                 </base-dropdown>
                 <base-dropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl"  v-else> 
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-circle-08"></i>
+                        <i class="ni ni-circle-08 fa-2x"></i>
                     </a>
                     <a class="dropdown-item" @click="userLogout()">로그아웃</a>
                     <a class="dropdown-item" @click="modals.modal2 = true">선호주제</a>
                 </base-dropdown>
 
                 <div tag="li" class="nav-item">
-                    <router-link slot="title" to="/scrap" class="nav-link" role="button">마이스크랩</router-link>
+                    <router-link slot="title" to="/scrap" class="nav-link" role="button" v-if="this.$store.getters.getIsAuth == true" style="font-size : 30px;">마이스크랩</router-link>
                 </div>
             </ul>
         </base-nav>
@@ -45,7 +45,7 @@
             </my-login>
         </modal>
         <modal :show.sync="modals.modal1">
-            <my-sign-up v-on:closemodal="modals.modal1 = false; modals.modal2 = true">
+            <my-sign-up v-on:closemodal="modals.modal1 = false; modals.modal2 = true" v-on:justclose="modals.modal1 = false;">
             </my-sign-up>
         </modal>
         <modal :show.sync="modals.modal2">
@@ -84,6 +84,8 @@ export default {
       userLogout() {
           this.$axios.post('/api/rest-auth/logout/').then(response => {
               this.$store.commit('IS_AUTH', false)
+              document.cookie = 'csrftoken=; expires=Thu, 01 Jan 1999 00:00:10 GMT;'
+              sessionStorage.removeItem('jwt-auth-token')
               this.$router.push('/').catch(()=>{})
           }).catch(e => {
               console.log(e.message)

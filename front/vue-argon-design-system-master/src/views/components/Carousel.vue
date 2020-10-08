@@ -11,9 +11,9 @@
         <div class="container py-0 pb-lg">
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-5 mb-5 mb-lg-0">
-                    <h1 class="text-white font-weight-light">Bootstrap carousel</h1>
-                    <p class="lead text-white mt-4">Argon Design System comes with four pre-built pages to help you get
-                        started faster. You can change the text and images and you're good to go.</p>
+                    <h1 class="text-white font-weight-light">STORE Service</h1>
+                    <p class="lead text-white mt-4">스토어 서비스는 Summary Thesis Online and Recommend for Everyone 의 약자입니다.</p>
+                    <p class="lead text-white mt-4">더 이상 힘들이지 말고 스토어를 이용해보세요!!</p>
                     <a href="https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html"
                        class="btn btn-white mt-4">See all components</a>
                 </div>

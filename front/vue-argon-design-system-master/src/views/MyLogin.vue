@@ -18,6 +18,7 @@
             </validation-provider>
             <footer>
                 <base-button type="primary" :disabled="invalid" @click="onSubmit">로그인</base-button>
+                <base-button type="primary" @click="closeModal()">닫기</base-button>
             </footer>
         </validation-observer>
     </div>
@@ -65,12 +66,15 @@ export default {
         password: ''
     }),
     methods: {
+        closeModal() {
+            this.$emit('closemodal')
+        },
         onSubmit() {
             let successful = this.$store.dispatch('login', {username: this.uid, password: this.password})
             if (successful) {
                 this.uid = ''
                 this.password = ''
-                this.$emit("closemodal");
+                this.closeModal()
             }
         }
     }

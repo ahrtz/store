@@ -11,8 +11,11 @@
           v-for="(keyword, index) in keywords"
           :key="index"
           :type="colors[index % 5]"
-          >{{ keyword }}</badge
         >
+          <b v-if="keyword.length > 30">{{ keyword.substring(0,30) }}...</b>
+          <b v-else>{{ keyword }}</b>
+        </badge>
+        
       </div>
       <div class="col-2">{{ nm.subject }}</div>
       <div class="col-2">{{ nm.main_author }} 외 {{ subcnt }}명</div>
@@ -54,16 +57,17 @@ export default {
     Modal,
   },
   created() {
-    this.keywords = this.nm.keyword_kor.split(", ");
-    this.subcnt = this.nm.sub_author.split(",").length;
+    // this.keywords = this.nm.keyword_kor.replace(" · ",", ").split(", ");
+    // this.subcnt = this.nm.sub_author.split(",").length;
   },
   data() {
     return {
       modals: {
         modal1: false,
       },
-      keywords: [],
-      subcnt: 0,
+      keywordss : [],
+      // keywords: this.nm.keyword_kor.replace(" · ",", ").split(", "),
+      // subcnt: this.nm.sub_author.split(",").length,
       colors: ["primary", "success", "danger", "warning", "info"],
     };
   },
@@ -72,15 +76,29 @@ export default {
       type: Object,
       required: true,
     },
+    keywords: {
+      type: Array,
+      required: true,
+    },
+    subcnt: {
+      type: Number,
+      required: true,
+    },
+  },
+  watch: {
+    keywords(){
+      this.keywordss = this.keywords;
+
+    }
   },
   methods: {
     onClickRedirect() {
       window.open(this.nm.direct_urls);
     },
-    movedetail(){
-      var url = '/showdetail/' + this.nm.id;
+    movedetail() {
+      var url = "/showdetail/" + this.nm.id;
       this.$router.push(url);
-    }
+    },
   },
 };
 </script>

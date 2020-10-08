@@ -1,22 +1,16 @@
 <template>
   <div>
-    <h1>메인페이지입니다.</h1>
-    <router-link to="/guide">컴포넌트 가이드</router-link>
-    <br />
-    <router-link to="/nmdetail">논문상세페이지 임시 이동 링크</router-link>
-    <br />
-    <router-link to="/search">검색페이지 임시 이동 링크</router-link>
-    <br />
-    <router-link to="/scrap">스크랩 페이지 임시 이동 링크</router-link>
-
+    <!-- <carousel /> -->
     <div style="text-align : center;">
-      <h1>
-        <strong>PDF 논문 요약 서비스</strong>
-      </h1>
+      <br><br><br>
+      <div style="font-size: 4rem; font-family: 'Black Han Sans', sans-serif; text-align:center;">PDF KCI 논문 요약 서비스</div>
+
     </div>
     <div>
       <file v-on:update="showloading" />
     </div>
+      <div style="font-size: 2rem; font-family: 'Black Han Sans', sans-serif; text-align:center;">※ KCI 논문에 최적화되어 있으며 영어 논문 요약의 경우 한글보다 더 오래 걸릴 수도 있습니다.</div>
+      <br><br><br>
     <div>
       <introduce />
     </div>

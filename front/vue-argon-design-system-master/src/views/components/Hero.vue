@@ -1,65 +1,59 @@
 <template>
-  <section class="section-hero section-shaped my-0">
-    <div class="shape shape-style-1 shape-primary">
-      <span class="span-150"></span>
-      <span class="span-50"></span>
-      <span class="span-50"></span>
-      <span class="span-75"></span>
-      <span class="span-100"></span>
-      <span class="span-75"></span>
-      <span class="span-50"></span>
-      <span class="span-100"></span>
-      <span class="span-50"></span>
-      <span class="span-100"></span>
-    </div>
-    <div class="container shape-container d-flex align-items-center">
-      <div class="col px-0">
-        <div class="row justify-content-center align-items-center">
-          <router-link to="/">
-            <img src="@/assets/images/logo.png" id="logo" class="img-fluid" />
-          </router-link>
-          <!-- <div class="btn-wrapper">
-                            <base-button tag="a"
-                                         href="https://demos.creative-tim.com/vue-argon-design-system/documentation"
-                                         class="mb-3 mb-sm-0"
-                                         type="info"
-                                         icon="fa fa-code">
-                                Components
-                            </base-button>
-                            <base-button tag="a"
-                                         href="https://www.creative-tim.com/product/vue-argon-design-system"
-                                         class="mb-3 mb-sm-0"
-                                         type="white"
-                                         icon="ni ni-cloud-download-95">
-                                Download Vue
-                            </base-button>
-          </div>-->
+  <div class="section-hero section-shaped my-0">
+    <appHeader />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <div class="shape shape-style-1 shape-primary"></div>
+    <div class="container py-0 pb-lg">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-lg-5 mb-5 mb-lg-0">
+          <h1 class="text-white font-weight-light">STORE Service</h1>
+          <p class="lead text-white mt-4">
+            Summary Thesis Online <br />and Recommend for Everyone
+          </p>
+          <p class="lead text-white mt-4">
+            더 이상 힘들이지 말고<br />스토어를 이용해보세요!!
+          </p>
+          <!-- <router-link to="/stepper" class="btn btn-white mt-4">STORE 이용 가이드</router-link> -->
         </div>
-        <!-- <div class="row align-items-center justify-content-around stars-and-coded">
-                    <div class="col-sm-4">
-                        <span class="text-white alpha-7 ml-3">Star us on</span>
-                        <a href="https://github.com/creativetimofficial/argon-design-system" target="_blank" title="Support us on Github">
-                            <img src="img/brand/github-white-slim.png" style="height: 22px; margin-top: -3px">
-                        </a>
-                    </div>
-                    <div class="col-sm-4 mt-4 mt-sm-0 text-right">
-                        <span class="text-white alpha-7">Coded by</span>
-                        <a href="https://www.creative-tim.com" target="_blank" title="Creative Tim - Premium Bootstrap Themes and Templates">
-                            <img src="img/brand/creativetim-white-slim.png" class="ml-3" style="height: 30px;">
-                        </a>
-                    </div>
-        </div>-->
+        <div class="col-lg-6 mb-lg-auto">
+          <div
+            class="rounded shadow-lg overflow-hidden transform-perspective-right"
+          >
+            <b-carousel id="carousel1" controls indicators>
+              <!-- Text slides with image -->
+              <b-carousel-slide
+                img-src="img/theme/논문요약.PNG"
+              ></b-carousel-slide>
+              <b-carousel-slide
+                img-src="img/theme/논문검색.PNG"
+              ></b-carousel-slide>
+              <b-carousel-slide
+                img-src="img/theme/마이스크랩.PNG"
+              ></b-carousel-slide>
+            </b-carousel>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 <script>
-export default {};
+import { BCarousel } from "bootstrap-vue/esm/components/carousel/carousel";
+import { BCarouselSlide } from "bootstrap-vue/esm/components/carousel/carousel-slide";
+import AppHeader from "@/layout/AppHeader";
+
+export default {
+  components: {
+    BCarousel,
+    BCarouselSlide,
+    AppHeader,
+  },
+};
 </script>
 <style scoped>
 .section-hero {
   width: 100%;
-  height: 20%;
+  height: 80%;
 }
 
 #logo {

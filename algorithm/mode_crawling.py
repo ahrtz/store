@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
-import time
+import re
+from googletrans import Translator
 
 # Selenium Setting
 def crawling_setting(title_data):
@@ -18,7 +19,8 @@ def crawling_setting(title_data):
         login.send_keys("ksb0925")
         login = driver.find_element_by_name("upw")
         login.send_keys("30286450")
-        login.send_keys('\n')
+        login = driver.find_element_by_xpath("//input[@type='image']")
+        login.click()
 
         text = driver.find_element_by_id("mainSearchKeyword")
         text.send_keys(title_data)
@@ -54,7 +56,9 @@ def crawling_setting(title_data):
     title_data_ko = soup.select(".articleInfo p span")[0].get_text()
     title_data_en = soup.select(".articleInfo p span")[1].get_text()
     title_data_plus1 = int(soup.select(".articleRight div.citation p span")[0].get_text().replace('\n', '').strip().replace("회", ''))
-    title_data_plus2 = int(soup.select(".articleRight div.tools p")[0].get_text().replace('\n', '').strip().replace("회 열람", ''))
+
+    temp = re.sub("[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]", '', soup.select(".articleRight div.tools p")[0].get_text().replace('\n', '').strip().replace("회 열람", ''))
+    title_data_plus2 = int(temp)
 
     # journalInfo Scrap
     journalInfo1 = soup.select(".journalInfo div.overbox p a")[0].get_text().replace('\n', '').strip().replace(' ', '')
@@ -70,7 +74,11 @@ def crawling_setting(title_data):
         name2.append(soup.select(".attach p")[x].get_text().replace('\n', '').strip().replace(' ', '')[1:])
         
     content1 = soup.select(".articleBody div.box div.innerBox p")[0].get_text().strip()
-    content2 = soup.select(".articleBody div.box div.innerBox p")[1].get_text().strip()
+    translator = Translator()
+    if translator.translate(content1).src == 'ko':
+        content2 = soup.select(".articleBody div.box div.innerBox p")[1].get_text().strip()
+    else:
+        content2 = ""
     content3 = []
     for x in range(len(soup.select(".articleBody div.box div.innerBox div.overbox a"))):
         if x%3 == 0:
@@ -94,24 +102,3 @@ def crawling_setting(title_data):
         pass
 
     return link_data, title_data_ko, title_data_en, title_data_plus1, title_data_plus2, journalInfo1, journalInfo2, journalInfo3, name1, name2, content1, content2, content3, content4, reference
-    '''
-    print(link_data)
-    print(title_data_ko)
-    print(title_data_en)
-    print(title_data_plus1)
-    print(title_data_plus2)
-
-    print(journalInfo1)
-    print(journalInfo2)
-    print(journalInfo3)
-
-    print(name1)
-    print(name2)
-
-    print(content1)
-    print(content2)
-    print(content3)
-    print(content4)
-
-    print(reference)
-    '''

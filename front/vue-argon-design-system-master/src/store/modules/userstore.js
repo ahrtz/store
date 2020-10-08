@@ -6,7 +6,6 @@ import http from '../../http-common.js';
 import axios from 'axios'
 Vue.use(Vuex);
 
-const storage = window.sessionStorage;
 const userstore = {
   state: {
     token: '',
