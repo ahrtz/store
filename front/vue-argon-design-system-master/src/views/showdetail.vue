@@ -132,13 +132,14 @@ export default {
                 let nm = this.$store.state.nmstore.nm
                 this.essay.title = nm.title_kor != "" ? nm.title_kor : nm.title_eng
                 this.essay.author = nm.main_author + " / " + nm.sub_author
+                this.essay.keywords = []
                 if (nm.keyword_kor != "") {
                     let splitResult = nm.keyword_kor.split(", ")
                     for (var s in splitResult) {
                         this.essay.keywords.push(splitResult[s])
                     }
                 }
-                if (nm.keyword_eng != "") {
+                if (nm.keyword_eng != "" && nm.keyword_eng != nm.keyword_kor) {
                     let splitResult = nm.keyword_eng.split(", ")
                     for (var s in splitResult) {
                         this.essay.keywords.push(splitResult[s])
@@ -151,6 +152,7 @@ export default {
             })
         },
         async isScrapped() {
+            this.scrapped = false
             await this.$store.dispatch(Constant.GET_SCRAPLIST).then(() => {
                 let scraps = this.$store.state.scrapstore.scraps
                 for (var sc in scraps) {
