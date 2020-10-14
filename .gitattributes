@@ -1,0 +1,9 @@
+backend/all_data.pkl filter=lfs diff=lfs merge=lfs -text
+backend/clean_data_en.pkl filter=lfs diff=lfs merge=lfs -text
+backend/keyword_space.pkl filter=lfs diff=lfs merge=lfs -text
+data/sbk/subjects.pkl filter=lfs diff=lfs merge=lfs -text
+data/sbk/title_en.pkl filter=lfs diff=lfs merge=lfs -text
+data/sbk/title_ko.pkl filter=lfs diff=lfs merge=lfs -text
+data/sbk/abstract_en.pkl filter=lfs diff=lfs merge=lfs -text
+data/sbk/abstract_ko.pkl filter=lfs diff=lfs merge=lfs -text
+data/sbk/all_data.pkl filter=lfs diff=lfs merge=lfs -text
